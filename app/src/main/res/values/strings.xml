@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">JoynAppClient</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    //string menu services
+
+    //authentikasi
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="e_mail">E-mail</string>
+    <string name="register">Register</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="your_name">Your Name</string>
+    <string name="change_language">Change Language</string>
+    <string name="term_condition">*By creating an account, you agree to our \n
+    Term of Service and Privacy Policy</string>
+    <string name="_812345678">812345678</string>
+    <string name="verify_mobile_number_via">Verify mobile number via</string>
+    <string name="whatsapp">Whatsapp</string>
+    <string name="call">Call</string>
+    <string name="Sms">sms</string>
+    <string name="verification">Verification code has been send to</string>
+    <string name="_08123412312">08123412312</string>
+    <string name="change_number">Change Number</string>
+    <string name="manual">You don\'t need to manual enter verification code if the number instal in this phone</string>
+    <string name="please">Please enter it bellow if number \\n install another phone</string>
+    <string name="time">RESEND 15 Second</string>
+
+
+</resources>
