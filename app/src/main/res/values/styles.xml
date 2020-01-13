@@ -17,5 +17,30 @@
         <item name="android:layout_height">@dimen/_50sdp</item>
     </style>
 
+    //style menu service
+
+    <style name="LayoutCardvieMainMenu" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_width">@dimen/_79sdp</item>
+        <item name="android:layout_height">@dimen/_80sdp</item>
+        <item name="android:padding">@dimen/_8sdp</item>
+        <item name="rippleColor">@color/halfBlack</item>
+    </style>
+
+    <style name="LayoutContentMenuImage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:padding">@dimen/_8sdp</item>
+        <item name="android:contentDescription">@string/menu_icon</item>
+    </style>
+
+    <style name="LayoutContentMenuText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/black80</item>
+    </style>
+
 
 </resources>

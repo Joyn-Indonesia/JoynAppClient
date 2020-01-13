@@ -23,7 +23,7 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
             android:scaleType="fitXY"
-            android:src="@drawable/logo_ovo" />
+            android:src="@drawable/logo_dana" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
             android:scaleType="fitXY"
-            android:src="@drawable/logo_ovo" />
+            android:src="@drawable/icon_topup" />
 
         <TextView
             android:layout_width="wrap_content"

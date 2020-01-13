@@ -28,5 +28,18 @@
     <string name="time">RESEND 15 Second</string>
     <string name="rp_25_000">Rp.25.000</string>
 
+    //main menu
+    <string name="j_ride">J-Ride</string>
+    <string name="menu_icon">menu_icon</string>
+    <string name="j_send">J-Send</string>
+    <string name="j_car">J-Car</string>
+    <string name="j_box">J-Box</string>
+    <string name="j_food">J-Food</string>
+    <string name="j_shop">J-Shop</string>
+    <string name="j_mall">J-Mall</string>
+    <string name="more">More</string>
+    <string name="booking_features">Booking Features</string>
+    <string name="content_image">content image</string>
+
 
 </resources>

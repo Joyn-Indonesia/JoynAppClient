@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <include
@@ -10,9 +10,27 @@
         android:layout_height="@dimen/_30sdp" />
 
     <include
-        layout="@layout/layout_content_menu_payment_gateway"
+        layout="@layout/layout_menu_content_payment_gateway"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp" />
+
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_2sdp">
+
+        <include layout="@layout/layout_menu_content_services" />
+
+    </androidx.cardview.widget.CardView>
+
+    <include
+        layout="@layout/layout_menu_content_booking_features"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp" />
 
 
 </LinearLayout>

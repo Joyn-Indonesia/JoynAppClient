@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alignmentMode="alignMargins"
+    android:background="@color/colorWhite"
+    android:columnCount="4"
+    android:columnOrderPreserved="false"
+    android:rowCount="3">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menu_JRide"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_ride" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_ride" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menu_JSend"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_send" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_send" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menu_JCar"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_car" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_car" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menu_JBox"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_box" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_box" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menu_JFood"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_food" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_food" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menu_JShoop"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_shop" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_shop" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menu_JMall"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_mall" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_mall" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menu_more"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:padding="@dimen/_16sdp"
+                android:src="@drawable/hamburger_03" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/more" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</GridLayout>
