@@ -26,6 +26,7 @@
     <string name="manual">You don\'t need to manual enter verification code if the number instal in this phone</string>
     <string name="please">Please enter it bellow if number \\n install another phone</string>
     <string name="time">RESEND 15 Second</string>
+    <string name="rp_25_000">Rp.25.000</string>
 
 
 </resources>
