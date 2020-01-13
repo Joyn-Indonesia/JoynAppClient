@@ -40,6 +40,10 @@
     <string name="more">More</string>
     <string name="booking_features">Booking Features</string>
     <string name="content_image">content image</string>
+    <string name="top_picks_for_you">Top picks for you</string>
+    <string name="mcdonald_s_ready">McDonald\'s Ready</string>
+    <string name="happy_meal">Happy meal\'s pokemon. Areyou ready to   cacth em all? Get your pocketball ready</string>
+    <string name="j_payment">J-Payment</string>
 
 
 </resources>

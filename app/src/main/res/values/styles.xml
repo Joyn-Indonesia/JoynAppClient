@@ -18,9 +18,9 @@
     </style>
 
     //style menu service
-
     <style name="LayoutCardvieMainMenu" parent="Widget.MaterialComponents.CardView">
-        <item name="android:layout_width">@dimen/_79sdp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_columnWeight">1</item>
         <item name="android:layout_height">@dimen/_80sdp</item>
         <item name="android:padding">@dimen/_8sdp</item>
         <item name="rippleColor">@color/halfBlack</item>

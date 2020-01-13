@@ -6,8 +6,7 @@
     android:background="@color/colorWhite"
     android:columnCount="4"
     android:columnOrderPreserved="false"
-    android:rowCount="3">
-
+    android:rowCount="1">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/menu_JRide"

@@ -1,36 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/toolbar_main_menu"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_30sdp" />
-
-    <include
-        layout="@layout/layout_menu_content_payment_gateway"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_2sdp" />
+        android:orientation="vertical">
 
+        <include
+            layout="@layout/toolbar_main_menu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp" />
 
-    <androidx.cardview.widget.CardView
+        <include
+            layout="@layout/layout_menu_content_payment_gateway"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp" />
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_2sdp">
+        <androidx.cardview.widget.CardView
 
-        <include layout="@layout/layout_menu_content_services" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_2sdp">
 
-    </androidx.cardview.widget.CardView>
+            <include layout="@layout/layout_menu_content_services_menu" />
 
-    <include
-        layout="@layout/layout_menu_content_booking_features"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_2sdp" />
+        </androidx.cardview.widget.CardView>
 
+        <include
+            layout="@layout/layout_menu_content_booking_features"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp" />
 
-</LinearLayout>
+        <include
+            layout="@layout/layout_menu_content_top_pick_features"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp" />
+
+        <include
+            layout="@layout/layout_menu_content_j_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp" />
+
+        <include
+            layout="@layout/layout_menu_content_j_food_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp" />
+
+        <include
+            layout="@layout/layout_menu_content_j_food_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp" />
+
+        <include
+            layout="@layout/layout_menu_content_j_food_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp" />
+
+        <include
+            layout="@layout/layout_menu_content_j_food_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp" />
+
+        <include
+            layout="@layout/layout_menu_content_j_food_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp" />
+
+        <include
+            layout="@layout/layout_menu_content_j_food_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp" />
+
+        <include
+            layout="@layout/layout_menu_content_j_food_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

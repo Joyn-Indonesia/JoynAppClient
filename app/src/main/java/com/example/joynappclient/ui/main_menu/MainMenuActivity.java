@@ -7,21 +7,43 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.joynappclient.R;
 import com.example.joynappclient.ui.main_menu.home.HomeFragment;
 
 import java.util.Objects;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainMenuActivity extends AppCompatActivity {
+
+    public static final int MENU_HOME = 1;
+    public static final int MENU_ORDER = 2;
+    public static final int MENU_CHAT = 3;
+    public static final int MENU_INBOX = 4;
+    public static final int MENU_ACCOUNT = 5;
+
+    //widget
+    @BindView(R.id.meowBottomNavigation)
+    MeowBottomNavigation navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        ButterKnife.bind(this);
 
+        navView.add(new MeowBottomNavigation.Model(MENU_HOME, R.drawable.icon_home));
+        navView.add(new MeowBottomNavigation.Model(MENU_ORDER, R.drawable.icon_order));
+        navView.add(new MeowBottomNavigation.Model(MENU_CHAT, R.drawable.icon_chat));
+        navView.add(new MeowBottomNavigation.Model(MENU_INBOX, R.drawable.icon_inbox));
+        navView.add(new MeowBottomNavigation.Model(MENU_ACCOUNT, R.drawable.icon_account));
+
+        navView.show(MENU_HOME, true);
+        navView.setCount(MENU_INBOX, "9");
         setFragment(HomeFragment.getInstance());
-
     }
 
     private void setFragment(Fragment fragment) {
@@ -30,10 +52,22 @@ public class MainMenuActivity extends AppCompatActivity {
         FragmentTransaction ft = fm.beginTransaction();
         if (fm.findFragmentByTag(tag) == null) {
             ft.add(R.id.containerMain, fragment, tag)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .addToBackStack(tag)
                     .commit();
         } else {
             ft.show(Objects.requireNonNull(fm.findFragmentByTag(tag))).commit();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (getSupportFragmentManager().getBackStackEntryCount() <= 1) {
+            super.onBackPressed();
+            finish();
+        } else {
+            getSupportFragmentManager().popBackStack();
         }
     }
 }

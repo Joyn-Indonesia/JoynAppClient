@@ -11,7 +11,7 @@
         android:layout_gravity="center"
         android:text="@string/change_language"
         android:textColor="@color/toscaTop"
-        android:textSize="@dimen/smaal_text" />
+        android:textSize="@dimen/small_text" />
 
     <ImageView
         android:layout_width="@dimen/_18sdp"
