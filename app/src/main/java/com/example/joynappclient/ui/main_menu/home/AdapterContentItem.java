@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.JfoodModelDummyl;
+import com.example.joynappclient.data.JFoodContentModelDummy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,19 +20,22 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapter.VH> {
-    private List<JfoodModelDummyl> item = new ArrayList<>();
+public class AdapterContentItem extends RecyclerView.Adapter<AdapterContentItem.VH> {
+    private List<JFoodContentModelDummy> item = new ArrayList<>();
     private Context context;
 
-    public void setItem(Context context, List<JfoodModelDummyl> item) {
+    public AdapterContentItem() {
+    }
+
+    public void setItem(Context contex, List<JFoodContentModelDummy> item) {
         this.item = item;
-        this.context = context;
+        this.context = contex;
     }
 
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_layout_j_food, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_layout_content_item, parent, false);
 
         return new VH(view);
     }
@@ -62,7 +65,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
 
         }
 
-        void bindItem(JfoodModelDummyl model) {
+        void bindItem(JFoodContentModelDummy model) {
 
             Glide.with(context)
                     .load(model.getImgContent())

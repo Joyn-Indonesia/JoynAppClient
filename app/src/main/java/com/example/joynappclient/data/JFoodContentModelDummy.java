@@ -1,14 +1,14 @@
 package com.example.joynappclient.data;
 
-public class JfoodModelDummyl {
+public class JFoodContentModelDummy {
 
     private int imgContent;
 
-    private String titleContentl;
+    private String titleContent;
 
-    public JfoodModelDummyl(int imgContent, String titleContentl) {
+    public JFoodContentModelDummy(int imgContent, String titleContent) {
         this.imgContent = imgContent;
-        this.titleContentl = titleContentl;
+        this.titleContent = titleContent;
     }
 
     public int getImgContent() {
@@ -16,6 +16,6 @@ public class JfoodModelDummyl {
     }
 
     public String getTitleContentl() {
-        return titleContentl;
+        return titleContent;
     }
 }

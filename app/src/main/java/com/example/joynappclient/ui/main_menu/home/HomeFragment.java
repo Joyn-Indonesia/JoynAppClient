@@ -3,6 +3,7 @@ package com.example.joynappclient.ui.main_menu.home;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ import butterknife.OnClick;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-
+    private static final String TAG = "HomeFragment";
 
     public HomeFragment() {
         // Required empty public constructor
@@ -44,20 +45,20 @@ public class HomeFragment extends Fragment {
     //Widget
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.recycleview_snack)
+    @BindView(R.id.recycleview_mainContent)
     RecyclerView rvSnack;
-    @BindView(R.id.recycleview_recomendResto)
-    RecyclerView rvResto;
-    @BindView(R.id.recycleview_nearbyRestaurant)
-    RecyclerView rvNearby;
-    @BindView(R.id.recycleview_bestPick)
-    RecyclerView rvBestPick;
-    @BindView(R.id.recycleview_dishesLiked)
-    RecyclerView rvDishesLiked;
-    @BindView(R.id.recycleview_breakfast)
-    RecyclerView rvBreakfast;
-    @BindView(R.id.recycleview_highlightedDishes)
-    RecyclerView rvHighlightDishes;
+    //    @BindView(R.id.recycleview_recomendResto)
+//    RecyclerView rvResto;
+//    @BindView(R.id.recycleview_nearbyRestaurant)
+//    RecyclerView rvNearby;
+//    @BindView(R.id.recycleview_bestPick)
+//    RecyclerView rvBestPick;
+//    @BindView(R.id.recycleview_dishesLiked)
+//    RecyclerView rvDishesLiked;
+//    @BindView(R.id.recycleview_breakfast)
+//    RecyclerView rvBreakfast;
+//    @BindView(R.id.recycleview_highlightedDishes)
+//    RecyclerView rvHighlightDishes;
     //var
     private Context context;
 
@@ -77,37 +78,10 @@ public class HomeFragment extends Fragment {
         context = getContext();
 
         rvSnack.setHasFixedSize(true);
-        rvResto.setHasFixedSize(true);
-        rvNearby.setHasFixedSize(true);
-        rvBestPick.setHasFixedSize(true);
-        rvDishesLiked.setHasFixedSize(true);
-        rvBreakfast.setHasFixedSize(true);
-        rvHighlightDishes.setHasFixedSize(true);
-
-        HomeFragmentAdapter snack = new HomeFragmentAdapter();
-        HomeFragmentAdapter resto = new HomeFragmentAdapter();
-        HomeFragmentAdapter nearby = new HomeFragmentAdapter();
-        HomeFragmentAdapter bestpick = new HomeFragmentAdapter();
-        HomeFragmentAdapter liked = new HomeFragmentAdapter();
-        HomeFragmentAdapter breakfast = new HomeFragmentAdapter();
-        HomeFragmentAdapter highligh = new HomeFragmentAdapter();
-
-
-        snack.setItem(context, DummyItem.getFoodSnack());
-        resto.setItem(context, DummyItem.getRecomendResto());
-        nearby.setItem(context, DummyItem.getNearbyReto());
-        bestpick.setItem(context, DummyItem.getBestPick());
-        liked.setItem(context, DummyItem.getDhisesLike());
-        breakfast.setItem(context, DummyItem.getBreakfast());
-        highligh.setItem(context, DummyItem.getHighligtedDishes());
-
+        AdapterContentTitle snack = new AdapterContentTitle();
+        snack.setItem(context, DummyItem.getAllData());
+        Log.d(TAG, "onActivityCreated: " + DummyItem.getAllData().size());
         rvSnack.setAdapter(snack);
-        rvResto.setAdapter(resto);
-        rvNearby.setAdapter(nearby);
-        rvBestPick.setAdapter(bestpick);
-        rvDishesLiked.setAdapter(liked);
-        rvBreakfast.setAdapter(breakfast);
-        rvHighlightDishes.setAdapter(highligh);
 
         //initToolbar();
     }

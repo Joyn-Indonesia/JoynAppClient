@@ -49,46 +49,46 @@
             android:layout_marginTop="@dimen/_2sdp" />
 
         <include
-            layout="@layout/layout_menu_content_j_food_1"
+            layout="@layout/layout_menu_content_j_food"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_2sdp" />
 
-        <include
-            layout="@layout/layout_menu_content_j_food_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp" />
+        <!--        <include-->
+        <!--            layout="@layout/layout_menu_content_j_food_2"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/_2sdp" />-->
 
-        <include
-            layout="@layout/layout_menu_content_j_food_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp" />
+        <!--        <include-->
+        <!--            layout="@layout/layout_menu_content_j_food_3"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/_2sdp" />-->
 
-        <include
-            layout="@layout/layout_menu_content_j_food_4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp" />
+        <!--        <include-->
+        <!--            layout="@layout/layout_menu_content_j_food_4"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/_2sdp" />-->
 
-        <include
-            layout="@layout/layout_menu_content_j_food_5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp" />
+        <!--        <include-->
+        <!--            layout="@layout/layout_menu_content_j_food_5"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/_2sdp" />-->
 
-        <include
-            layout="@layout/layout_menu_content_j_food_6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp" />
+        <!--        <include-->
+        <!--            layout="@layout/layout_menu_content_j_food_6"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/_2sdp" />-->
 
-        <include
-            layout="@layout/layout_menu_content_j_food_7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp" />
+        <!--        <include-->
+        <!--            layout="@layout/layout_menu_content_j_food_7"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/_2sdp" />-->
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
