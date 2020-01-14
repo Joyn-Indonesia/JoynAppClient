@@ -44,6 +44,19 @@
     <string name="mcdonald_s_ready">McDonald\'s Ready</string>
     <string name="happy_meal">Happy meal\'s pokemon. Areyou ready to   cacth em all? Get your pocketball ready</string>
     <string name="j_payment">J-Payment</string>
+    <string name="j_travel">J-Travel</string>
+    <string name="j_doc">J-Doc</string>
+    <string name="j_apotek">J-Apotek</string>
+    <string name="j_massage">J-Massage</string>
+    <string name="j_fitnes">J-Fitnes</string>
+    <string name="j_course">J-Course</string>
+    <string name="j_clean">J-Clean</string>
+    <string name="j_pulsa">J-Pulsa</string>
+    <string name="j_bills">J-Bills</string>
+    <string name="j_tickets">J-Tickets</string>
+    <string name="j_point">J-Point</string>
+    <string name="j_give">J-Give</string>
+    <string name="j_news">J-News</string>
 
 
 </resources>

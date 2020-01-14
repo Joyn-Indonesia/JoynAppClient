@@ -19,11 +19,11 @@
 
     //style menu service
     <style name="LayoutCardvieMainMenu" parent="Widget.MaterialComponents.CardView">
+        <item name="rippleColor">@color/toscaLevel3</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_columnWeight">1</item>
         <item name="android:layout_height">@dimen/_80sdp</item>
         <item name="android:padding">@dimen/_8sdp</item>
-        <item name="rippleColor">@color/halfBlack</item>
     </style>
 
     <style name="LayoutContentMenuImage">
@@ -31,7 +31,7 @@
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:adjustViewBounds">true</item>
-        <item name="android:padding">@dimen/_8sdp</item>
+        <item name="android:padding">@dimen/_16sdp</item>
         <item name="android:contentDescription">@string/menu_icon</item>
     </style>
 
