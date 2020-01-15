@@ -39,7 +39,7 @@ public class HomeMenuServiceSheetDialog extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.layout_menu_content_service_all, container, false);
+        View v = inflater.inflate(R.layout.layout_bottom_sheet_menu_content_service_all, container, false);
         ButterKnife.bind(this, v);
         return v;
 

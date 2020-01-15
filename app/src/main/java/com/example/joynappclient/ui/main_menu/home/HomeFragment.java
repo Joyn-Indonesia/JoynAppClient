@@ -47,18 +47,7 @@ public class HomeFragment extends Fragment {
     Toolbar toolbar;
     @BindView(R.id.recycleview_mainContent)
     RecyclerView rvSnack;
-    //    @BindView(R.id.recycleview_recomendResto)
-//    RecyclerView rvResto;
-//    @BindView(R.id.recycleview_nearbyRestaurant)
-//    RecyclerView rvNearby;
-//    @BindView(R.id.recycleview_bestPick)
-//    RecyclerView rvBestPick;
-//    @BindView(R.id.recycleview_dishesLiked)
-//    RecyclerView rvDishesLiked;
-//    @BindView(R.id.recycleview_breakfast)
-//    RecyclerView rvBreakfast;
-//    @BindView(R.id.recycleview_highlightedDishes)
-//    RecyclerView rvHighlightDishes;
+
     //var
     private Context context;
 

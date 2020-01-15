@@ -3,9 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
 
-    //string menu services
-
-    //auth
+    <!-- Auth -->
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="e_mail">E-mail</string>
@@ -28,7 +26,7 @@
     <string name="time">RESEND 15 Second</string>
     <string name="rp_25_000">Rp.25.000</string>
 
-    //main menu
+    <!--  Main Menu  -->
     <string name="j_ride">J-Ride</string>
     <string name="menu_icon">menu_icon</string>
     <string name="j_send">J-Send</string>
@@ -59,7 +57,17 @@
     <string name="j_news">J-News</string>
     <string name="search">search</string>
 
-    //Food
+    <!--  Booking  -->
+    <string name="where_do_you_want_picked_up">Where do you want picked up?</string>
+    <string name="search_for_street_or_place">Search for street or place</string>
+    <string name="next">Next</string>
+    <string name="select_one_of_the_services_type">SELECT ONE OF THE SERVICES TYPE</string>
+    <string name="select">Select</string>
+    <string name="favorite_addres">Favorite Addresses :</string>
+    <string name="pickup_location">Pickup Location</string>
+    <string name="destination">Destination</string>
+
+    <!--  FOOD  -->
     <string name="food">Food</string>
     <string name="add">Add</string>
     <string name="order">ORDER</string>
@@ -67,6 +75,9 @@
     <string name="total">Total</string>
     <string name="add_note">Add note</string>
     <string name="top_up">Top Up</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

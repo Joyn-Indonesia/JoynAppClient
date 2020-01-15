@@ -1,13 +1,13 @@
 package com.example.joynappclient.ui.authentication.otp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.ui.main_menu.MainMenuActivity;
-import com.example.joynappclient.utils.MoveActivity;
 import com.google.android.material.button.MaterialButton;
 
 import butterknife.BindView;
@@ -31,6 +31,13 @@ public class OtpActivity extends AppCompatActivity {
         context = this;
         ButterKnife.bind(this);
 
-        next.setOnClickListener(v -> MoveActivity.MoveAct(context, MainMenuActivity.class));
+        next.setOnClickListener(v -> {
+                    // MoveActivity.MoveAct(context, MainMenuActivity.class);
+                    Intent i = new Intent(context, MainMenuActivity.class);
+
+                    startActivity(i);
+                    finishAffinity();
+                }
+        );
     }
 }
