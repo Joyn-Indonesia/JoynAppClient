@@ -1,4 +1,4 @@
-package com.example.joynappclient.ui.main_menu.home;
+package com.example.joynappclient.ui.j_food.detail;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.JFoodContentModelDummy;
-import com.example.joynappclient.ui.j_food.detail.DetailJFoodActivity;
-import com.example.joynappclient.utils.MoveActivity;
+import com.example.joynappclient.data.FoodModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,23 +20,19 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AdapterContentItem extends RecyclerView.Adapter<AdapterContentItem.VH> {
-    private List<JFoodContentModelDummy> item = new ArrayList<>();
+public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.VH> {
     private Context context;
+    private List<FoodModel> item = new ArrayList<>();
 
-    public AdapterContentItem() {
-    }
-
-    public void setItem(Context contex, List<JFoodContentModelDummy> item) {
+    public void setFood(Context context, List<FoodModel> item) {
+        this.context = context;
         this.item = item;
-        this.context = contex;
     }
 
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_layout_content_item, parent, false);
-
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_layout_food, parent, false);
         return new VH(view);
     }
 
@@ -58,25 +52,27 @@ public class AdapterContentItem extends RecyclerView.Adapter<AdapterContentItem.
     public class VH extends RecyclerView.ViewHolder {
         @BindView(R.id.img_content)
         ImageView imgContent;
-        @BindView(R.id.tv_name_content)
-        TextView titleContent;
+        @BindView(R.id.tv_titleContent)
+        TextView title;
+        @BindView(R.id.tv_content)
+        TextView content;
+        @BindView(R.id.tv_priceContent)
+        TextView price;
 
         public VH(@NonNull View v) {
             super(v);
             ButterKnife.bind(this, v);
-
-            v.setOnClickListener(v1 -> {
-                MoveActivity.MoveAct(context, DetailJFoodActivity.class);
-            });
         }
 
-        void bindItem(JFoodContentModelDummy model) {
+        void bindItem(FoodModel model) {
 
             Glide.with(context)
-                    .load(model.getImgContent())
+                    .load(model.getContentImage())
                     .into(imgContent);
-            titleContent.setText(model.getTitleContentl());
 
+            title.setText(model.getTitleContent());
+            content.setText(model.getContent());
+            price.setText(model.getPrice());
         }
     }
 }

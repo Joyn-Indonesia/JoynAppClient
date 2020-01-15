@@ -20,6 +20,8 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/icon_title"
+                android:contentDescription="@string/content_image"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
                 android:layout_marginEnd="@dimen/_4sdp"
@@ -27,7 +29,7 @@
                 android:src="@drawable/j_food" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/tv_title_jfood"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/j_food"

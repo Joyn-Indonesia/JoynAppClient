@@ -1,4 +1,4 @@
-package com.example.joynappclient.ui.main_menu.home;
+package com.example.joynappclient.ui.j_food.food;
 
 import android.content.Context;
 import android.view.LayoutInflater;

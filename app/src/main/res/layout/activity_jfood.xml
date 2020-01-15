@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.j_food.JFoodActivity">
+    tools:context=".ui.j_food.food.JFoodActivity">
 
     <include
         layout="@layout/toolbar_main_menu"

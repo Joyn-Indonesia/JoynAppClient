@@ -4,15 +4,14 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/_4sdp"
+    android:layout_marginEnd="@dimen/margin_8dp"
     android:orientation="vertical"
-    app:cardCornerRadius="@dimen/_4sdp">
+    app:cardCornerRadius="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/_4sdp">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/img_content"

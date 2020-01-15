@@ -1,6 +1,8 @@
 package com.example.joynappclient.utils;
 
 import com.example.joynappclient.R;
+import com.example.joynappclient.data.CartModel;
+import com.example.joynappclient.data.FoodModel;
 import com.example.joynappclient.data.JFoodContentModelDummy;
 import com.example.joynappclient.data.JfoodTitleModelDummy;
 
@@ -77,6 +79,24 @@ public class DummyItem {
         data.add(new JfoodTitleModelDummy("Hightlighted Dishes", getHighligtedDishes()));
 
         return data;
+    }
+
+    public static List<CartModel> getCart() {
+        List<CartModel> cart = new ArrayList<>();
+
+        cart.add(new CartModel(R.drawable.img_rawon2, "Rawon", "Rp. 25000"));
+        cart.add(new CartModel(R.drawable.img_ekrim_zangrandi, "Es Krim", "Rp. 15000"));
+
+        return cart;
+    }
+
+    public static List<FoodModel> getFood() {
+        List<FoodModel> food = new ArrayList<>();
+        food.add(new FoodModel(R.drawable.img_ayamrujak, "Rujak Ayam", "Sayur ayam dirujak", "Rp.75.000"));
+        food.add(new FoodModel(R.drawable.img_sateklopo2, "Sate Ayam", "Steak daging ayam + sayur + lontong", "Rp.50.000"));
+        food.add(new FoodModel(R.drawable.img_empalpengampon, "Paket steak daging kambing", "Steak daging kambing + sayur + longtng", "Rp.100.000"));
+        food.add(new FoodModel(R.drawable.img_ekrim_zangrandi, "Capucino Cincau Ice", "Capucino bubuk, almond milk ", "Rp.15.000"));
+        return food;
     }
 
 }

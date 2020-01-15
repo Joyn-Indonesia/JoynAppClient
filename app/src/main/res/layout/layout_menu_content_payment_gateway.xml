@@ -8,10 +8,7 @@
 
     <LinearLayout
         android:id="@+id/payment_dana"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/_8sdp"
+        style="@style/StylePaymentGatewayHome"
         app:layout_constraintBottom_toBottomOf="@+id/payment_ovo"
         app:layout_constraintEnd_toStartOf="@+id/payment_ovo"
         app:layout_constraintHorizontal_bias="0.55"
@@ -19,49 +16,33 @@
         app:layout_constraintTop_toTopOf="@+id/payment_ovo">
 
         <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
+            style="@style/StylePaymentGatewayHomeImage"
             android:src="@drawable/logo_dana" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rp_25_000"
-            android:textColor="@color/colorBlack" />
+            style="@style/StylePaymentGatewayHomeText"
+            android:text="@string/rp_25_000" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/payment_ovo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/_8sdp"
+        style="@style/StylePaymentGatewayHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
+            style="@style/StylePaymentGatewayHomeImage"
             android:src="@drawable/logo_ovo" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rp_25_000"
-            android:textColor="@color/colorBlack" />
+            style="@style/StylePaymentGatewayHomeText"
+            android:text="@string/rp_25_000" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/payment_topUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/_8sdp"
+        style="@style/StylePaymentGatewayHome"
         app:layout_constraintBottom_toBottomOf="@+id/payment_ovo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.45"
@@ -69,17 +50,12 @@
         app:layout_constraintTop_toTopOf="@+id/payment_ovo">
 
         <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
+            style="@style/StylePaymentGatewayHomeImage"
             android:src="@drawable/icon_topup" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rp_25_000"
-            android:textColor="@color/colorBlack" />
+            style="@style/StylePaymentGatewayHomeText"
+            android:text="@string/top_up" />
     </LinearLayout>
 
 

@@ -1,4 +1,4 @@
-package com.example.joynappclient.ui.j_food;
+package com.example.joynappclient.ui.j_food.food;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.ui.main_menu.home.AdapterContentTitle;
 import com.example.joynappclient.utils.DummyItem;
 
 import butterknife.BindView;
@@ -49,6 +48,7 @@ public class JFoodActivity extends AppCompatActivity {
         rvContent.setItemAnimator(new DefaultItemAnimator());
         rvContent.setHasFixedSize(true);
         rvContent.setAdapter(title);
+
     }
 
     @Override

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.ui.booking.BookingActivity;
-import com.example.joynappclient.ui.j_food.JFoodActivity;
+import com.example.joynappclient.ui.j_food.food.JFoodActivity;
 import com.example.joynappclient.utils.DummyItem;
 import com.example.joynappclient.utils.MoveActivity;
 
