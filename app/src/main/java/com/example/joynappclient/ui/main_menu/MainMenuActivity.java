@@ -4,16 +4,19 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.joynappclient.R;
 import com.example.joynappclient.ui.main_menu.account.AccountFragment;
+import com.example.joynappclient.ui.main_menu.adapter.VIewPagerAdapter;
 import com.example.joynappclient.ui.main_menu.chat.ChatFragment;
 import com.example.joynappclient.ui.main_menu.home.HomeFragment;
 import com.example.joynappclient.ui.main_menu.inbox.InboxFragment;
 import com.example.joynappclient.ui.main_menu.order.OrderFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +32,8 @@ public class MainMenuActivity extends AppCompatActivity {
     //widget
     @BindView(R.id.meowBottomNavigation)
     MeowBottomNavigation navView;
+    @BindView(R.id.containerMain)
+    ViewPager container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,22 +48,24 @@ public class MainMenuActivity extends AppCompatActivity {
         navView.add(new MeowBottomNavigation.Model(MENU_INBOX, R.drawable.icon_inbox));
         navView.add(new MeowBottomNavigation.Model(MENU_ACCOUNT, R.drawable.icon_account));
 
+        initFragment();
+
         navView.setOnClickMenuListener(model -> {
             switch (model.getId()) {
                 case MENU_HOME:
-                    setFragment(HomeFragment.getInstance());
+                    container.setCurrentItem(0);
                     break;
                 case MENU_ORDER:
-                    setFragment(OrderFragment.getInstance());
+                    container.setCurrentItem(1);
                     break;
                 case MENU_CHAT:
-                    setFragment(ChatFragment.getInstance());
+                    container.setCurrentItem(2);
                     break;
                 case MENU_INBOX:
-                    setFragment(InboxFragment.getInstance());
+                    container.setCurrentItem(3);
                     break;
                 case MENU_ACCOUNT:
-                    setFragment(AccountFragment.getInstance());
+                    container.setCurrentItem(4);
                     break;
             }
             return null;
@@ -70,13 +77,28 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
+    private void initFragment() {
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(HomeFragment.getInstance());
+        fragments.add(OrderFragment.getInstance());
+        fragments.add(ChatFragment.getInstance());
+        fragments.add(InboxFragment.getInstance());
+        fragments.add(AccountFragment.getInstance());
+
+        VIewPagerAdapter adapter = new VIewPagerAdapter(getSupportFragmentManager(), fragments);
+        container.setAdapter(adapter);
+        container.setCurrentItem(0);
+        container.setOffscreenPageLimit(5);
+
+    }
+
     private void setFragment(Fragment fragment) {
-        String tag = fragment.getClass().getSimpleName();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.containerMain, fragment, tag)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .commit();
+//        String tag = fragment.getClass().getSimpleName();
+//        FragmentManager fm = getSupportFragmentManager();
+//        FragmentTransaction ft = fm.beginTransaction();
+//        ft.replace(R.id.containerMain, fragment, tag)
+//                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                .commit();
 //        if (fm.findFragmentByTag(tag) == null) {
 //            ft.add(R.id.containerMain, fragment, tag)
 //                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)

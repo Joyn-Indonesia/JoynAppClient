@@ -3,7 +3,6 @@ package com.example.joynappclient.ui.main_menu.home;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,10 +68,14 @@ public class HomeFragment extends Fragment {
         rvSnack.setHasFixedSize(true);
         AdapterContentTitle snack = new AdapterContentTitle();
         snack.setItem(context, DummyItem.getAllData());
-        Log.d(TAG, "onActivityCreated: " + DummyItem.getAllData().size());
         rvSnack.setAdapter(snack);
 
         //initToolbar();
+    }
+
+    @Override
+    public void setRetainInstance(boolean retain) {
+        super.setRetainInstance(true);
     }
 
     private void initToolbar() {

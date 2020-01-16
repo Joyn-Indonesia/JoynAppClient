@@ -57,4 +57,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     //pinView
     implementation 'com.github.GoodieBag:Pinview:v1.4'
+    //viewPager
+    implementation 'com.github.Johnyoat:non-swipe-view-pager:1.0.0'
+
 }

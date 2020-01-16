@@ -1,7 +1,6 @@
 package com.example.joynappclient.ui.main_menu.home;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,10 +45,8 @@ public class AdapterContentTitle extends RecyclerView.Adapter<AdapterContentTitl
     @Override
     public int getItemCount() {
         if (item == null) {
-            Log.d(TAG, "getItemCount: ");
             return 0;
         }
-        Log.d(TAG, "getItemCount: 6++");
         return item.size();
     }
 
@@ -69,7 +66,6 @@ public class AdapterContentTitle extends RecyclerView.Adapter<AdapterContentTitl
         }
 
         void bindItem(JfoodTitleModelDummy model) {
-            Log.d(TAG, "bindItem: " + model.getTitle());
             rvItemContent.setHasFixedSize(true);
             rvItemContent.setItemAnimator(new DefaultItemAnimator());
             titleContent.setText(model.getTitle());
