@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.ui.j_food.cart.CartAdapter;
+import com.example.joynappclient.ui.main_menu.order.checkout.CheckOutBottomSheet;
 import com.example.joynappclient.utils.DummyItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DetailJFoodActivity extends AppCompatActivity {
 
@@ -38,5 +40,11 @@ public class DetailJFoodActivity extends AppCompatActivity {
         FoodAdapter foodAdapter = new FoodAdapter();
         foodAdapter.setFood(this, DummyItem.getFood());
         food.setAdapter(foodAdapter);
+    }
+
+    @OnClick(R.id.btn_order)
+    public void showBottomSheetDialog() {
+        CheckOutBottomSheet bottomSheetFragment = new CheckOutBottomSheet();
+        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
     }
 }

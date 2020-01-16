@@ -76,8 +76,12 @@
     <string name="add_note">Add note</string>
     <string name="top_up">Top Up</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Order -->
+    <string name="edit_destinaton">Edit Destinaton</string>
+    <string name="recipient_phone_number">Recipient Phone Number :</string>
+
+    <string name="history">History</string>
+    <string name="inprogress">Inprogress</string>
 
 
 </resources>

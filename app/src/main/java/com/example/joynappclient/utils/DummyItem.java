@@ -3,6 +3,7 @@ package com.example.joynappclient.utils;
 import com.example.joynappclient.R;
 import com.example.joynappclient.data.CartModel;
 import com.example.joynappclient.data.FoodModel;
+import com.example.joynappclient.data.InProgressModel;
 import com.example.joynappclient.data.JFoodContentModelDummy;
 import com.example.joynappclient.data.JfoodTitleModelDummy;
 
@@ -97,6 +98,24 @@ public class DummyItem {
         food.add(new FoodModel(R.drawable.img_empalpengampon, "Paket steak daging kambing", "Steak daging kambing + sayur + longtng", "Rp.100.000"));
         food.add(new FoodModel(R.drawable.img_ekrim_zangrandi, "Capucino Cincau Ice", "Capucino bubuk, almond milk ", "Rp.15.000"));
         return food;
+    }
+
+    public static List<InProgressModel> getInProgress() {
+        List<InProgressModel> progress = new ArrayList<>();
+        progress.add(new InProgressModel("10 jan 2020", "Jl. majapahit no 3", "17:45"));
+        progress.add(new InProgressModel("10 jan 2020", "Jl. majapahit no 3", "17:45"));
+
+        return progress;
+    }
+
+    public static List<InProgressModel> getHistory() {
+        List<InProgressModel> progress = new ArrayList<>();
+        progress.add(new InProgressModel("10 jan 2020", "Jl. majapahit no 1", "17:45"));
+        progress.add(new InProgressModel("10 jan 2077", "Jl. majapahit no 2", "17:45"));
+        progress.add(new InProgressModel("10 jan 2088", "Jl. majapahit no 3", "19:45"));
+        progress.add(new InProgressModel("10 jan 2099", "Jl. majapahit no 4", "19:45"));
+
+        return progress;
     }
 
 }

@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:textSize="@dimen/medium_small_text"
+        android:textSize="@dimen/default_text"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/img_content"
         app:layout_constraintTop_toTopOf="@+id/img_content" />

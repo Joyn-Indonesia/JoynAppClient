@@ -85,8 +85,8 @@
             android:weightSum="10">
 
             <ImageView
-                android:padding="@dimen/_18sdp"
-                style="@style/LayoutContentMenuImage"
+
+                style="@style/LayoutContentMenuImage.J_Box"
                 android:layout_weight="7"
                 android:src="@drawable/j_box" />
 
