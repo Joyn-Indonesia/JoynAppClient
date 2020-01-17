@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:alignmentMode="alignMargins"
+    android:background="@color/colorWhite"
+    android:columnCount="4"
+    android:columnOrderPreserved="false"
+    android:rowCount="1">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/menu_JRide"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_ride" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_ride" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/menu_JSend"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_send" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_send" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/menu_JCar"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_car" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_car" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/menu_JBox"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                android:padding="@dimen/_18sdp"
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_box" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_box" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/menu_JFood"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_food" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_food" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/menu_JShoop"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_shop" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_shop" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/menu_JMall"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:src="@drawable/j_mall" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/j_mall" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/menu_more"
+        style="@style/LayoutCardvieMainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <ImageView
+                style="@style/LayoutContentMenuImage"
+                android:layout_weight="7"
+                android:padding="@dimen/_20sdp"
+                android:src="@drawable/hamburger_03" />
+
+            <TextView
+                style="@style/LayoutContentMenuText"
+                android:layout_weight="3"
+                android:text="@string/more" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</GridLayout>

@@ -1,0 +1,70 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.SplashScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_splash_screen_launcher</item>
+    </style>
+
+    <style name="InputEditTextContent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/_50sdp</item>
+    </style>
+
+    <!--    style payment gateway home-->
+    <style name="StylePaymentGatewayHome">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/_8sdp</item>
+    </style>
+
+    <style name="StylePaymentGatewayHomeImage">
+        <item name="android:layout_height">@dimen/_30sdp</item>
+        <item name="android:layout_width">@dimen/_30sdp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="StylePaymentGatewayHomeText">
+        <item name="android:layout_marginTop">@dimen/margin_8dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--    end style-->
+
+    <!--    style menu service-->
+    <style name="LayoutCardvieMainMenu" parent="Widget.MaterialComponents.CardView">
+        <item name="rippleColor">@color/toscaLevel3</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_height">@dimen/_80sdp</item>
+        <item name="android:padding">@dimen/_8sdp</item>
+    </style>
+
+    <style name="LayoutContentMenuImage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:padding">@dimen/_16sdp</item>
+        <item name="android:contentDescription">@string/menu_icon</item>
+    </style>
+
+    <style name="LayoutContentMenuText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/black80</item>
+    </style>
+
+
+</resources>
