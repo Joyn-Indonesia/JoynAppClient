@@ -18,11 +18,23 @@ public class DummyItem {
         snack.add(new JFoodContentModelDummy(R.drawable.martabak, "Martabak"));
         snack.add(new JFoodContentModelDummy(R.drawable.burjodurian, "Bubur Ijo Durian"));
         snack.add(new JFoodContentModelDummy(R.drawable.singkong_keju, "Singkong Coklat Keju"));
+        snack.add(new JFoodContentModelDummy(R.drawable.martabak, "Martabak"));
+        snack.add(new JFoodContentModelDummy(R.drawable.burjodurian, "Bubur Ijo Durian"));
+        snack.add(new JFoodContentModelDummy(R.drawable.singkong_keju, "Singkong Coklat Keju"));
+        snack.add(new JFoodContentModelDummy(R.drawable.martabak, "Martabak"));
+        snack.add(new JFoodContentModelDummy(R.drawable.burjodurian, "Bubur Ijo Durian"));
+        snack.add(new JFoodContentModelDummy(R.drawable.singkong_keju, "Singkong Coklat Keju"));
         return snack;
     }
 
     public static List<JFoodContentModelDummy> getNearbyReto() {
         List<JFoodContentModelDummy> snack = new ArrayList<>();
+        snack.add(new JFoodContentModelDummy(R.drawable.kopikenangan, "Kopi Kenangan"));
+        snack.add(new JFoodContentModelDummy(R.drawable.satebabi, "Sate Babi Manis"));
+        snack.add(new JFoodContentModelDummy(R.drawable.ayambetutu, "Ayam Betutu Klampis"));
+        snack.add(new JFoodContentModelDummy(R.drawable.kopikenangan, "Kopi Kenangan"));
+        snack.add(new JFoodContentModelDummy(R.drawable.satebabi, "Sate Babi Manis"));
+        snack.add(new JFoodContentModelDummy(R.drawable.ayambetutu, "Ayam Betutu Klampis"));
         snack.add(new JFoodContentModelDummy(R.drawable.kopikenangan, "Kopi Kenangan"));
         snack.add(new JFoodContentModelDummy(R.drawable.satebabi, "Sate Babi Manis"));
         snack.add(new JFoodContentModelDummy(R.drawable.ayambetutu, "Ayam Betutu Klampis"));
@@ -34,11 +46,23 @@ public class DummyItem {
         snack.add(new JFoodContentModelDummy(R.drawable.mcd_manyar, "McDonald manyar"));
         snack.add(new JFoodContentModelDummy(R.drawable.mrd_coffee, "MrD Coffe Sukolilo"));
         snack.add(new JFoodContentModelDummy(R.drawable.platinum, "Platinum Grill"));
+        snack.add(new JFoodContentModelDummy(R.drawable.mcd_manyar, "McDonald manyar"));
+        snack.add(new JFoodContentModelDummy(R.drawable.mrd_coffee, "MrD Coffe Sukolilo"));
+        snack.add(new JFoodContentModelDummy(R.drawable.platinum, "Platinum Grill"));
+        snack.add(new JFoodContentModelDummy(R.drawable.mcd_manyar, "McDonald manyar"));
+        snack.add(new JFoodContentModelDummy(R.drawable.mrd_coffee, "MrD Coffe Sukolilo"));
+        snack.add(new JFoodContentModelDummy(R.drawable.platinum, "Platinum Grill"));
         return snack;
     }
 
     public static List<JFoodContentModelDummy> getDhisesLike() {
         List<JFoodContentModelDummy> snack = new ArrayList<>();
+        snack.add(new JFoodContentModelDummy(R.drawable.baksokober, "Bakso Kober"));
+        snack.add(new JFoodContentModelDummy(R.drawable.rujaksoto, "Rujak Soto"));
+        snack.add(new JFoodContentModelDummy(R.drawable.nasibekepor, "Nasi Bakepor"));
+        snack.add(new JFoodContentModelDummy(R.drawable.baksokober, "Bakso Kober"));
+        snack.add(new JFoodContentModelDummy(R.drawable.rujaksoto, "Rujak Soto"));
+        snack.add(new JFoodContentModelDummy(R.drawable.nasibekepor, "Nasi Bakepor"));
         snack.add(new JFoodContentModelDummy(R.drawable.baksokober, "Bakso Kober"));
         snack.add(new JFoodContentModelDummy(R.drawable.rujaksoto, "Rujak Soto"));
         snack.add(new JFoodContentModelDummy(R.drawable.nasibekepor, "Nasi Bakepor"));
@@ -50,6 +74,12 @@ public class DummyItem {
         snack.add(new JFoodContentModelDummy(R.drawable.segojagung, "McDonald manyar"));
         snack.add(new JFoodContentModelDummy(R.drawable.segojagung, "MrD Coffe Sukolilo"));
         snack.add(new JFoodContentModelDummy(R.drawable.burjodurian, "Platinum Grill"));
+        snack.add(new JFoodContentModelDummy(R.drawable.segojagung, "McDonald manyar"));
+        snack.add(new JFoodContentModelDummy(R.drawable.segojagung, "MrD Coffe Sukolilo"));
+        snack.add(new JFoodContentModelDummy(R.drawable.burjodurian, "Platinum Grill"));
+        snack.add(new JFoodContentModelDummy(R.drawable.segojagung, "McDonald manyar"));
+        snack.add(new JFoodContentModelDummy(R.drawable.segojagung, "MrD Coffe Sukolilo"));
+        snack.add(new JFoodContentModelDummy(R.drawable.burjodurian, "Platinum Grill"));
         return snack;
     }
 
@@ -58,11 +88,23 @@ public class DummyItem {
         snack.add(new JFoodContentModelDummy(R.drawable.mcd_manyar, "McDonald manyar"));
         snack.add(new JFoodContentModelDummy(R.drawable.mrd_coffee, "MrD Coffe Sukolilo"));
         snack.add(new JFoodContentModelDummy(R.drawable.platinum, "Platinum Grill"));
+        snack.add(new JFoodContentModelDummy(R.drawable.mcd_manyar, "McDonald manyar"));
+        snack.add(new JFoodContentModelDummy(R.drawable.mrd_coffee, "MrD Coffe Sukolilo"));
+        snack.add(new JFoodContentModelDummy(R.drawable.platinum, "Platinum Grill"));
+        snack.add(new JFoodContentModelDummy(R.drawable.mcd_manyar, "McDonald manyar"));
+        snack.add(new JFoodContentModelDummy(R.drawable.mrd_coffee, "MrD Coffe Sukolilo"));
+        snack.add(new JFoodContentModelDummy(R.drawable.platinum, "Platinum Grill"));
         return snack;
     }
 
     public static List<JFoodContentModelDummy> getRecomendResto() {
         List<JFoodContentModelDummy> snack = new ArrayList<>();
+        snack.add(new JFoodContentModelDummy(R.drawable.mcd_manyar, "McDonald manyar"));
+        snack.add(new JFoodContentModelDummy(R.drawable.mrd_coffee, "MrD Coffe Sukolilo"));
+        snack.add(new JFoodContentModelDummy(R.drawable.platinum, "Platinum Grill"));
+        snack.add(new JFoodContentModelDummy(R.drawable.mcd_manyar, "McDonald manyar"));
+        snack.add(new JFoodContentModelDummy(R.drawable.mrd_coffee, "MrD Coffe Sukolilo"));
+        snack.add(new JFoodContentModelDummy(R.drawable.platinum, "Platinum Grill"));
         snack.add(new JFoodContentModelDummy(R.drawable.mcd_manyar, "McDonald manyar"));
         snack.add(new JFoodContentModelDummy(R.drawable.mrd_coffee, "MrD Coffe Sukolilo"));
         snack.add(new JFoodContentModelDummy(R.drawable.platinum, "Platinum Grill"));

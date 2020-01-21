@@ -26,6 +26,19 @@
     <style name="StyleTextViewDefault.Black">
         <item name="android:textColor">@color/colorBlack</item>
     </style>
+
+    <style name="StyleTextViewDefault.TitleBanner">
+        <item name="android:textSize">@dimen/extra_big_text</item>
+        <item name="android:textColor">@color/toscaTop</item>
+
+    </style>
+
+    <style name="StyleTextViewDefault.ContentBanner">
+        <item name="android:textSize">@dimen/medium_small_text</item>
+        <item name="android:textColor">@color/black80</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
     <!--    end Style TextVIew  -->
 
     <!--    Edit Text Style -->

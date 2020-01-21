@@ -21,36 +21,29 @@
 
             <ImageView
                 android:id="@+id/icon_title"
-                android:contentDescription="@string/content_image"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
                 android:layout_marginEnd="@dimen/_4sdp"
+                android:contentDescription="@string/content_image"
                 android:scaleType="fitXY"
                 android:src="@drawable/j_food" />
 
             <TextView
                 android:id="@+id/tv_title_jfood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/j_food"
-                android:textColor="@color/toscaTop"
-                android:textSize="@dimen/extra_big_text"
-                android:textStyle="bold" />
+                style="@style/StyleTextViewDefault.TitleBanner"
+                android:text="@string/j_food" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_item_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
+            style="@style/StyleTextViewDefault.Bold"
             android:layout_marginTop="@dimen/margin_8dp"
-            android:textSize="@dimen/default_text"
-            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
             tool:text="@string/j_travel" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
             android:id="@+id/recycleview_itemContent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_8dp"
             android:orientation="horizontal"
