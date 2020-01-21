@@ -13,14 +13,12 @@
         <activity android:name=".ui.authentication.signup.SignUpActivity"></activity>
         <activity android:name=".ui.authentication.signin.SignInActivity" />
         <activity android:name=".ui.authentication.welcome_to_app.WelcomeToAppActivity" />
-        <activity android:name=".ui.authentication.login_register.sign_in_act.Sign_inActivity" />
         <activity android:name=".ui.j_food.cart.CartActivity" />
         <activity android:name=".ui.j_food.detail.DetailJFoodActivity" />
         <activity android:name=".ui.j_food.food.JFoodActivity" />
         <activity android:name=".ui.booking.BookingActivity" />
         <activity android:name=".ui.authentication.otp.OtpActivity" />
         <activity android:name=".ui.main_menu.MainMenuActivity" />
-        <activity android:name=".ui.authentication.login_register.AuthenticationActivity" />
         <activity android:name=".ui.booking.checkout.CheckoutActivity" />
         <activity android:name=".ui.booking.paymen.PaymenRideActivity" />
         <activity android:name=".ui.booking.paymen.PaymenCarActivity" />
