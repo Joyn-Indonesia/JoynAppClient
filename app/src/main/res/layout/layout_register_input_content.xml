@@ -8,30 +8,22 @@
     android:paddingEnd="@dimen/_40sdp">
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/InputEditTextContent"
-        android:hint="@string/your_name"
-        app:boxBackgroundMode="none"
-        app:hintEnabled="false">
+        style="@style/InputEditTextContent.Register"
+        android:hint="@string/your_name">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/edittext_bottom_line"
+            style="@style/EditTextInputStyle.Register"
             android:hint="@string/your_name"
             android:imeOptions="actionNext"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/InputEditTextContent"
-        android:hint="@string/your_name"
-        app:boxBackgroundMode="none"
-        app:hintEnabled="false">
+        style="@style/InputEditTextContent.Register"
+        android:hint="@string/your_name">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/edittext_bottom_line"
+            style="@style/EditTextInputStyle.Register"
             android:hint="@string/e_mail"
             android:imeOptions="actionNext"
             android:inputType="text"
@@ -39,19 +31,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/InputEditTextContent"
-        android:hint="@string/your_name"
-        app:boxBackgroundMode="none"
-        app:hintEnabled="false">
+        style="@style/InputEditTextContent.Register"
+        android:hint="@string/your_name">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/edittext_bottom_line"
+            style="@style/EditTextInputStyle.Register"
             android:hint="@string/phone_number"
             android:imeOptions="actionDone"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
-
-
 </LinearLayout>
