@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -16,6 +17,7 @@
         android:layout_height="@dimen/_18sdp"
         android:layout_gravity="center"
         android:layout_marginStart="@dimen/_4sdp"
+        android:contentDescription="@string/content_image"
         android:padding="@dimen/_2sdp"
         android:src="@drawable/lang_id" />
 </LinearLayout>
