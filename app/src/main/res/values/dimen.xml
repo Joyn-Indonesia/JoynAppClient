@@ -5,7 +5,7 @@
     <dimen name="margin_16dp">@dimen/_16sdp</dimen>
 
     <dimen name="extra_big_text">@dimen/_16sdp</dimen>
-    <dimen name="title_text">@dimen/_14ssp</dimen>
+    <dimen name="medium_text">@dimen/_14ssp</dimen>
     <dimen name="default_text">@dimen/_12ssp</dimen>
     <dimen name="medium_small_text">@dimen/_10ssp</dimen>
     <dimen name="small_text">@dimen/_8ssp</dimen>

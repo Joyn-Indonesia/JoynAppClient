@@ -22,7 +22,11 @@
     <style name="StyleTextViewDefault.Bold">
         <item name="android:textStyle">bold</item>
     </style>
-    <!--    end Styele TextVIew-->
+
+    <style name="StyleTextViewDefault.Black">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+    <!--    end Style TextVIew  -->
 
     <!--    Edit Text Style -->
     <style name="InputEditTextContent">
@@ -43,10 +47,34 @@
     <style name="EditTextInputStyle.Register">
         <item name="android:background">@drawable/edittext_bottom_line</item>
     </style>
-
     <!--    end Edit Text -->
 
-    <!--    style payment gateway home-->
+    <!--   Material Button Style  -->
+    <style name="StyleMaterialButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="StyleMaterialButton.ButtonSignIn">
+        <item name="android:layout_width">@dimen/_80sdp</item>
+        <item name="android:layout_height">@dimen/_35sdp</item>
+        <item name="backgroundTint">@color/toscaLevel3</item>
+        <item name="android:padding">@dimen/_4sdp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/greenDarkerMain</item>
+        <item name="android:textSize">@dimen/medium_small_text</item>
+        <item name="cornerRadius">@dimen/_20sdp</item>
+        <item name="rippleColor">@color/greenYoung</item>
+        <item name="android:backgroundTint">@color/toscaLevel3</item>
+    </style>
+
+    <style name="StyleMaterialButton.Outline" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!--    end button style  -->
+
+    <!-- style payment gateway home -->
     <style name="StylePaymentGatewayHome">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>

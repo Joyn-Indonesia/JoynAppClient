@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_03"
-    tools:context=".ui.authentication.login_register.sign_in.SignInFragment">
+    tools:context=".ui.authentication.signin.SignInActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
+            android:contentDescription="@string/content_image"
             android:id="@+id/imageView"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
@@ -23,13 +24,10 @@
 
         <TextView
             android:id="@+id/tv_signUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/StyleTextViewDefault.Bold"
             android:layout_marginEnd="@dimen/_10sdp"
             android:text="@string/sign_up"
             android:textColor="@color/greenDarkerMain"
-            android:textSize="@dimen/default_text"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView" />
@@ -57,13 +55,11 @@
 
                 <TextView
                     android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/StyleTextViewDefault.Bold"
                     android:layout_marginTop="16dp"
                     android:text="@string/sign_in"
                     android:textColor="@color/toscaTop"
                     android:textSize="@dimen/extra_big_text"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -116,10 +112,11 @@
 
                 <TextView
                     android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/StyleTextViewDefault"
                     android:text="@string/verify_mobile_number_via"
                     android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/medium_small_text"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -128,60 +125,33 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_call"
-                    style="@style/Widget.MaterialComponents.Button"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_35sdp"
+                    style="@style/StyleMaterialButton.ButtonSignIn"
                     android:layout_marginStart="8dp"
-                    android:backgroundTint="@color/toscaLevel3"
-                    android:padding="@dimen/_4sdp"
                     android:text="@string/call"
-                    android:textAlignment="center"
-                    android:textColor="@color/greenDarkerMain"
-                    android:textSize="@dimen/medium_small_text"
-                    app:cornerRadius="@dimen/_20sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4"
-                    app:layout_constraintVertical_bias="0.542"
-                    app:rippleColor="@color/greenYoung" />
+                    app:layout_constraintVertical_bias="0.542" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_sms"
-                    style="@style/Widget.MaterialComponents.Button"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:backgroundTint="@color/toscaLevel3"
-                    android:padding="@dimen/_4sdp"
+                    style="@style/StyleMaterialButton.ButtonSignIn"
                     android:text="@string/Sms"
-                    android:textAlignment="center"
-                    android:textColor="@color/greenDarkerMain"
-                    android:textSize="@dimen/medium_small_text"
-                    app:cornerRadius="@dimen/_20sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_whatsapp"
                     app:layout_constraintStart_toEndOf="@+id/btn_call"
                     app:layout_constraintTop_toBottomOf="@+id/textView4"
-                    app:layout_constraintVertical_bias="0.542"
-                    app:rippleColor="@color/greenYoung" />
+                    app:layout_constraintVertical_bias="0.542" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_whatsapp"
-                    style="@style/Widget.MaterialComponents.Button"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_35sdp"
+                    style="@style/StyleMaterialButton.ButtonSignIn"
                     android:layout_marginEnd="8dp"
-                    android:backgroundTint="@color/toscaLevel3"
-                    android:padding="@dimen/_4sdp"
                     android:text="@string/whatsapp"
-                    android:textAlignment="center"
-                    android:textColor="@color/greenDarkerMain"
-                    android:textSize="@dimen/medium_small_text"
-                    app:cornerRadius="@dimen/_20sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4"
-                    app:layout_constraintVertical_bias="0.542"
-                    app:rippleColor="@color/greenYoung" />
+                    app:layout_constraintVertical_bias="0.542" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
