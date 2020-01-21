@@ -20,6 +20,8 @@ import com.example.joynappclient.ui.j_food.food.JFoodActivity;
 import com.example.joynappclient.utils.DummyItem;
 import com.example.joynappclient.utils.MoveActivity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -46,6 +48,8 @@ public class HomeFragment extends Fragment {
     Toolbar toolbar;
     @BindView(R.id.recycleview_mainContent)
     RecyclerView rvSnack;
+    @BindView(R.id.recycleview_button)
+    RecyclerView rvButton;
 
     //var
     private Context context;
@@ -69,8 +73,26 @@ public class HomeFragment extends Fragment {
         AdapterContentTitle snack = new AdapterContentTitle();
         snack.setItem(context, DummyItem.getAllData());
         rvSnack.setAdapter(snack);
-
+        initButton();
         //initToolbar();
+    }
+
+    private void initButton() {
+
+        List<String> title = new ArrayList<>();
+        title.add("All");
+        title.add("Food");
+        title.add("Promo");
+        title.add("Payment");
+        title.add("LifeStyles");
+        title.add("HangOuts");
+        title.add("Party");
+
+        ButtonAdapter adapter = new ButtonAdapter();
+        adapter.setItem(context, title);
+        rvButton.setHasFixedSize(true);
+        rvButton.setAdapter(adapter);
+
     }
 
     @Override
