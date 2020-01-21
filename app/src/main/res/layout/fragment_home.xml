@@ -24,7 +24,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_2sdp">
+            android:layout_marginTop="@dimen/_1sdp">
 
             <include layout="@layout/layout_menu_content_services_menu" />
 
@@ -34,13 +34,13 @@
             layout="@layout/layout_menu_content_booking_features"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp" />
+            android:layout_marginTop="@dimen/_1sdp" />
 
         <include
             layout="@layout/layout_menu_content_top_pick_features"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp" />
+            android:layout_marginTop="@dimen/_1sdp" />
 
         <include
             layout="@layout/layout_menu_content_j_payment"

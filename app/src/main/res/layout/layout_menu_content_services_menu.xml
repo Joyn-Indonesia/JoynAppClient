@@ -2,6 +2,7 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/_14sdp"
     android:alignmentMode="alignMargins"
     android:background="@color/colorWhite"
     android:columnCount="4"
@@ -85,8 +86,7 @@
             android:weightSum="10">
 
             <ImageView
-
-                style="@style/LayoutContentMenuImage.J_Box"
+                style="@style/LayoutContentMenuImage"
                 android:layout_weight="7"
                 android:src="@drawable/j_box" />
 
@@ -176,7 +176,9 @@
             <ImageView
                 style="@style/LayoutContentMenuImage"
                 android:layout_weight="7"
-                android:padding="@dimen/_20sdp"
+                android:paddingLeft="@dimen/_30sdp"
+                android:paddingTop="@dimen/_30sdp"
+                android:paddingRight="@dimen/_30sdp"
                 android:src="@drawable/hamburger_03" />
 
             <TextView

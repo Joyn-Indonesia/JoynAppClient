@@ -235,7 +235,6 @@
                     tools:ignore="MissingConstraints" />
 
                 <TextView
-                    android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Balance : Rp. 25.000"
@@ -286,7 +285,6 @@
                     tools:ignore="MissingConstraints" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/materialCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView11"
@@ -297,7 +295,6 @@
                     tools:ignore="MissingConstraints" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/materialCheckBox2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView10"

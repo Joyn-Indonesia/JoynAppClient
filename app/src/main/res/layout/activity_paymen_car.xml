@@ -31,7 +31,6 @@
                 android:src="@drawable/j_car" />
 
             <TextView
-                android:id="@+id/tv_detailTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -46,7 +45,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bidding Mode"
@@ -55,7 +53,6 @@
                     />
 
                 <Switch
-                    android:id="@+id/switch1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />

@@ -10,7 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.j_food.cart.CartActivity"></activity>
+        <activity android:name=".ui.authentication.signup.SignUpActivity"></activity>
+        <activity android:name=".ui.authentication.signin.SignInActivity" />
+        <activity android:name=".ui.authentication.welcome_to_app.WelcomeToAppActivity" />
+        <activity android:name=".ui.authentication.login_register.sign_in_act.Sign_inActivity" />
+        <activity android:name=".ui.j_food.cart.CartActivity" />
         <activity android:name=".ui.j_food.detail.DetailJFoodActivity" />
         <activity android:name=".ui.j_food.food.JFoodActivity" />
         <activity android:name=".ui.booking.BookingActivity" />
@@ -32,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

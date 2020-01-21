@@ -2,10 +2,11 @@ package com.example.joynappclient.ui.splashscreen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.joynappclient.ui.authentication.login_register.AuthenticationActivity;
+import com.example.joynappclient.ui.authentication.signup.SignUpActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -14,7 +15,11 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        startActivity(new Intent(SplashScreen.this, AuthenticationActivity.class));
-        finish();
+        new Handler().postDelayed(() -> {
+            startActivity(new Intent(SplashScreen.this, SignUpActivity.class));
+            finish();
+        }, 3000);
+
+
     }
 }

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.ui.main_menu.MainMenuActivity;
+import com.example.joynappclient.ui.authentication.welcome_to_app.WelcomeToAppActivity;
 import com.google.android.material.button.MaterialButton;
 
 import butterknife.BindView;
@@ -33,10 +33,10 @@ public class OtpActivity extends AppCompatActivity {
 
         next.setOnClickListener(v -> {
                     // MoveActivity.MoveAct(context, MainMenuActivity.class);
-                    Intent i = new Intent(context, MainMenuActivity.class);
+                    Intent i = new Intent(context, WelcomeToAppActivity.class);
 
                     startActivity(i);
-                    finishAffinity();
+
                 }
         );
     }

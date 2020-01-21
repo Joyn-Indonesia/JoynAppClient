@@ -96,7 +96,6 @@
             <ImageView
                 style="@style/LayoutContentMenuImage"
                 android:layout_weight="7"
-                android:padding="@dimen/_18sdp"
                 android:src="@drawable/j_box" />
 
             <TextView
@@ -199,7 +198,6 @@
     </com.google.android.material.card.MaterialCardView>
     <!--row 3-->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/menu_JDoc"
 
         style="@style/LayoutCardvieMainMenu">
 
@@ -222,7 +220,6 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/menu_JApotek"
 
         style="@style/LayoutCardvieMainMenu">
 
@@ -245,7 +242,6 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/menu_JMassage"
 
         style="@style/LayoutCardvieMainMenu">
 
@@ -268,7 +264,6 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/menu_Fitnes"
 
         style="@style/LayoutCardvieMainMenu">
 
@@ -291,7 +286,6 @@
     </com.google.android.material.card.MaterialCardView>
     <!--row 4 -->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/menu_JCourse"
 
         style="@style/LayoutCardvieMainMenu">
 
@@ -314,7 +308,6 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/menu_JClean"
 
         style="@style/LayoutCardvieMainMenu">
 
@@ -337,7 +330,6 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/menu_JPulsa"
 
         style="@style/LayoutCardvieMainMenu">
 
@@ -360,7 +352,6 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/menu_JBills"
 
         style="@style/LayoutCardvieMainMenu">
 
@@ -383,7 +374,6 @@
     </com.google.android.material.card.MaterialCardView>
     <!--row 5-->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/menu_JTickets"
 
         style="@style/LayoutCardvieMainMenu">
 
@@ -406,7 +396,6 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/menu_JPoint"
 
         style="@style/LayoutCardvieMainMenu">
 
@@ -429,7 +418,6 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/menu_JGive"
 
         style="@style/LayoutCardvieMainMenu">
 
@@ -451,9 +439,7 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/menu_JNews"
-        style="@style/LayoutCardvieMainMenu">
+    <com.google.android.material.card.MaterialCardView style="@style/LayoutCardvieMainMenu">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -51,17 +51,24 @@
     </style>
 
     <style name="LayoutContentMenuImage">
-        <item name="android:background">@drawable/shadow_background</item>
+        <!--        <item name="android:background">@drawable/shadow_background</item>-->
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:adjustViewBounds">true</item>
-        <item name="android:padding">@dimen/_10sdp</item>
+        <!--        <item name="android:padding">@dimen/_12sdp</item>-->
+        <item name="android:paddingTop">@dimen/_20sdp</item>
+        <item name="android:paddingLeft">@dimen/_20sdp</item>
+        <item name="android:paddingRight">@dimen/_20sdp</item>
+        <item name="android:paddingBottom">@dimen/_6sdp</item>
         <item name="android:contentDescription">@string/menu_icon</item>
     </style>
 
     <style name="LayoutContentMenuImage.J_Box">
-        <item name="android:padding">@dimen/_14sdp</item>
+        <!--        <item name="android:paddingTop">@dimen/_12sdp</item>-->
+        <!--        <item name="android:paddingLeft">@dimen/_12sdp</item>-->
+        <!--        <item name="android:paddingRight">@dimen/_12sdp</item>-->
+        <item name="android:paddingBottom">-8dp</item>
     </style>
 
     <style name="LayoutContentMenuText">
