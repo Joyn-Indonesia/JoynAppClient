@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "659640852065",
+    "firebase_url": "https://ghet-indonesia.firebaseio.com",
+    "project_id": "ghet-indonesia",
+    "storage_bucket": "ghet-indonesia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659640852065:android:73a8aadf9a68f617195420",
+        "android_client_info": {
+          "package_name": "com.example.joynappclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "659640852065-e4iuosn8ts66i29r5cudq5b76hfe0s3d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.joynappclient",
+            "certificate_hash": "ff9cde9498562deeec6a375d8fa5951ed1b08932"
+          }
+        },
+        {
+          "client_id": "659640852065-uavke16kp9lekcvs8so43n6ouksnjhve.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq_LjQmqukyfxeQIQyXeN_LgvumvjKOck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "659640852065-uavke16kp9lekcvs8so43n6ouksnjhve.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
