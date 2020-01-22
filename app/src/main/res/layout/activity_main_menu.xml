@@ -40,12 +40,5 @@
         app:mbn_selectedIconColor="@color/colorWhite"
         app:mbn_shadowColor="@color/colorWhite" />
 
-    <!--    <include-->
-    <!--        layout="@layout/layout_bottom_sheet_menu_content_service_all"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@+id/meowBottomNavigation"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

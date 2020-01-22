@@ -28,6 +28,10 @@
     <!-- Firestore Strings -->
     <string name="collection_users">Users</string>
 
+    <!--    Intent var -->
+    <string name="intent_phone">phone</string>
+    <string name="intent_params">signIn</string>
+
     <!--  Main Menu  -->
     <string name="j_ride">J-Ride</string>
     <string name="menu_icon">menu_icon</string>

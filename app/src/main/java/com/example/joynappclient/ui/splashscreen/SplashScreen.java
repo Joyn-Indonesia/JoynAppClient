@@ -2,9 +2,9 @@ package com.example.joynappclient.ui.splashscreen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.joynappclient.ui.authentication.signup.SignUpActivity;
@@ -25,27 +25,38 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        setupFirebaseAuth();
-
+        new Handler().postDelayed(() -> {
+            setupFirebaseAuth();
+        }, 3000);
     }
 
     private void setupFirebaseAuth() {
         Log.d(TAG, "setupFirebaseAuth: auth started");
-        mListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    Log.d(TAG, "onAuthStateChanged: signed in" + user.getUid());
-                    moveToHome();
-                    finish();
-                } else {
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                    moveToRegister();
-                }
-            }
-        };
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            Log.d(TAG, "onAuthStateChanged: signed in" + user.getUid());
+            moveToHome();
+            finish();
+        } else {
+            Log.d(TAG, "onAuthStateChanged:signed_out");
+            moveToRegister();
+        }
+
+//        mListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if (user != null) {
+//                    Log.d(TAG, "onAuthStateChanged: signed in" + user.getUid());
+//                    moveToHome();
+//                    finish();
+//                } else {
+//                    Log.d(TAG, "onAuthStateChanged:signed_out");
+//                    moveToRegister();
+//                }
+//            }
+//        };
     }
 
     private void moveToHome() {
@@ -62,17 +73,4 @@ public class SplashScreen extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseAuth.getInstance().addAuthStateListener(mListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mListener != null) {
-            FirebaseAuth.getInstance().removeAuthStateListener(mListener);
-        }
-    }
 }
