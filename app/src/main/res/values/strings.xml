@@ -19,7 +19,6 @@
     <string name="call">Call</string>
     <string name="Sms">sms</string>
     <string name="verification">Verification code has been send to</string>
-    <string name="_08123412312">08123412312</string>
     <string name="change_number">Change Number</string>
     <string name="manual">You don\'t need to manual enter verification code if the number instal in this phone</string>
     <string name="please">Please enter it bellow if number \n install another phone</string>

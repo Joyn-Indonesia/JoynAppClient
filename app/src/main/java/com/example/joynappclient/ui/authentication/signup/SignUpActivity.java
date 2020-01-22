@@ -1,6 +1,7 @@
 package com.example.joynappclient.ui.authentication.signup;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,12 +11,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.source.RegisterModel;
+import com.example.joynappclient.data.source.UserModel;
+import com.example.joynappclient.ui.authentication.otp.OtpActivity;
 import com.example.joynappclient.ui.authentication.signin.SignInActivity;
 import com.example.joynappclient.utils.Constant;
 import com.example.joynappclient.utils.MoveActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
@@ -65,22 +65,25 @@ public class SignUpActivity extends AppCompatActivity implements Validator.Valid
     }
 
     private void registerUser() {
-        RegisterModel user = new RegisterModel();
-        user.setName(name.getText().toString());
-        user.seteMail(email.getText().toString());
-        user.setPhoneNumber(phoneNumber.getText().toString());
-        user.setUserId(FirebaseAuth.getInstance().getUid());
+        String phone = "+62";
+        if (phoneNumber.getText().toString().charAt(0) == '0') {
+            phone = phone + phoneNumber.getText().toString().substring(1);
 
-        DocumentReference userReff = db.collection(Constant.User)
-                .document("1");
+            Log.d(TAG, "registerUser: " + phone);
 
-        userReff.set(user).addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult() != null) {
-                Log.d(TAG, "registerUser: success");
-            } else {
-                Log.d(TAG, "registerUser: failed");
-            }
-        });
+            UserModel user = new UserModel();
+            user.setName(name.getText().toString());
+            user.seteMail(email.getText().toString());
+            user.setPhoneNumber(phone);
+            Intent i = new Intent(context, OtpActivity.class);
+            i.putExtra(Constant.User, user);
+            startActivity(i);
+
+        }
+
+
+
+
     }
 
     @OnClick(R.id.btn_regiter)

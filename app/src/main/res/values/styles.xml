@@ -85,6 +85,12 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
+    <style name="StyleMaterialButton.disabled" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="backgroundTint">@color/background_button_disable</item>
+    </style>
     <!--    end button style  -->
 
     <!-- style payment gateway home -->

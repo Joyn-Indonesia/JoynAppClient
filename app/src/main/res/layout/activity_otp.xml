@@ -22,9 +22,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_number"
+            android:id="@+id/tv_numberPhone"
             style="@style/StyleTextViewDefault.Bold"
-            android:text="@string/_08123412312"
             android:textColor="@color/greenDarkerMain"
             android:textSize="@dimen/medium_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,13 +41,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_number" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_numberPhone" />
 
         <ImageView
-            android:contentDescription="@string/content_image"
             android:id="@+id/imageView5"
             android:layout_width="90dp"
             android:layout_height="90dp"
+            android:contentDescription="@string/content_image"
             android:src="@drawable/img_veriphone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -62,19 +61,20 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_50sdp"
             android:layout_marginTop="20dp"
-            android:textAlignment="center"
-            android:textSize="@dimen/medium_small_text"
             android:layout_marginEnd="@dimen/_50sdp"
             android:text="@string/manual"
+            android:textAlignment="center"
             android:textColor="@color/black80"
+            android:textSize="@dimen/medium_small_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
         <com.google.android.material.card.MaterialCardView
             style="@style/Widget.MaterialComponents.CardView"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="200dp"
+
             android:minHeight="200dp"
             app:cardBackgroundColor="@color/toscaLevel3"
             app:cardCornerRadius="20dp"
@@ -112,6 +112,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:focusable="false"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
                     app:cursorVisible="false"
                     app:forceKeyboard="false"
                     app:hint="0"
@@ -123,8 +125,9 @@
                     app:password="false"
                     app:pinBackground="@color/toscaTop"
                     app:pinHeight="40dp"
-                    app:pinLength="4"
+                    app:pinLength="6"
                     app:pinWidth="40dp"
+                    app:splitWidth="@dimen/_8sdp"
                     app:textSize="@dimen/small_text"
                     tools:ignore="MissingConstraints" />
 
@@ -150,10 +153,9 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_next"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/greenLight"
-                        android:text="NEXT"
+                        style="@style/StyleMaterialButton.disabled"
+                        android:enabled="false"
+                        android:text="@string/next"
                         app:cornerRadius="10sp" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
