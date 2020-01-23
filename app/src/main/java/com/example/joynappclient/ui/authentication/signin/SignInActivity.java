@@ -11,14 +11,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.source.UserModel;
+import com.example.joynappclient.data.source.remote.model.UserModel;
 import com.example.joynappclient.ui.authentication.otp.OtpActivity;
 import com.example.joynappclient.utils.MoveActivity;
-import com.google.firebase.firestore.CollectionReference;
+import com.example.joynappclient.viewmodel.ViewModelFactory;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Length;
@@ -49,6 +50,7 @@ public class SignInActivity extends AppCompatActivity implements Validator.Valid
     private FirebaseFirestore mDb;
     private Context context;
     private Validator validator;
+    private SignInVIewModel vIewModel;
 
     @OnClick(R.id.tv_signUp)
     public void signUp() {
@@ -60,10 +62,15 @@ public class SignInActivity extends AppCompatActivity implements Validator.Valid
         validator.validate();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        ViewModelFactory factory = ViewModelFactory.getInstance();
+        vIewModel = new ViewModelProvider(this, factory).get(SignInVIewModel.class);
+
         ButterKnife.bind(this);
         mDb = FirebaseFirestore.getInstance();
 
@@ -83,17 +90,28 @@ public class SignInActivity extends AppCompatActivity implements Validator.Valid
 
     private void checkNumber(String phoneNumber) {
 
-        CollectionReference getUser = mDb.collection(getString(R.string.collection_users));
-        Query query = getUser.whereEqualTo("phoneNumber", phoneNumber);
-
-        query.get().addOnSuccessListener(this, queryDocumentSnapshots -> {
-            if (queryDocumentSnapshots.getDocuments().isEmpty()) {
-                Log.d(TAG, "checkNumber: find");
-                MoveActivity.showToast(context, "Phone Number belum terdaftar");
-            } else {
-                moveToOtp(phoneNumber);
+        vIewModel.checkNumberPhone(phoneNumber, getString(R.string.collection_users)).observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    moveToOtp(phoneNumber);
+                } else {
+                    MoveActivity.showToast(context, "Phone Number belum terdaftar");
+                }
             }
         });
+
+//        CollectionReference getUser = mDb.collection(getString(R.string.collection_users));
+//        Query query = getUser.whereEqualTo("phoneNumber", phoneNumber);
+//
+//        query.get().addOnSuccessListener(this, queryDocumentSnapshots -> {
+//            if (queryDocumentSnapshots.getDocuments().isEmpty()) {
+//                Log.d(TAG, "checkNumber: find");
+//                MoveActivity.showToast(context, "Phone Number belum terdaftar");
+//            } else {
+//                moveToOtp(phoneNumber);
+//            }
+//        });
     }
 
     private void moveToOtp(String phoneNumber) {

@@ -1,4 +1,4 @@
-package com.example.joynappclient.data;
+package com.example.joynappclient.data.dummy;
 
 public class FoodModel {
 

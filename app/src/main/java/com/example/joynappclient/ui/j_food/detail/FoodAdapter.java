@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.FoodModel;
+import com.example.joynappclient.data.dummy.FoodModel;
 
 import java.util.ArrayList;
 import java.util.List;

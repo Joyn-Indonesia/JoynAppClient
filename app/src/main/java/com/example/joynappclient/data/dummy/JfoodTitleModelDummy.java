@@ -1,4 +1,4 @@
-package com.example.joynappclient.data;
+package com.example.joynappclient.data.dummy;
 
 import java.util.List;
 

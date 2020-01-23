@@ -1,11 +1,11 @@
 package com.example.joynappclient.utils;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.CartModel;
-import com.example.joynappclient.data.FoodModel;
-import com.example.joynappclient.data.InProgressModel;
-import com.example.joynappclient.data.JFoodContentModelDummy;
-import com.example.joynappclient.data.JfoodTitleModelDummy;
+import com.example.joynappclient.data.dummy.CartModel;
+import com.example.joynappclient.data.dummy.FoodModel;
+import com.example.joynappclient.data.dummy.InProgressModel;
+import com.example.joynappclient.data.dummy.JFoodContentModelDummy;
+import com.example.joynappclient.data.dummy.JfoodTitleModelDummy;
 
 import java.util.ArrayList;
 import java.util.List;

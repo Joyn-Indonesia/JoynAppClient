@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.InProgressModel;
+import com.example.joynappclient.data.dummy.InProgressModel;
 
 import java.util.List;
 

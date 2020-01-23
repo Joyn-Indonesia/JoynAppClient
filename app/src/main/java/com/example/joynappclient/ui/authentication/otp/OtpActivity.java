@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.source.UserModel;
+import com.example.joynappclient.data.source.remote.model.UserModel;
 import com.example.joynappclient.ui.authentication.welcome_to_app.WelcomeToAppActivity;
 import com.example.joynappclient.utils.MoveActivity;
 import com.goodiebag.pinview.Pinview;

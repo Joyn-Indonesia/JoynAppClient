@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.JFoodContentModelDummy;
+import com.example.joynappclient.data.dummy.JFoodContentModelDummy;
 import com.example.joynappclient.ui.j_food.detail.DetailJFoodActivity;
 import com.example.joynappclient.utils.MoveActivity;
 

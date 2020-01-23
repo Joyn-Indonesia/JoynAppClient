@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.JfoodTitleModelDummy;
+import com.example.joynappclient.data.dummy.JfoodTitleModelDummy;
 
 import java.util.ArrayList;
 import java.util.List;

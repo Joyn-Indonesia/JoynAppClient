@@ -1,4 +1,4 @@
-package com.example.joynappclient.data.source;
+package com.example.joynappclient.data.source.remote.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
