@@ -10,11 +10,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.data.source.remote.model.UserModel;
 import com.example.joynappclient.ui.authentication.welcome_to_app.WelcomeToAppActivity;
 import com.example.joynappclient.utils.MoveActivity;
+import com.example.joynappclient.viewmodel.ViewModelFactory;
 import com.goodiebag.pinview.Pinview;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
@@ -53,6 +55,8 @@ public class OtpActivity extends AppCompatActivity {
     private UserModel user;
     private boolean registerNewUser = true;
     private String phoneNumber;
+    private OtpVIewModel vIewModel;
+    private boolean isTrue = false;
 
     //onCLick
     @OnClick(R.id.btn_changeNumber)
@@ -66,8 +70,17 @@ public class OtpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_otp);
         ButterKnife.bind(this);
         context = this;
+
+        ViewModelFactory factory = ViewModelFactory.getInstance();
+        vIewModel = new ViewModelProvider(this, factory).get(OtpVIewModel.class);
+
         mAuth = FirebaseAuth.getInstance();
         mDb = FirebaseFirestore.getInstance();
+
+        getData();
+    }
+
+    private void getData() {
 
         if (getIntent() != null) {
             user = getIntent().getParcelableExtra(getString(R.string.intent_phone));
@@ -76,15 +89,18 @@ public class OtpActivity extends AppCompatActivity {
                 registerNewUser = false;
             }
             numberText.setText(phoneNumber);
+
             countDownTimer();
             requestOtp();
             widgetListener();
         }
+
     }
 
     private void countDownTimer() {
+
         resendCode.setEnabled(false);
-        new CountDownTimer(60 * 1000, 1000) {
+        new CountDownTimer(30 * 1000, 1000) {
             public void onTick(long millisUntilFinished) {
                 resendCode.setText("resend in " + millisUntilFinished / 1000 + " second");
             }
@@ -100,7 +116,7 @@ public class OtpActivity extends AppCompatActivity {
         Log.d(TAG, "requestOtp: start request");
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,
-                60,
+                30,
                 TimeUnit.SECONDS,
                 this,
                 callbacks());
@@ -159,7 +175,6 @@ public class OtpActivity extends AppCompatActivity {
         };
     }
 
-    //  @OnClick(R.id.btn_next)
     public void sendOtpCode(String code) {
         Log.d(TAG, "sendOtpCode: start otp");
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
@@ -167,6 +182,7 @@ public class OtpActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 Log.d(TAG, "onComplete: success");
                 if (registerNewUser) {
+                    isTrue = true;
                     user.setUserId(mAuth.getUid());
                     insertNewUser();
                     Log.d(TAG, "sendOtpCode: new user");
@@ -179,7 +195,7 @@ public class OtpActivity extends AppCompatActivity {
                 if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                     // The verification code entered was invalid
                     Log.e(TAG, "Invalid code: ");
-                    Toast.makeText(context, "Invalid Code", Toast.LENGTH_SHORT).show();
+                    isTrue = false;
                 }
             }
         });
@@ -190,6 +206,7 @@ public class OtpActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 Log.d(TAG, "onComplete: success");
                 if (registerNewUser) {
+                    isTrue = true;
                     user.setUserId(mAuth.getUid());
                     insertNewUser();
                     Log.d(TAG, "sendOtpCode: new user");
@@ -202,10 +219,20 @@ public class OtpActivity extends AppCompatActivity {
                 if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                     // The verification code entered was invalid
                     Log.e(TAG, "Invalid code: ");
+                    isTrue = false;
                     Toast.makeText(context, "Invalid Code", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    @OnClick(R.id.btn_next)
+    public void checkOtp() {
+        if (isTrue) {
+            redirectHomeMenu();
+        } else {
+            Toast.makeText(context, "Invalid Code", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void insertNewUser() {
