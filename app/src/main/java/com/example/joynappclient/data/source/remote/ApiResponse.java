@@ -23,8 +23,8 @@ public class ApiResponse<T> {
         this.body = body;
     }
 
-    public static <T> ApiResponse<T> success(@Nullable T body) {
-        return new ApiResponse<>(SUCCESS, body, null);
+    public static <T> ApiResponse<T> success(String message, @Nullable T body) {
+        return new ApiResponse<>(SUCCESS, body, message);
     }
 
     public static <T> ApiResponse<T> empety(String message, @Nullable T body) {

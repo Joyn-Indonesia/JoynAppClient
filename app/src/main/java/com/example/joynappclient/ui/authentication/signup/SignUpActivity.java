@@ -4,19 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.data.source.remote.model.UserModel;
 import com.example.joynappclient.ui.authentication.otp.OtpActivity;
 import com.example.joynappclient.ui.authentication.signin.SignInActivity;
+import com.example.joynappclient.utils.DialogActivity;
 import com.example.joynappclient.utils.MoveActivity;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
+import com.example.joynappclient.viewmodel.ViewModelFactory;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
@@ -29,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SignUpActivity extends AppCompatActivity implements Validator.ValidationListener {
+public class SignUpActivity extends DialogActivity implements Validator.ValidationListener {
     private static final String TAG = "SignUpActivity";
 
     //wigets
@@ -42,16 +43,18 @@ public class SignUpActivity extends AppCompatActivity implements Validator.Valid
     @BindView(R.id.input_email)
     EditText email;
 
+    @BindView(R.id.phone_number)
+    AutoCompleteTextView editTextFilledExposedDropdown;
+
     @NotEmpty
     @Length(min = 10, max = 13, trim = true, message = "Phone number not valid")
     @BindView(R.id.input_phoneNumber)
-    EditText phoneNumber;
+    EditText inputPhone;
 
     //vars
     private Context context;
     private Validator validator;
-    private FirebaseFirestore db;
-    private String phone = "+62";
+    private SignUpViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,38 +62,52 @@ public class SignUpActivity extends AppCompatActivity implements Validator.Valid
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
         context = this;
+
+        ViewModelFactory factory = ViewModelFactory.getInstance();
+        viewModel = new ViewModelProvider(this, factory).get(SignUpViewModel.class);
+
         validator = new Validator(this);
         validator.setValidationListener(this);
-        db = FirebaseFirestore.getInstance();
+
+        setAdapterCountryCode();
+
     }
 
-    private void checkNumber() {
+    private void setAdapterCountryCode() {
+        String[] COUNTRIES = new String[]{"+62", "+63", "+64"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, R.layout.dropdown_menu_popup_item, COUNTRIES
+        );
+        editTextFilledExposedDropdown.setText(COUNTRIES[0]);
+        editTextFilledExposedDropdown.setAdapter(adapter);
+    }
 
-        if (phoneNumber.getText().toString().charAt(0) == '0') {
-            phone = phone + phoneNumber.getText().toString().substring(1);
-        }
+    private void checkNumber(String phoneNumber) {
+        viewModel.setCredential(phoneNumber, getString(R.string.collection_users));
 
-        CollectionReference getUser = db.collection(getString(R.string.collection_users));
-        Query query = getUser.whereEqualTo("phoneNumber", phone);
-        query.get().addOnSuccessListener(this, queryDocumentSnapshots -> {
-            if (queryDocumentSnapshots.getDocuments().isEmpty()) {
-                registerUser();
-            } else {
-                Toast.makeText(context, "Number has regristered", Toast.LENGTH_SHORT).show();
+        viewModel.checkPhoneNumber().observe(this, api -> {
+            switch (api.status) {
+                case LOADING:
+                    showProgressDialog(R.string.dialog_loading);
+                    break;
+                case EMPTY:
+                    registerUser(phoneNumber);
+                    hideProgressDialog();
+                    break;
+                case SUCCESS:
+                    showToast(api.message);
+                    hideProgressDialog();
+                    break;
             }
         });
     }
 
-    private void registerUser() {
-
+    private void registerUser(String phoneNumber) {
         UserModel user = new UserModel();
         user.setName(name.getText().toString());
         user.seteMail(email.getText().toString());
-        user.setPhoneNumber(phone);
+        user.setPhoneNumber(phoneNumber);
         Intent i = new Intent(context, OtpActivity.class);
         i.putExtra(getString(R.string.intent_phone), user);
-        startActivity(i);
-
     }
 
     @OnClick(R.id.btn_regiter)
@@ -105,7 +122,8 @@ public class SignUpActivity extends AppCompatActivity implements Validator.Valid
 
     @Override
     public void onValidationSucceeded() {
-        checkNumber();
+        String phoneNumber = "+62" + inputPhone.getText().toString();
+        checkNumber(phoneNumber);
     }
 
     @Override

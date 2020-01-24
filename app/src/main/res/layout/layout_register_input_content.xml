@@ -32,16 +32,50 @@
             app:boxBackgroundMode="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/InputEditTextContent.Register"
-        android:hint="@string/your_name">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.120000005">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_phoneNumber"
-            style="@style/EditTextInputStyle.Register"
-            android:hint="@string/phone_number"
-            android:inputType="number"
-            android:imeOptions="actionDone"
-            android:maxLength="13" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/colorWhite">
+
+            <AutoCompleteTextView
+                android:id="@+id/phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:editable="false" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            app:boxStrokeColor="@color/colorWhite"
+            app:boxStrokeWidth="0dp"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_bottom_line"
+                android:hint="@string/_812345678"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="12"
+                android:textColor="@color/colorBlack" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 </LinearLayout>

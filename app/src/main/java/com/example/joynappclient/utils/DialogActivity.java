@@ -1,6 +1,7 @@
 package com.example.joynappclient.utils;
 
 import android.app.ProgressDialog;
+import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,10 @@ public class DialogActivity extends AppCompatActivity {
             dialog.dismiss();
             dialog = null;
         }
+    }
+
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
 }

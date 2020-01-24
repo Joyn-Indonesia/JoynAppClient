@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.joynappclient.data.JoynRepository;
 import com.example.joynappclient.di.DataInjection;
 import com.example.joynappclient.ui.authentication.signin.SignInVIewModel;
+import com.example.joynappclient.ui.authentication.signup.SignUpViewModel;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
@@ -35,6 +36,9 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         if (modelClass.isAssignableFrom(SignInVIewModel.class)) {
             //noinspection unchecked
             return (T) new SignInVIewModel(joynRepository);
+        } else if (modelClass.isAssignableFrom(SignUpViewModel.class)) {
+            //noinspection unchecked
+            return (T) new SignUpViewModel(joynRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel Class " + modelClass.getName());
     }

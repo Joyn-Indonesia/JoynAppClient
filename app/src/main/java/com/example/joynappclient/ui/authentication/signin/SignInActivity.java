@@ -35,27 +35,26 @@ public class SignInActivity extends DialogActivity implements Validator.Validati
     private static final String TAG = "SignInActivity";
 
     //    wigets
-
     @BindView(R.id.phone_number)
     AutoCompleteTextView editTextFilledExposedDropdown;
-
     @NotEmpty
     @Length(min = 10, max = 12, trim = true, message = "number is wrong")
     @BindView(R.id.input_phoneNumber)
     EditText inputPhone;
     @BindString(R.string.intent_params)
     String params;
+
     //    vars
     private FirebaseFirestore mDb;
     private Context context;
     private Validator validator;
     private SignInVIewModel vIewModel;
 
+    //onclick
     @OnClick(R.id.tv_signUp)
     public void signUp() {
         finish();
     }
-
     @OnClick({R.id.btn_whatsapp, R.id.btn_sms, R.id.btn_call})
     public void onMethodClick() {
         validator.validate();
@@ -121,7 +120,6 @@ public class SignInActivity extends DialogActivity implements Validator.Validati
 
     @Override
     public void onValidationSucceeded() {
-        Log.d(TAG, "onValidationSucceeded: valid");
         String phoneNumber = "+62" + inputPhone.getText().toString();
         checkNumber(phoneNumber);
     }

@@ -29,7 +29,7 @@ public class FirebaseRepository {
     public LiveData<ApiResponse> checkPhoneNumber(String number, String collection) {
         MutableLiveData<ApiResponse> checkNumber = new MutableLiveData<>();
 
-        checkNumber.postValue(ApiResponse.loading("Loading", null));
+        checkNumber.postValue(ApiResponse.loading("Loading...", null));
 
         CollectionReference reference = mDb.collection(collection);
         Query query = reference.whereEqualTo("phoneNumber", number);
@@ -38,9 +38,9 @@ public class FirebaseRepository {
             if (queryDocumentSnapshots.getDocuments().isEmpty()) {
                 checkNumber.postValue(ApiResponse.empety("belum terdaftar", null));
             } else {
-                checkNumber.postValue(ApiResponse.success("oke"));
+                checkNumber.postValue(ApiResponse.success("sudah terdaftar", null));
             }
-        }).addOnFailureListener(e -> checkNumber.postValue(ApiResponse.error("Problem Network", null)));
+        });
 
 
         return checkNumber;
