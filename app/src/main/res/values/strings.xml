@@ -3,6 +3,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
 
+    <!--  Dialog  -->
+    <string name="dialog_loading">Loading…</string>
+
     <!-- Auth -->
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
@@ -85,7 +88,6 @@
     <!--Order -->
     <string name="edit_destinaton">Edit Destinaton</string>
     <string name="recipient_phone_number">Recipient Phone Number :</string>
-
     <string name="history">History</string>
     <string name="inprogress">Inprogress</string>
     <string name="j_ride_features">J-Ride Features</string>

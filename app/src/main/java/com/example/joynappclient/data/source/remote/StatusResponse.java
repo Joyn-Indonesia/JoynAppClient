@@ -4,5 +4,6 @@ public enum StatusResponse {
 
     SUCCESS,
     EMPTY,
+    LOADING,
     ERROR
 }

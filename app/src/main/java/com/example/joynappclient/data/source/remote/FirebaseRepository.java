@@ -1,7 +1,9 @@
 package com.example.joynappclient.data.source.remote;
 
 import android.os.Handler;
-import android.util.Log;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.joynappclient.data.source.remote.model.UserModel;
 import com.google.firebase.firestore.CollectionReference;
@@ -23,13 +25,25 @@ public class FirebaseRepository {
         return INSTANCE;
     }
 
-    public Query checkPhoneNumber(String number, String collection) {
-        Log.d(TAG, "checkPhoneNumber: ");
+
+    public LiveData<ApiResponse> checkPhoneNumber(String number, String collection) {
+        MutableLiveData<ApiResponse> checkNumber = new MutableLiveData<>();
+
+        checkNumber.postValue(ApiResponse.loading("Loading", null));
+
         CollectionReference reference = mDb.collection(collection);
         Query query = reference.whereEqualTo("phoneNumber", number);
 
-        return query;
-    }
+        query.get().addOnSuccessListener(queryDocumentSnapshots -> {
+            if (queryDocumentSnapshots.getDocuments().isEmpty()) {
+                checkNumber.postValue(ApiResponse.empety("belum terdaftar", null));
+            } else {
+                checkNumber.postValue(ApiResponse.success("oke"));
+            }
+        }).addOnFailureListener(e -> checkNumber.postValue(ApiResponse.error("Problem Network", null)));
 
+
+        return checkNumber;
+    }
 
 }

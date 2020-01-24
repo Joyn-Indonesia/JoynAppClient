@@ -1,7 +1,9 @@
 package com.example.joynappclient.data;
 
+import androidx.lifecycle.LiveData;
+
+import com.example.joynappclient.data.source.remote.ApiResponse;
 import com.example.joynappclient.data.source.remote.FirebaseRepository;
-import com.google.firebase.firestore.Query;
 
 public class JoynRepository implements JoynDataSource {
     private static volatile JoynRepository INSTANCE = null;
@@ -23,9 +25,8 @@ public class JoynRepository implements JoynDataSource {
         return INSTANCE;
     }
 
-
     @Override
-    public Query checkPhoneNumber(String number, String reference) {
+    public LiveData<ApiResponse> checkPhoneNumber(String number, String reference) {
         return firebaseRepository.checkPhoneNumber(number, reference);
     }
 }

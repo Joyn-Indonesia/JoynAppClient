@@ -1,9 +1,11 @@
 package com.example.joynappclient.data;
 
-import com.google.firebase.firestore.Query;
+import androidx.lifecycle.LiveData;
+
+import com.example.joynappclient.data.source.remote.ApiResponse;
 
 public interface JoynDataSource {
 
-    Query checkPhoneNumber(String number, String reference);
+    LiveData<ApiResponse> checkPhoneNumber(String number, String reference);
 
 }

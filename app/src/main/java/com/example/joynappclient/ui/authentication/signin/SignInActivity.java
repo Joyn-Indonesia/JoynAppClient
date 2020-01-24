@@ -10,13 +10,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.data.source.remote.model.UserModel;
 import com.example.joynappclient.ui.authentication.otp.OtpActivity;
+import com.example.joynappclient.utils.DialogActivity;
 import com.example.joynappclient.utils.MoveActivity;
 import com.example.joynappclient.viewmodel.ViewModelFactory;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SignInActivity extends AppCompatActivity implements Validator.ValidationListener {
+public class SignInActivity extends DialogActivity implements Validator.ValidationListener {
     private static final String TAG = "SignInActivity";
 
     //    wigets
@@ -90,28 +89,24 @@ public class SignInActivity extends AppCompatActivity implements Validator.Valid
 
     private void checkNumber(String phoneNumber) {
 
-        vIewModel.checkNumberPhone(phoneNumber, getString(R.string.collection_users)).observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
+        vIewModel.setCredential(phoneNumber, getString(R.string.collection_users));
+        vIewModel.checkNumberPhone().observe(this, apiResponse -> {
+            switch (apiResponse.status) {
+                case LOADING:
+                    showProgressDialog(R.string.dialog_loading);
+                    break;
+
+                case SUCCESS:
+                    hideProgressDialog();
                     moveToOtp(phoneNumber);
-                } else {
-                    MoveActivity.showToast(context, "Phone Number belum terdaftar");
-                }
+                    break;
+
+                case EMPTY:
+                    hideProgressDialog();
+                    MoveActivity.showToast(context, apiResponse.message);
+                    break;
             }
         });
-
-//        CollectionReference getUser = mDb.collection(getString(R.string.collection_users));
-//        Query query = getUser.whereEqualTo("phoneNumber", phoneNumber);
-//
-//        query.get().addOnSuccessListener(this, queryDocumentSnapshots -> {
-//            if (queryDocumentSnapshots.getDocuments().isEmpty()) {
-//                Log.d(TAG, "checkNumber: find");
-//                MoveActivity.showToast(context, "Phone Number belum terdaftar");
-//            } else {
-//                moveToOtp(phoneNumber);
-//            }
-//        });
     }
 
     private void moveToOtp(String phoneNumber) {
