@@ -12,12 +12,12 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:contentDescription="@string/content_image"
             android:id="@+id/imageView"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:contentDescription="@string/content_image"
             android:src="@drawable/lg_joyn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -80,13 +80,15 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:boxStrokeColor="@color/colorWhite">
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp">
 
                         <AutoCompleteTextView
                             android:id="@+id/phone_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:editable="false" />
+                            android:editable="false"
+                            android:focusable="false" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -107,6 +109,7 @@
                             android:imeOptions="actionDone"
                             android:inputType="number"
                             android:maxLength="12"
+                            android:paddingStart="0dp"
                             android:textColor="@color/colorBlack" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
