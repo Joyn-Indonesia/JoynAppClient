@@ -98,11 +98,13 @@ public class SignInActivity extends DialogActivity implements Validator.Validati
                 case SUCCESS:
                     hideProgressDialog();
                     moveToOtp(phoneNumber);
+                    Log.d(TAG, "checkNumber: daftar");
                     break;
 
                 case EMPTY:
                     hideProgressDialog();
                     MoveActivity.showToast(context, apiResponse.message);
+                    Log.d(TAG, "checkNumber: ");
                     break;
             }
         });

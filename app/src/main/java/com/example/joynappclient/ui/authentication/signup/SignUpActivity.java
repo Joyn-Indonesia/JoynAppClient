@@ -3,6 +3,7 @@ package com.example.joynappclient.ui.authentication.signup;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -91,10 +92,12 @@ public class SignUpActivity extends DialogActivity implements Validator.Validati
                     break;
                 case EMPTY:
                     registerUser(phoneNumber);
+                    Log.d(TAG, "checkNumber: register");
                     hideProgressDialog();
                     break;
                 case SUCCESS:
                     showToast(api.message);
+                    Log.d(TAG, "checkNumber: number");
                     hideProgressDialog();
                     break;
             }
@@ -102,12 +105,14 @@ public class SignUpActivity extends DialogActivity implements Validator.Validati
     }
 
     private void registerUser(String phoneNumber) {
+        Log.d(TAG, "registerUser: register run");
         UserModel user = new UserModel();
         user.setName(name.getText().toString());
         user.seteMail(email.getText().toString());
         user.setPhoneNumber(phoneNumber);
         Intent i = new Intent(context, OtpActivity.class);
         i.putExtra(getString(R.string.intent_phone), user);
+        startActivity(i);
     }
 
     @OnClick(R.id.btn_regiter)

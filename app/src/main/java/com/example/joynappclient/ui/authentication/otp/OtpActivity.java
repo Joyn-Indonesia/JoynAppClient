@@ -113,6 +113,7 @@ public class OtpActivity extends AppCompatActivity {
     }
 
     private void requestOtp() {
+        Log.d(TAG, "requestOtp: "+phoneNumber);
         Log.d(TAG, "requestOtp: start request");
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,
@@ -177,6 +178,7 @@ public class OtpActivity extends AppCompatActivity {
 
     public void sendOtpCode(String code) {
         Log.d(TAG, "sendOtpCode: start otp");
+        Log.d(TAG, "sendOtpCode: ");
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
