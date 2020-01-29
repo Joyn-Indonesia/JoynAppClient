@@ -27,6 +27,7 @@ public class BookingActivity extends AppCompatActivity implements ExampleButtomS
             ExampleButtomSheetDialog ex = new ExampleButtomSheetDialog();
             ex.show(getSupportFragmentManager(), "");
         });
+
     }
 
 

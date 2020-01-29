@@ -55,6 +55,7 @@ public class SignInActivity extends DialogActivity implements Validator.Validati
     public void signUp() {
         finish();
     }
+
     @OnClick({R.id.btn_whatsapp, R.id.btn_sms, R.id.btn_call})
     public void onMethodClick() {
         validator.validate();

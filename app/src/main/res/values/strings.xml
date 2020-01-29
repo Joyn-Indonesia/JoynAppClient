@@ -93,5 +93,8 @@
     <string name="j_ride_features">J-Ride Features</string>
     <string name="j_car_features">J-Car Features</string>
 
+    <!--  Permission  -->
+    <string name="request_permission">Kami membutuhkan Akses lokasi dan ini itu</string>
+
 
 </resources>

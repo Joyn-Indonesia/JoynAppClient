@@ -33,6 +33,15 @@ import butterknife.OnClick;
  */
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
+    //Widget
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.recycleview_mainContent)
+    RecyclerView rvSnack;
+    @BindView(R.id.recycleview_button)
+    RecyclerView rvButton;
+    //var
+    private Context context;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -41,18 +50,6 @@ public class HomeFragment extends Fragment {
     public static HomeFragment getInstance() {
         return new HomeFragment();
     }
-
-
-    //Widget
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.recycleview_mainContent)
-    RecyclerView rvSnack;
-    @BindView(R.id.recycleview_button)
-    RecyclerView rvButton;
-
-    //var
-    private Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,6 +72,7 @@ public class HomeFragment extends Fragment {
         rvSnack.setAdapter(snack);
         initButton();
         //initToolbar();
+
     }
 
     private void initButton() {
