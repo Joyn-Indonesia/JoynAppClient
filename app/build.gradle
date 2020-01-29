@@ -40,6 +40,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation 'com.google.firebase:firebase-firestore:21.3.1'
 
+    //maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
     //**layouting
     //ConstraintLayout
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

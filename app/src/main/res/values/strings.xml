@@ -2,7 +2,6 @@
     <string name="app_name">JoynAppClient</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-
     <!--  Dialog  -->
     <string name="dialog_loading">Loading…</string>
 
