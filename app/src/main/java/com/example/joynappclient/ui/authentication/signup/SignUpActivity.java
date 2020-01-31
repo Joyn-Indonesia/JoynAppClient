@@ -16,7 +16,7 @@ import com.example.joynappclient.R;
 import com.example.joynappclient.data.source.remote.model.UserModel;
 import com.example.joynappclient.ui.authentication.otp.OtpActivity;
 import com.example.joynappclient.ui.authentication.signin.SignInActivity;
-import com.example.joynappclient.utils.DialogActivity;
+import com.example.joynappclient.utils.BaseActivity;
 import com.example.joynappclient.utils.MoveActivity;
 import com.example.joynappclient.viewmodel.ViewModelFactory;
 import com.mobsandgeeks.saripaar.ValidationError;
@@ -31,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SignUpActivity extends DialogActivity implements Validator.ValidationListener {
+public class SignUpActivity extends BaseActivity implements Validator.ValidationListener {
     private static final String TAG = "SignUpActivity";
 
     //wigets

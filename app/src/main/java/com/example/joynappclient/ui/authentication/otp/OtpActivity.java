@@ -81,7 +81,7 @@ public class OtpActivity extends AppCompatActivity {
     }
 
     private void getData() {
-
+        Log.d(TAG, "getData: get data from intent");
         if (getIntent() != null) {
             user = getIntent().getParcelableExtra(getString(R.string.intent_phone));
             phoneNumber = user.getPhoneNumber();
@@ -98,7 +98,7 @@ public class OtpActivity extends AppCompatActivity {
     }
 
     private void countDownTimer() {
-
+        Log.d(TAG, "countDownTimer: init countdown timer");
         resendCode.setEnabled(false);
         new CountDownTimer(30 * 1000, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -141,6 +141,7 @@ public class OtpActivity extends AppCompatActivity {
     }
 
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks() {
+        Log.d(TAG, "callbacks: verification");
         return new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {

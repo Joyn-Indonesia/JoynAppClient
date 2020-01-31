@@ -9,6 +9,7 @@ import com.example.joynappclient.di.DataInjection;
 import com.example.joynappclient.ui.authentication.otp.OtpVIewModel;
 import com.example.joynappclient.ui.authentication.signin.SignInVIewModel;
 import com.example.joynappclient.ui.authentication.signup.SignUpViewModel;
+import com.example.joynappclient.ui.booking.BookingViewModel;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
@@ -43,7 +44,11 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         } else if (modelClass.isAssignableFrom(OtpVIewModel.class)) {
             //noinspection unchecked
             return (T) new OtpVIewModel(joynRepository);
+        } else if (modelClass.isAssignableFrom(BookingViewModel.class)) {
+            //noinspection unchecked
+            return (T) new BookingViewModel(joynRepository);
         }
+
         throw new IllegalArgumentException("Unknown ViewModel Class " + modelClass.getName());
     }
 }

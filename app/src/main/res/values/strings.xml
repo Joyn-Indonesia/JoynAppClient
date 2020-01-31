@@ -10,7 +10,6 @@
     <string name="sign_up">Sign Up</string>
     <string name="e_mail">E-mail</string>
     <string name="register">Register</string>
-    <string name="phone_number">Phone Number</string>
     <string name="your_name">Your Name</string>
     <string name="change_language">Change Language</string>
     <string name="term_condition">*By creating an account, you agree to our \n
@@ -24,7 +23,6 @@
     <string name="change_number">Change Number</string>
     <string name="manual">You don\'t need to manual enter verification code if the number instal in this phone</string>
     <string name="please">Please enter it bellow if number \n install another phone</string>
-    <string name="time">RESEND 15 Second</string>
     <string name="rp_25_000">Rp.25.000</string>
 
     <!-- Firestore Strings -->
@@ -91,9 +89,10 @@
     <string name="inprogress">Inprogress</string>
     <string name="j_ride_features">J-Ride Features</string>
     <string name="j_car_features">J-Car Features</string>
+    <string name="text_addressNotAvailable">Address does not exist.</string>
+    <string name="your_trip_plan">Your Trip Plan</string>
 
     <!--  Permission  -->
-    <string name="request_permission">Kami membutuhkan Akses lokasi dan ini itu</string>
 
 
 </resources>

@@ -1,10 +1,11 @@
-package com.example.joynappclient.data.source.remote;
+package com.example.joynappclient.data.source.remote.firebase;
 
 import android.os.Handler;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.joynappclient.data.source.remote.ApiResponse;
 import com.example.joynappclient.data.source.remote.model.UserModel;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;

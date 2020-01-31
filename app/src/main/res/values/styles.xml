@@ -140,13 +140,6 @@
         <item name="android:contentDescription">@string/menu_icon</item>
     </style>
 
-    <style name="LayoutContentMenuImage.J_Box">
-        <!--        <item name="android:paddingTop">@dimen/_12sdp</item>-->
-        <!--        <item name="android:paddingLeft">@dimen/_12sdp</item>-->
-        <!--        <item name="android:paddingRight">@dimen/_12sdp</item>-->
-        <item name="android:paddingBottom">-8dp</item>
-    </style>
-
     <style name="LayoutContentMenuText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
@@ -154,5 +147,6 @@
         <item name="android:textColor">@color/black80</item>
     </style>
     <!--    end menu service-->
+
 
 </resources>

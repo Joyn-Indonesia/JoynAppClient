@@ -61,7 +61,6 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
         <TextView
-            android:id="@+id/textView19"
             style="@style/StyleTextViewDefault"
             android:text="@string/j_car_features"
             android:textColor="@color/greenYoung"

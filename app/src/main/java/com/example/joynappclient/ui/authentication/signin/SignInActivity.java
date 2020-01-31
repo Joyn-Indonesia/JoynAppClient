@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.joynappclient.R;
 import com.example.joynappclient.data.source.remote.model.UserModel;
 import com.example.joynappclient.ui.authentication.otp.OtpActivity;
-import com.example.joynappclient.utils.DialogActivity;
+import com.example.joynappclient.utils.BaseActivity;
 import com.example.joynappclient.utils.MoveActivity;
 import com.example.joynappclient.viewmodel.ViewModelFactory;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SignInActivity extends DialogActivity implements Validator.ValidationListener {
+public class SignInActivity extends BaseActivity implements Validator.ValidationListener {
     private static final String TAG = "SignInActivity";
 
     //    wigets
