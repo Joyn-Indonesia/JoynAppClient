@@ -1,7 +1,5 @@
 package com.example.joynappclient.ui.booking;
 
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +15,8 @@ import com.example.joynappclient.R;
 import com.example.joynappclient.data.gmap.directions.Directions;
 import com.example.joynappclient.data.gmap.directions.Route;
 import com.example.joynappclient.ui.booking.api.MapDirectionAPI;
+import com.example.joynappclient.ui.booking.checkout.CheckOutButtomSheetDialog;
+import com.example.joynappclient.ui.booking.checkout.CheckOutModel;
 import com.example.joynappclient.utils.BaseActivity;
 import com.example.joynappclient.utils.Constant;
 import com.example.joynappclient.utils.VectorDescriptor;
@@ -33,6 +33,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.DirectionsApiRequest;
+import com.google.maps.GeoApiContext;
+import com.google.maps.PendingResult;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.TravelMode;
 
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -42,9 +47,6 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.observers.DefaultObserver;
 
 public class BookingActivity extends BaseActivity implements OnMapReadyCallback {
 
@@ -72,6 +74,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
 
     //vars
     private GoogleMap mMap;
+    private GeoApiContext mGeoAPiContext = null;
     private FusedLocationProviderClient mFusedLocation;
     private boolean isMapReady = false;
     private LatLng pickUpLatLang;
@@ -84,6 +87,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     private double harga;
 
     private BookingViewModel viewModel;
+    private CheckOutModel checkOutModel;
 
     private okhttp3.Callback updateRouteCallback = new okhttp3.Callback() {
 
@@ -121,13 +125,22 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
 
         ButterKnife.bind(this);
 
-        ViewModelFactory factory = ViewModelFactory.getInstance();
+        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
         viewModel = new ViewModelProvider(this, factory).get(BookingViewModel.class);
+
+        checkOutModel = new CheckOutModel();
 
         mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
         //maps
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_container);
         mapFragment.getMapAsync(this);
+
+        if (mGeoAPiContext == null) {
+            Log.d(TAG, "onCreate: init geo api");
+            mGeoAPiContext = new GeoApiContext.Builder()
+                    .apiKey(getString(R.string.google_maps_key))
+                    .build();
+        }
 
         setPickUpContainer.setVisibility(View.GONE);
         setDestinationContainer.setVisibility(View.GONE);
@@ -173,9 +186,10 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         mFusedLocation.getLastLocation().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 Location location = task.getResult();
-                updateMyLocation(new LatLng(location.getLatitude(), location.getLongitude()));
                 pickUpLatLang = new LatLng(location.getLatitude(), location.getLongitude());
+                updateMyLocation(pickUpLatLang);
                 fillAddress(pickUpText, pickUpLatLang);
+//                checkOutModel.setPickupAdress(fillAddress(pickUpLatLang));
             }
         });
     }
@@ -199,8 +213,8 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
                 .title("Pick Up")
                 .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_pickups)));
         pickUpLatLang = centerPos;
-
         fillAddress(pickUpText, pickUpLatLang);
+//        checkOutModel.setPickupAdress(fillAddress(pickUpLatLang));
         requestRoute();
         setPickUpContainer.setVisibility(View.GONE);
     }
@@ -217,13 +231,15 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         destinationLatLang = centerPos;
 
         if (pickUpLatLang != null) {
+            if (pickUpMarker != null)
+                pickUpMarker.remove();
             pickUpMarker = mMap.addMarker(new MarkerOptions()
                     .position(centerPos)
                     .title("Pick Up")
                     .position(pickUpLatLang)
                     .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_pickups)));
         }
-
+//        checkOutModel.setDestintaionAddress(fillAddress(destinationLatLang));
         fillAddress(destinationText, destinationLatLang);
         requestRoute();
         setDestinationContainer.setVisibility(View.GONE);
@@ -233,63 +249,67 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         Log.d(TAG, "requestRoute: request router");
         if (pickUpLatLang != null && destinationLatLang != null) {
 
-            MapDirectionAPI.getDirection(pickUpLatLang, destinationLatLang).enqueue(updateRouteCallback);
-            CameraUpdate camera = CameraUpdateFactory.newLatLngZoom(destinationLatLang, 12f);
+//            MapDirectionAPI.getDirection(pickUpLatLang, destinationLatLang).enqueue(updateRouteCallback);
+            calculateDirection(pickUpLatLang, destinationLatLang);
+            CameraUpdate camera = CameraUpdateFactory.newLatLngZoom(destinationLatLang, 15f);
             mMap.animateCamera(camera);
         }
     }
 
-    private void fillAddress(final TextView editText, final LatLng latLng) {
-
-        Observable<LatLng> address = Observable.just(latLng);
-        address.subscribe(new DefaultObserver<LatLng>() {
-            @Override
-            public void onNext(@NonNull LatLng latLng) {
-                Log.d(TAG, "onNext: ");
-                Geocoder geocoder = new Geocoder(BookingActivity.this, Locale.getDefault());
-                try {
-                    final List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-                    if (!addresses.isEmpty()) {
-                        if (addresses.size() > 0) {
-                            String titleAddress = addresses.get(0).getThoroughfare();
-                            String address = addresses.get(0).getAddressLine(0);
-                            String fullAddress = titleAddress + " \n" + address;
-                            editText.setText(fullAddress);
-                            Log.d(TAG, "onNext: " + addresses.get(0).toString());
-                        } else {
-                            editText.setText(R.string.text_addressNotAvailable);
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-                Log.d(TAG, "onError: ");
-            }
-
-            @Override
-            public void onComplete() {
-                Log.d(TAG, "onComplete: ");
-            }
+    private void fillAddress(TextView editText, LatLng latLng) {
+        viewModel.getAdress(latLng).observe(this, address -> {
+            editText.setText(address.getAddressLine(0));
+            Log.d(TAG, "onChanged: ");
         });
+    }
+
+    private void calculateDirection(LatLng pickUpLatLang, LatLng destinationLatLang) {
+        if (pickUpLatLang != null && destinationLatLang != null) {
+            Log.d(TAG, "calculateDirection: calculate directions");
+            DirectionsApiRequest direction = new DirectionsApiRequest(mGeoAPiContext);
+            direction.alternatives(true);
+            direction.mode(TravelMode.DRIVING);
+            direction.origin(new com.google.maps.model.LatLng(pickUpLatLang.latitude, pickUpLatLang.longitude));
+            direction.destination(new com.google.maps.model.LatLng(destinationLatLang.latitude, destinationLatLang.latitude));
+            direction.setCallback(new PendingResult.Callback<DirectionsResult>() {
+                @Override
+                public void onResult(DirectionsResult result) {
+                    Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
+                    Log.d(TAG, "calculateDirections: duration: " + result.routes[0].legs[0].duration);
+                    Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance);
+                    Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance.inMeters);
+                    Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
+                }
+
+                @Override
+                public void onFailure(Throwable e) {
+                    Log.e(TAG, "calculateDirections: Failed to get directions: " + e.getMessage());
+                }
+            });
 
 
+        }
     }
 
     private void updateLineDestination(String json) {
+        Log.d(TAG, "updateLineDestination: called" + json);
         Directions directions = new Directions(this);
         try {
             List<Route> routes = directions.parse(json);
 
             if (directionLine != null) directionLine.remove();
             if (routes.size() > 0) {
+
                 directionLine = mMap.addPolyline((new PolylineOptions())
                         .addAll(routes.get(0).getOverviewPolyLine())
                         .color(ContextCompat.getColor(this, R.color.greenDarkerMain))
                         .width(17));
+
+
+//                LatLngBounds camera = new LatLngBounds(routes.get(0).getBounds().getSouthWest(), routes.get(0).getBounds().getNorthEast());
+//                Log.d(TAG, "updateLineDestination: " + routes.get(0).getOverviewPolyLine());
+//                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(camera.getCenter(), 10);
+//                mMap.animateCamera(update);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -306,6 +326,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
 
         String format = String.format(Locale.US, "Distance %.2f " + Constant.UNIT_OF_DISTANCE, km);
         // distanceText.setText(format);
+        checkOutModel.setDistance(format);
         Log.d(TAG, "updateDistance: " + format);
 
         long biaya = 5000;
@@ -331,6 +352,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         String formattedTotal = NumberFormat.getNumberInstance(Locale.US).format(biayaTotal);
         String noCent = String.format(Locale.US, Constant.MONEY + " %s.00", formattedTotal);
 //        priceText.setText(noCent);
+        checkOutModel.setCost(noCent);
         Log.d(TAG, "updateDistance: " + noCent);
 
        /* String priceCent = String.format(Locale.US, General.MONEY +" %.2f", biayaTotal);
@@ -349,6 +371,14 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
 //        } else {
 //            mPayButton.setEnabled(true);
 //        }
+    }
+
+    @OnClick(R.id.btn_next)
+    public void checkOutProcces() {
+        checkOutModel.setTimeDistance(String.valueOf(timeDistance));
+        viewModel.setCheckOut(checkOutModel);
+        CheckOutButtomSheetDialog dialog = new CheckOutButtomSheetDialog(checkOutModel);
+        dialog.show(getSupportFragmentManager(), dialog.getTag());
     }
 
 

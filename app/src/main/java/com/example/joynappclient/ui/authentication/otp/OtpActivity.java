@@ -71,7 +71,7 @@ public class OtpActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         context = this;
 
-        ViewModelFactory factory = ViewModelFactory.getInstance();
+        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
         vIewModel = new ViewModelProvider(this, factory).get(OtpVIewModel.class);
 
         mAuth = FirebaseAuth.getInstance();

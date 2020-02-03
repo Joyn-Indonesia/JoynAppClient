@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.joynappclient.R;
 import com.example.joynappclient.ui.authentication.signup.SignUpActivity;
 import com.example.joynappclient.ui.main_menu.MainMenuActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +25,7 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash_screen);
 
         new Handler().postDelayed(() -> {
             setupFirebaseAuth();

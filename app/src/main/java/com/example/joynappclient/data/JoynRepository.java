@@ -1,5 +1,7 @@
 package com.example.joynappclient.data;
 
+import android.app.Application;
+
 import androidx.lifecycle.LiveData;
 
 import com.example.joynappclient.data.source.remote.ApiResponse;
@@ -12,17 +14,19 @@ public class JoynRepository implements JoynDataSource {
 
     private FirebaseRepository firebaseRepository;
     private GmapRepository gmapRepository;
+    private Application application;
 
-    public JoynRepository(FirebaseRepository firebaseRepository, GmapRepository gmapRepository) {
+    public JoynRepository(Application application, FirebaseRepository firebaseRepository, GmapRepository gmapRepository) {
+        this.application = application;
         this.firebaseRepository = firebaseRepository;
         this.gmapRepository = gmapRepository;
     }
 
-    public static JoynRepository getInstance(FirebaseRepository firebaseRepository, GmapRepository gmapRepository) {
+    public static JoynRepository getInstance(Application application, FirebaseRepository firebaseRepository, GmapRepository gmapRepository) {
         if (INSTANCE == null) {
             synchronized (JoynRepository.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new JoynRepository(firebaseRepository, gmapRepository);
+                    INSTANCE = new JoynRepository(application, firebaseRepository, gmapRepository);
                 }
             }
         }

@@ -1,27 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:tool="http://schemas.android.com/tools"
     android:layout_marginEnd="@dimen/_4sdp">
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_top_pick"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_8sdp"
         android:backgroundTint="@color/colorWhite"
-        android:padding="@dimen/_1sdp"
-        android:paddingStart="@dimen/_1sdp"
-        android:paddingLeft="@dimen/_1sdp"
-        android:paddingEnd="@dimen/_1sdp"
-        android:paddingRight="@dimen/_1sdp"
-        android:textColor="@color/halfBlack"
-        android:textSize="@dimen/small_text"
-        app:cornerRadius="@dimen/_8sdp"
         app:rippleColor="@color/greenLight"
-        tool:text="All" />
+        app:strokeColor="@color/halfBlack">
+
+        <TextView
+            android:id="@+id/tv_name_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_8sdp"
+            android:textColor="@color/halfBlack"
+            android:textSize="@dimen/default_text"
+            tool:text="All" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!--        <com.google.android.material.button.MaterialButton-->
+    <!--            android:id="@+id/btn_top_pick"-->
+    <!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="@dimen/_30sdp"-->
+    <!--            android:backgroundTint="@color/colorWhite"-->
+    <!--            android:padding="@dimen/_1sdp"-->
+    <!--            android:paddingStart="@dimen/_1sdp"-->
+    <!--            android:paddingLeft="@dimen/_1sdp"-->
+    <!--            android:paddingEnd="@dimen/_1sdp"-->
+    <!--            android:paddingRight="@dimen/_1sdp"-->
+    <!--            android:textColor="@color/halfBlack"-->
+    <!--            android:textSize="@dimen/small_text"-->
+    <!--            app:cornerRadius="@dimen/_8sdp"-->
+    <!--            app:rippleColor="@color/greenLight"-->
+    <!--            tool:text="All" />-->
 
 
 </LinearLayout>

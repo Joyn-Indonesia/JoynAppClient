@@ -1,5 +1,7 @@
 package com.example.joynappclient.viewmodel;
 
+import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,16 +17,19 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     private static volatile ViewModelFactory INSTANCE;
     private final JoynRepository joynRepository;
+    private Application application;
 
-    public ViewModelFactory(JoynRepository joynRepository) {
+    public ViewModelFactory(Application application, JoynRepository joynRepository) {
         this.joynRepository = joynRepository;
+        this.application = application;
     }
 
-    public static ViewModelFactory getInstance() {
+    public static ViewModelFactory getInstance(Application application) {
         if (INSTANCE == null) {
             synchronized (ViewModelFactory.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new ViewModelFactory(DataInjection.provideRepository());
+                    INSTANCE = new ViewModelFactory(application, DataInjection.provideRepository(application));
+
                 }
             }
         }
@@ -46,7 +51,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new OtpVIewModel(joynRepository);
         } else if (modelClass.isAssignableFrom(BookingViewModel.class)) {
             //noinspection unchecked
-            return (T) new BookingViewModel(joynRepository);
+            return (T) new BookingViewModel(application, joynRepository);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel Class " + modelClass.getName());

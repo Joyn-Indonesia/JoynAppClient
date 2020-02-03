@@ -23,6 +23,4 @@
             android:textStyle="bold" />
 
     </LinearLayout>
-
-
 </com.google.android.material.appbar.MaterialToolbar>

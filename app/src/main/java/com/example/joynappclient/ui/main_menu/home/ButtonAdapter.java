@@ -4,12 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.joynappclient.R;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,17 +38,18 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        holder.top_pick.setText(item.get(position));
+        holder.buttonName.setText(item.get(position));
         holder.top_pick.setOnClickListener(v -> {
             index = position;
             notifyDataSetChanged();
         });
         if (index == position) {
+            holder.top_pick.setCardBackgroundColor(context.getResources().getColor(R.color.greenDarkerMain));
             holder.top_pick.setBackgroundColor(context.getResources().getColor(R.color.greenDarkerMain));
-            holder.top_pick.setTextColor(context.getResources().getColor(R.color.colorWhite));
+            holder.buttonName.setTextColor(context.getResources().getColor(R.color.colorWhite));
         } else {
-            holder.top_pick.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
-            holder.top_pick.setTextColor(context.getResources().getColor(R.color.halfBlack));
+            holder.top_pick.setCardBackgroundColor(context.getResources().getColor(R.color.colorWhite));
+            holder.buttonName.setTextColor(context.getResources().getColor(R.color.halfBlack));
         }
     }
 
@@ -62,7 +64,9 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.VH> {
 
     public class VH extends RecyclerView.ViewHolder {
         @BindView(R.id.btn_top_pick)
-        Button top_pick;
+        MaterialCardView top_pick;
+        @BindView(R.id.tv_name_button)
+        TextView buttonName;
 
         public VH(@NonNull View v) {
             super(v);

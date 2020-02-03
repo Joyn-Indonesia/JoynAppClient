@@ -1,12 +1,15 @@
 package com.example.joynappclient.data.source.remote.firebase;
 
 import android.os.Handler;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.joynappclient.data.source.remote.ApiResponse;
 import com.example.joynappclient.data.source.remote.model.UserModel;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -41,8 +44,14 @@ public class FirebaseRepository {
             } else {
                 checkNumber.postValue(ApiResponse.success("sudah terdaftar", null));
             }
+            Log.d(TAG, "checkPhoneNumber: success");
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                checkNumber.postValue(ApiResponse.error("Connection Error", null));
+                Log.d(TAG, "onFailure: " + e);
+            }
         });
-
 
         return checkNumber;
     }

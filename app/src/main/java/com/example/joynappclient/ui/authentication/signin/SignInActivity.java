@@ -67,7 +67,7 @@ public class SignInActivity extends BaseActivity implements Validator.Validation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        ViewModelFactory factory = ViewModelFactory.getInstance();
+        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
         vIewModel = new ViewModelProvider(this, factory).get(SignInVIewModel.class);
 
         ButterKnife.bind(this);
@@ -107,6 +107,12 @@ public class SignInActivity extends BaseActivity implements Validator.Validation
                     MoveActivity.showToast(context, apiResponse.message);
                     Log.d(TAG, "checkNumber: ");
                     break;
+
+                case ERROR:
+                    hideProgressDialog();
+                    MoveActivity.showToast(context, apiResponse.message);
+                    Log.d(TAG, "checkNumber: " + apiResponse.message);
+
             }
         });
     }

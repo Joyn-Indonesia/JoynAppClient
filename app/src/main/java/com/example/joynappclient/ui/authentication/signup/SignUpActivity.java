@@ -64,7 +64,7 @@ public class SignUpActivity extends BaseActivity implements Validator.Validation
         ButterKnife.bind(this);
         context = this;
 
-        ViewModelFactory factory = ViewModelFactory.getInstance();
+        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
         viewModel = new ViewModelProvider(this, factory).get(SignUpViewModel.class);
 
         validator = new Validator(this);

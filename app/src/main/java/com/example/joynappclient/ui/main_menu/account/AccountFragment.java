@@ -5,15 +5,31 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.joynappclient.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AccountFragment extends Fragment {
+
+
+    //widgets
+    @BindView(R.id.tv_profil_name)
+    TextView profilName;
+    @BindView(R.id.tv_number_profil)
+    TextView phoneProfilNumber;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
 
 
     public AccountFragment() {
@@ -29,7 +45,23 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false);
+        View v = inflater.inflate(R.layout.fragment_account, container, false);
+        ButterKnife.bind(this, v);
+        return v;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        // UserModel user = ((JoynApp) getActivity().getApplicationContext()).getUser();
+
+        profilName.setText("saya");
+        phoneProfilNumber.setText("0813145151");
+
+    }
+
+    private void initToolbar() {
+
+    }
 }
