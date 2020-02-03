@@ -27,6 +27,7 @@
 
     <!-- Firestore Strings -->
     <string name="collection_users">Users</string>
+    <string name="collection_drivers">Driver</string>
 
     <!--    Intent var -->
     <string name="intent_phone">phone</string>

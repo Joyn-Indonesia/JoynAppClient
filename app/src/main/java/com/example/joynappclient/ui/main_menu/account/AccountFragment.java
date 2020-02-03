@@ -11,9 +11,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.joynappclient.R;
+import com.example.joynappclient.ui.authentication.signin.SignInActivity;
+import com.example.joynappclient.utils.MoveActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,7 +60,10 @@ public class AccountFragment extends Fragment {
 
     }
 
-    private void initToolbar() {
-
+    @OnClick(R.id.btn_logout)
+    public void logOut() {
+        FirebaseAuth.getInstance().signOut();
+        MoveActivity.MoveAct(getContext(), SignInActivity.class);
+        getActivity().finish();
     }
 }

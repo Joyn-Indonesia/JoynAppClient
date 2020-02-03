@@ -130,6 +130,8 @@ public class MainMenuActivity extends BaseActivity {
 
                 UserModel user = task.getResult().toObject(UserModel.class);
                 ((JoynApp) getApplicationContext()).setUser(user);
+            } else {
+                Log.d(TAG, "getUserDetail: failed");
             }
         });
 

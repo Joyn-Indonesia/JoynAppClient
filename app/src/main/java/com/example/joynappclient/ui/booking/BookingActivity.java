@@ -2,19 +2,17 @@ package com.example.joynappclient.ui.booking;
 
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.gmap.directions.Directions;
-import com.example.joynappclient.data.gmap.directions.Route;
-import com.example.joynappclient.ui.booking.api.MapDirectionAPI;
+import com.example.joynappclient.data.source.remote.model.DriverModel;
 import com.example.joynappclient.ui.booking.checkout.CheckOutButtomSheetDialog;
 import com.example.joynappclient.ui.booking.checkout.CheckOutModel;
 import com.example.joynappclient.utils.BaseActivity;
@@ -28,22 +26,28 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.PendingResult;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.TravelMode;
 
-import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -70,8 +74,8 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     TextView destinationText;
     @BindView(R.id.tv_tripPlan)
     TextView tripPlantText;
-
-
+    @BindColor(R.color.greenDarkerMain)
+    int darkGreen;
     //vars
     private GoogleMap mMap;
     private GeoApiContext mGeoAPiContext = null;
@@ -81,42 +85,14 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     private LatLng destinationLatLang;
     private Marker pickUpMarker;
     private Marker destinationMarker;
+    private List<DriverModel> driverAvaible;
+    private List<Marker> driverMarkers;
     private Polyline directionLine;
-    private double timeDistance = 0;
+    private String timeDistance;
     private double jarak;
     private double harga;
-
     private BookingViewModel viewModel;
     private CheckOutModel checkOutModel;
-
-    private okhttp3.Callback updateRouteCallback = new okhttp3.Callback() {
-
-        @Override
-        public void onFailure(okhttp3.Call call, IOException e) {
-
-        }
-
-        @Override
-        public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
-            Log.d(TAG, "onResponse: response route");
-            if (response.isSuccessful()) {
-                final String json = response.body().string();
-                final long distance = MapDirectionAPI.getDistance(BookingActivity.this, json);
-                final long time = MapDirectionAPI.getTimeDistance(BookingActivity.this, json);
-                if (distance >= 0) {
-                    BookingActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            updateLineDestination(json);
-                            updateDistance(distance);
-                            timeDistance = time / 60;
-                        }
-                    });
-                }
-            }
-        }
-    };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,10 +103,10 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
 
         ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
         viewModel = new ViewModelProvider(this, factory).get(BookingViewModel.class);
-
         checkOutModel = new CheckOutModel();
-
         mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
+        driverMarkers = new ArrayList<>();
+
         //maps
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_container);
         mapFragment.getMapAsync(this);
@@ -198,8 +174,49 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         Log.d(TAG, "updateMyLocation: update location");
         mMap.setMyLocationEnabled(true);
         if (location != null) {
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(location, 18f);
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(location, 15f);
             mMap.animateCamera(cameraUpdate);
+            fetchNearDriver();
+        }
+    }
+
+    private void fetchNearDriver() {
+        if (pickUpLatLang != null) {
+            FirebaseFirestore mDb = FirebaseFirestore.getInstance();
+            CollectionReference reffUser = mDb.collection(getString(R.string.collection_drivers));
+            driverAvaible = new ArrayList<>();
+            reffUser.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "onComplete: get user complete" + task.getResult().size());
+                    Log.d(TAG, "fetchNearDriver: " + task.getResult().getDocuments().get(0).get("Location"));
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d(TAG, "fetchNearDriver: " + document.getData().get("Location"));
+                        driverAvaible.add(new DriverModel(document.getGeoPoint("Location")));
+                    }
+                    Log.d(TAG, "fetchNearDriver: " + driverAvaible.size());
+                    createMarker(driverAvaible);
+                } else {
+                    Log.d(TAG, "getUserDetail: failed");
+                }
+            });
+        }
+    }
+
+    private void createMarker(List<DriverModel> drivers) {
+        if (!drivers.isEmpty()) {
+            for (Marker m : driverMarkers) {
+                m.remove();
+            }
+            driverMarkers.clear();
+
+            for (DriverModel driver : drivers) {
+                LatLng curentDriverPos = new LatLng(driver.getGeoPoint().getLatitude(), driver.getGeoPoint().getLongitude());
+                driverMarkers.add(mMap.addMarker(new MarkerOptions()
+                        .position(curentDriverPos)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_ride_position))));
+
+            }
         }
     }
 
@@ -248,8 +265,6 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     private void requestRoute() {
         Log.d(TAG, "requestRoute: request router");
         if (pickUpLatLang != null && destinationLatLang != null) {
-
-//            MapDirectionAPI.getDirection(pickUpLatLang, destinationLatLang).enqueue(updateRouteCallback);
             calculateDirection(pickUpLatLang, destinationLatLang);
             CameraUpdate camera = CameraUpdateFactory.newLatLngZoom(destinationLatLang, 15f);
             mMap.animateCamera(camera);
@@ -266,53 +281,52 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     private void calculateDirection(LatLng pickUpLatLang, LatLng destinationLatLang) {
         if (pickUpLatLang != null && destinationLatLang != null) {
             Log.d(TAG, "calculateDirection: calculate directions");
+
             DirectionsApiRequest direction = new DirectionsApiRequest(mGeoAPiContext);
-            direction.alternatives(true);
-            direction.mode(TravelMode.DRIVING);
-            direction.origin(new com.google.maps.model.LatLng(pickUpLatLang.latitude, pickUpLatLang.longitude));
-            direction.destination(new com.google.maps.model.LatLng(destinationLatLang.latitude, destinationLatLang.latitude));
-            direction.setCallback(new PendingResult.Callback<DirectionsResult>() {
-                @Override
-                public void onResult(DirectionsResult result) {
-                    Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
-                    Log.d(TAG, "calculateDirections: duration: " + result.routes[0].legs[0].duration);
-                    Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance);
-                    Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance.inMeters);
-                    Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
-                }
+            direction.alternatives(true)
+                    .mode(TravelMode.DRIVING)
+                    .language("id")
+                    .origin(new com.google.maps.model.LatLng(pickUpLatLang.latitude, pickUpLatLang.longitude))
+                    .destination(new com.google.maps.model.LatLng(destinationLatLang.latitude, destinationLatLang.longitude))
+                    .setCallback(new PendingResult.Callback<DirectionsResult>() {
+                        @Override
+                        public void onResult(DirectionsResult result) {
+                            updateLineDestination(result);
+                            Log.d(TAG, "onResult: result");
+                        }
 
-                @Override
-                public void onFailure(Throwable e) {
-                    Log.e(TAG, "calculateDirections: Failed to get directions: " + e.getMessage());
-                }
-            });
-
-
+                        @Override
+                        public void onFailure(Throwable e) {
+                            Log.e(TAG, "calculateDirections: Failed to get directions: " + e.getMessage());
+                        }
+                    });
         }
     }
 
-    private void updateLineDestination(String json) {
-        Log.d(TAG, "updateLineDestination: called" + json);
-        Directions directions = new Directions(this);
-        try {
-            List<Route> routes = directions.parse(json);
-
-            if (directionLine != null) directionLine.remove();
-            if (routes.size() > 0) {
-
-                directionLine = mMap.addPolyline((new PolylineOptions())
-                        .addAll(routes.get(0).getOverviewPolyLine())
-                        .color(ContextCompat.getColor(this, R.color.greenDarkerMain))
-                        .width(17));
-
-
-//                LatLngBounds camera = new LatLngBounds(routes.get(0).getBounds().getSouthWest(), routes.get(0).getBounds().getNorthEast());
-//                Log.d(TAG, "updateLineDestination: " + routes.get(0).getOverviewPolyLine());
-//                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(camera.getCenter(), 10);
-//                mMap.animateCamera(update);
+    private void updateLineDestination(DirectionsResult result) {
+        if (result != null) {
+            List<LatLng> newDecodedPath = new ArrayList<>();
+            for (com.google.maps.model.LatLng latLng : result.routes[0].overviewPolyline.decodePath()) {
+                newDecodedPath.add(new LatLng(latLng.lat, latLng.lng));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            new Handler(getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    if (directionLine != null) directionLine.remove();
+                    directionLine = mMap.addPolyline((new PolylineOptions())
+                            .addAll(newDecodedPath)
+                            .color(darkGreen)
+                            .width(17));
+
+                    LatLng southwest = new LatLng(result.routes[0].bounds.southwest.lat, result.routes[0].bounds.southwest.lng);
+                    LatLng northeast = new LatLng(result.routes[0].bounds.northeast.lat, result.routes[0].bounds.northeast.lng);
+                    LatLngBounds bounds = new LatLngBounds(southwest, northeast);
+                    CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bounds, 200);
+                    mMap.animateCamera(update);
+                    updateDistance(result.routes[0].legs[0].distance.inMeters);
+                    timeDistance = result.routes[0].legs[0].duration.toString();
+                }
+            });
         }
     }
 
