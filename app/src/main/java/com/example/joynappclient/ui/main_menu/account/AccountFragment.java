@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -27,10 +26,6 @@ public class AccountFragment extends Fragment {
     TextView profilName;
     @BindView(R.id.tv_number_profil)
     TextView phoneProfilNumber;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
-
 
     public AccountFragment() {
         // Required empty public constructor
