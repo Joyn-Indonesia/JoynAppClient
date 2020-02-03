@@ -42,17 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_1sdp" />
 
-        <include
-            layout="@layout/layout_menu_content_j_payment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp" />
 
-        <include
-            layout="@layout/layout_menu_content_j_food"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp" />
 
     </LinearLayout>
 

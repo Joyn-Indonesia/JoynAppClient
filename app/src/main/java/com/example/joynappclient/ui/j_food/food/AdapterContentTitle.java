@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,7 +33,7 @@ public class AdapterContentTitle extends RecyclerView.Adapter<AdapterContentTitl
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_layout_title_content, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_menu_home_content, parent, false);
 
         return new VH(view);
     }
@@ -58,12 +57,8 @@ public class AdapterContentTitle extends RecyclerView.Adapter<AdapterContentTitl
 
         @BindView(R.id.recycleview_itemContent)
         RecyclerView rvItemContent;
-        @BindView(R.id.tv_item_content)
+        @BindView(R.id.tv_highlight_content)
         TextView titleContent;
-        @BindView(R.id.icon_title)
-        ImageView iconTitle;
-        @BindView(R.id.tv_title_jfood)
-        TextView titleJfood;
 
         private AdapterContentItem adapter;
 
@@ -75,8 +70,6 @@ public class AdapterContentTitle extends RecyclerView.Adapter<AdapterContentTitl
 
         void bindItem(JfoodTitleModelDummy model) {
             Log.d(TAG, "bindItem: " + model.getTitle());
-            iconTitle.setVisibility(View.GONE);
-            titleJfood.setVisibility(View.GONE);
             rvItemContent.setHasFixedSize(true);
             rvItemContent.setItemAnimator(new DefaultItemAnimator());
             titleContent.setText(model.getTitle());

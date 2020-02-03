@@ -8,9 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <!--Splash Screen-->
-    <style name="AppTheme.SplashScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_screen</item>
-    </style>
 
     <!--    TextVIew Style -->
     <style name="StyleTextViewDefault">
@@ -25,12 +22,6 @@
 
     <style name="StyleTextViewDefault.Black">
         <item name="android:textColor">@color/colorBlack</item>
-    </style>
-
-    <style name="StyleTextViewDefault.TitleBanner">
-        <item name="android:textSize">@dimen/extra_big_text</item>
-        <item name="android:textColor">@color/toscaTop</item>
-
     </style>
 
     <style name="StyleTextViewDefault.ContentBanner">

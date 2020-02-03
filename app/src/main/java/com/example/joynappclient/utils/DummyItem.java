@@ -3,6 +3,8 @@ package com.example.joynappclient.utils;
 import com.example.joynappclient.R;
 import com.example.joynappclient.data.dummy.CartModel;
 import com.example.joynappclient.data.dummy.FoodModel;
+import com.example.joynappclient.data.dummy.HomeContentDataModel;
+import com.example.joynappclient.data.dummy.HomeContentTipeModel;
 import com.example.joynappclient.data.dummy.InProgressModel;
 import com.example.joynappclient.data.dummy.JFoodContentModelDummy;
 import com.example.joynappclient.data.dummy.JfoodTitleModelDummy;
@@ -11,6 +13,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DummyItem {
+
+
+    public static List<HomeContentDataModel> getBannerItem() {
+
+        List<HomeContentDataModel> data = new ArrayList<>();
+        data.add(new HomeContentDataModel(R.drawable.mcd_manyar, "McDonald\'s Ready",
+                "Happy meal\'s pokemon. Areyou ready to   cacth em all ? Get your pocketball ready"));
+        return data;
+    }
+
+    public static List<HomeContentDataModel> getContentItem() {
+
+        List<HomeContentDataModel> data = new ArrayList<>();
+        data.add(new HomeContentDataModel(R.drawable.martabak, "Martabak", null));
+        data.add(new HomeContentDataModel(R.drawable.martabak, "Martabak", null));
+        data.add(new HomeContentDataModel(R.drawable.martabak, "Martabak", null));
+        data.add(new HomeContentDataModel(R.drawable.martabak, "Martabak", null));
+        data.add(new HomeContentDataModel(R.drawable.martabak, "Martabak", null));
+        data.add(new HomeContentDataModel(R.drawable.martabak, "Martabak", null));
+        data.add(new HomeContentDataModel(R.drawable.martabak, "Martabak", null));
+        data.add(new HomeContentDataModel(R.drawable.martabak, "Martabak", null));
+        data.add(new HomeContentDataModel(R.drawable.martabak, "Martabak", null));
+        return data;
+    }
+
+    public static List<HomeContentTipeModel> getTipeBanner() {
+        List<HomeContentTipeModel> data = new ArrayList<>();
+        data.add(new HomeContentTipeModel("banner", null, getBannerItem()));
+        data.add(new HomeContentTipeModel("content", "Dinner Order", getContentItem()));
+        data.add(new HomeContentTipeModel("content", "Dinner Order", getContentItem()));
+        data.add(new HomeContentTipeModel("banner", null, getBannerItem()));
+        data.add(new HomeContentTipeModel("content", "Dinner Day", getContentItem()));
+        data.add(new HomeContentTipeModel("content", "Dinner Night", getContentItem()));
+
+        return data;
+    }
+
+
 
     public static List<JFoodContentModelDummy> getFoodSnack() {
         List<JFoodContentModelDummy> snack = new ArrayList<>();

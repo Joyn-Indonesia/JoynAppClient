@@ -12,11 +12,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.ui.booking.BookingActivity;
 import com.example.joynappclient.ui.j_food.food.JFoodActivity;
+import com.example.joynappclient.ui.main_menu.home.adapter.ButtonAdapter;
+import com.example.joynappclient.ui.main_menu.home.adapter.HomeBannerAdapter;
 import com.example.joynappclient.utils.DummyItem;
 import com.example.joynappclient.utils.MoveActivity;
 
@@ -36,10 +39,11 @@ public class HomeFragment extends Fragment {
     //Widget
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.recycleview_mainContent)
-    RecyclerView rvSnack;
     @BindView(R.id.recycleview_button)
     RecyclerView rvButton;
+    @BindView(R.id.recycleview_container_home_banner)
+    RecyclerView containerHomeBanner;
+
     //var
     private Context context;
 
@@ -66,13 +70,12 @@ public class HomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         context = getContext();
 
-        rvSnack.setHasFixedSize(true);
-        AdapterContentTitle snack = new AdapterContentTitle();
-        snack.setItem(context, DummyItem.getAllData());
-        rvSnack.setAdapter(snack);
         initButton();
-        //initToolbar();
-
+        containerHomeBanner.setHasFixedSize(true);
+        containerHomeBanner.setItemAnimator(new DefaultItemAnimator());
+        HomeBannerAdapter adapter = new HomeBannerAdapter();
+        adapter.setBanner(context, DummyItem.getTipeBanner());
+        containerHomeBanner.setAdapter(adapter);
     }
 
     private void initButton() {
