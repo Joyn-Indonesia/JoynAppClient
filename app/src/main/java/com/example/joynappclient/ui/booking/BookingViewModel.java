@@ -34,9 +34,8 @@ public class BookingViewModel extends AndroidViewModel {
     private JoynRepository repository;
     private String addressLocation;
     private String cityName;
-    private MutableLiveData<String> address = new MutableLiveData<>();
     private Context context;
-    private MutableLiveData<Place> placeSearchPickup = new MutableLiveData<>();
+
     private MutableLiveData<Place> placeSearchDestination = new MutableLiveData<>();
     private MutableLiveData<HandleResponse<Place>> responsePickUp = new MutableLiveData<>();
     private MutableLiveData<HandleResponse<Place>> responseDestination = new MutableLiveData<>();
@@ -48,26 +47,21 @@ public class BookingViewModel extends AndroidViewModel {
         this.repository = repository;
     }
 
-    public void placeSearchDestination(Place place) {
-        this.placeSearchDestination.postValue(place);
-    }
 
-    public LiveData<HandleResponse<Place>> setResponsePlacesPickUp(StatusResponse response, Place place) {
+    public void setResponsePlacesPickUp(StatusResponse response, Place place) {
         if (response.equals(StatusResponse.PICKS)) {
             this.responsePickUp.postValue(HandleResponse.picks(null));
         } else {
             this.responsePickUp.postValue(HandleResponse.search(place));
         }
-        return this.responsePickUp;
     }
 
-    public LiveData<HandleResponse<Place>> setResponsePlacesDestintaion(StatusResponse response, Place place) {
+    public void setResponsePlacesDestintaion(StatusResponse response, Place place) {
         if (response.equals(StatusResponse.PICKS)) {
-            this.responsePickUp.postValue(HandleResponse.picks(null));
+            this.responseDestination.postValue(HandleResponse.picks(null));
         } else {
-            this.responsePickUp.postValue(HandleResponse.search(place));
+            this.responseDestination.postValue(HandleResponse.search(place));
         }
-        return this.responsePickUp;
     }
 
     public LiveData<HandleResponse<Place>> getResponsePickUp() {
@@ -82,17 +76,6 @@ public class BookingViewModel extends AndroidViewModel {
         getAdress(latLng);
     }
 
-    public LiveData<Place> getPlaceSearchPickup() {
-        return placeSearchPickup;
-    }
-
-    public void setPlaceSearchPickup(Place place) {
-        this.placeSearchPickup.postValue(place);
-    }
-
-    public LiveData<Place> placeSearchDestination() {
-        return placeSearchDestination;
-    }
 
     public LiveData<CheckOutModel> getCheckOut() {
         return checkOut;
@@ -103,38 +86,21 @@ public class BookingViewModel extends AndroidViewModel {
     }
 
     public String getAdress(LatLng latLng) {
-        Observable<LatLng> address = Observable.just(latLng);
-        address.subscribe(new DefaultObserver<LatLng>() {
-            @Override
-            public void onNext(LatLng latLng) {
-                Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-                try {
-                    final List<Address> adresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-                    if (!adresses.isEmpty()) {
-                        Log.d(TAG, "onNext: " + adresses.size());
-                        addressLocation = adresses.get(0).getAddressLine(0);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        try {
+            final List<Address> adresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            if (!adresses.isEmpty()) {
+                Log.d(TAG, "onNext: " + adresses.size());
+                addressLocation = adresses.get(0).getAddressLine(0);
             }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return addressLocation;
     }
 
     public String getCity(String city) {
-
         Observable.just(city)
                 .subscribeOn(Schedulers.io())
                 .map(s -> {

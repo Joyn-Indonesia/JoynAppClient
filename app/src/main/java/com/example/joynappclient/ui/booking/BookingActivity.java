@@ -13,9 +13,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.data.source.remote.model.DriverModel;
-import com.example.joynappclient.ui.booking.checkout.CheckOutButtomSheetDialog;
+import com.example.joynappclient.ui.booking.address.DestinationAddressBottomSheet;
+import com.example.joynappclient.ui.booking.address.PickUpAddressBottomSheet;
+import com.example.joynappclient.ui.booking.checkout.CheckOutButtomSheet;
 import com.example.joynappclient.ui.booking.checkout.CheckOutModel;
-import com.example.joynappclient.ui.booking.pickup.AddressPickUpBottomSheet;
 import com.example.joynappclient.utils.BaseActivity;
 import com.example.joynappclient.utils.Constant;
 import com.example.joynappclient.utils.VectorDescriptor;
@@ -58,6 +59,8 @@ import butterknife.OnClick;
 public class BookingActivity extends BaseActivity implements OnMapReadyCallback {
 
     private static final String TAG = "BookingActivity";
+    private static final String PICKUP = "Pick Up";
+    private static final String DESTINTAION = "Destination";
     private static float DEFFAULT_ZOOM = 15f;
 
     //widgets
@@ -65,11 +68,9 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     LinearLayout setPickUpContainer;
     @BindView(R.id.picker_destinationContainer)
     LinearLayout setDestinationContainer;
-
     //Button
     @BindView(R.id.btn_next)
     Button butonNext;
-
     //textview
     @BindView(R.id.booking_pickUpText)
     TextView pickUpText;
@@ -79,8 +80,11 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     TextView tripPlantText;
     @BindColor(R.color.greenDarkerMain)
     int darkGreen;
+
     //sheetDialog
-    AddressPickUpBottomSheet addressBottomSheet;
+    private PickUpAddressBottomSheet pickUpAddressBottomSheet;
+    private DestinationAddressBottomSheet destintaionAddressBottomSheet;
+
     //vars
     private GoogleMap mMap;
     private GeoApiContext mGeoAPiContext = null;
@@ -90,12 +94,12 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     private LatLng destinationLatLang;
     private Marker pickUpMarker;
     private Marker destinationMarker;
-    private String addressLine;
     private List<DriverModel> driverAvaible;
     private List<Marker> driverMarkers;
     private Polyline directionLine;
     private String timeDistance;
     private double harga;
+    //viewModel
     private BookingViewModel viewModel;
     private CheckOutModel checkOutModel;
 
@@ -105,116 +109,91 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         setContentView(R.layout.activity_booking);
         ButterKnife.bind(this);
 
-        setPickUpContainer.setVisibility(View.GONE);
-        setDestinationContainer.setVisibility(View.GONE);
-
-        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
-        viewModel = new ViewModelProvider(this, factory).get(BookingViewModel.class);
-        checkOutModel = new CheckOutModel();
-        mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
-        driverMarkers = new ArrayList<>();
+        initViewModel();
 
         //maps
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_container);
         mapFragment.getMapAsync(this);
 
-        if (mGeoAPiContext == null) {
-            Log.d(TAG, "onCreate: init geo api");
-            mGeoAPiContext = new GeoApiContext.Builder()
-                    .apiKey(getString(R.string.google_maps_key))
-                    .build();
-        }
+        mGeoAPiContext = new GeoApiContext.Builder()
+                .apiKey(getString(R.string.google_maps_key))
+                .build();
+
+        setPickUpContainer.setVisibility(View.GONE);
+        setDestinationContainer.setVisibility(View.GONE);
+
+        checkOutModel = new CheckOutModel();
+        mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
 
         // viewModel.getCity("Surabaya");
-
-        initViewModel();
-
     }
 
     private void initViewModel() {
 
+        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
+        viewModel = new ViewModelProvider(this, factory).get(BookingViewModel.class);
+
+        //pick up
         viewModel.getResponsePickUp().observe(this, status -> {
             switch (status.status) {
                 case SEARCH:
                     Place place = status.body;
-                    Log.d(TAG, "onChanged: " + place);
+                    Log.d(TAG, "onChanged: pick up" + place);
                     pickUpText.setText(place.getAddress());
                     pickUpLatLang = place.getLatLng();
                     moveCameraupdate(pickUpLatLang);
-                    createPickUpMarker(pickUpLatLang);
-                    showPickUpCOntainer();
+                    checkOutModel.setPickupAdress(place.getAddress());
+                    createMarkerDirection(PICKUP, pickUpLatLang);
                     break;
 
                 case PICKS:
-                    Log.d(TAG, "onChanged: picks");
+                    Log.d(TAG, "onChanged: picks up");
                     setPickUpContainer.setVisibility(View.VISIBLE);
-                    showdestintaionCOntainer();
-                    addressBottomSheet.dismiss();
+                    pickUpAddressBottomSheet.dismiss();
                     break;
             }
         });
 
+        //destintaion
         viewModel.getResponseDestination().observe(this, status -> {
             switch (status.status) {
                 case SEARCH:
                     Place place = status.body;
-                    Log.d(TAG, "onChanged: " + place);
+                    Log.d(TAG, "onChanged: destination " + place);
                     destinationText.setText(place.getAddress());
                     destinationLatLang = place.getLatLng();
-                    createPickUpMarker(destinationLatLang);
+                    checkOutModel.setDestintaionAddress(place.getAddress());
+                    createMarkerDirection(DESTINTAION, destinationLatLang);
                     break;
 
                 case PICKS:
-                    Log.d(TAG, "onChanged: picks");
+                    Log.d(TAG, "onChanged: destintaion");
                     setDestinationContainer.setVisibility(View.VISIBLE);
-                    showPickUpCOntainer();
-                    addressBottomSheet.dismiss();
+                    destintaionAddressBottomSheet.dismiss();
                     break;
             }
         });
-
-
-//        viewModel.getPlaceSearchPickup().observe(this, place -> {
-//            pickUpText.setText(place.getAddress());
-//            pickUpLatLang = place.getLatLng();
-//            moveCameraupdate(pickUpLatLang);
-//            createPickUpMarker(pickUpLatLang);
-//        });
-
     }
 
     @OnClick(R.id.container_pickup)
     public void setSetPickUpContainer() {
-        addressBottomSheet = new AddressPickUpBottomSheet();
-        addressBottomSheet.show(getSupportFragmentManager(), addressBottomSheet.getTag());
-
-//        setPickUpContainer.setVisibility(View.VISIBLE);
-//        showdestintaionCOntainer();
+        Log.d(TAG, "setSetPickUpContainer: ");
+        pickUpAddressBottomSheet = new PickUpAddressBottomSheet();
+        pickUpAddressBottomSheet.show(getSupportFragmentManager(), pickUpAddressBottomSheet.getTag());
     }
 
     @OnClick(R.id.container_destination)
     public void setSetDestinationContainer() {
-        setDestinationContainer.setVisibility(View.VISIBLE);
-        showPickUpCOntainer();
-    }
-
-    private void showPickUpCOntainer() {
-        if (setPickUpContainer.isShown()) {
-            setPickUpContainer.setVisibility(View.GONE);
-        }
-    }
-
-    private void showdestintaionCOntainer() {
-        if (setDestinationContainer.isShown()) {
-            setDestinationContainer.setVisibility(View.GONE);
-        }
+        Log.d(TAG, "setSetDestinationContainer: ");
+        destintaionAddressBottomSheet = new DestinationAddressBottomSheet();
+        destintaionAddressBottomSheet.show(getSupportFragmentManager(), destintaionAddressBottomSheet.getTag());
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Log.d(TAG, "onMapReady: ");
         LatLng surabya = new LatLng(-7.2755979, 112.572597);
         mMap = googleMap;
-        isMapReady = true;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(surabya, 10));
         getLastKnowLocation();
     }
@@ -243,35 +222,33 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     }
 
     private void fetchNearDriver() {
+        Log.d(TAG, "fetchNearDriver: get near driver");
         if (pickUpLatLang != null) {
             FirebaseFirestore mDb = FirebaseFirestore.getInstance();
             CollectionReference reffUser = mDb.collection(getString(R.string.collection_drivers));
             driverAvaible = new ArrayList<>();
+            driverMarkers = new ArrayList<>();
             reffUser.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Log.d(TAG, "onComplete: get user complete" + task.getResult().size());
-                    Log.d(TAG, "fetchNearDriver: " + task.getResult().getDocuments().get(0).get("Location"));
-
+                    Log.d(TAG, "fetchNearDriver: succes");
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d(TAG, "fetchNearDriver: " + document.getData().get("Location"));
                         driverAvaible.add(new DriverModel(document.getGeoPoint("Location")));
                     }
-                    Log.d(TAG, "fetchNearDriver: " + driverAvaible.size());
-                    createMarker(driverAvaible);
+                    createDriverMarker(driverAvaible);
                 } else {
-                    Log.d(TAG, "getUserDetail: failed");
+                    Log.d(TAG, "get driver failed: failed");
                 }
             });
         }
     }
 
-    private void createMarker(List<DriverModel> drivers) {
+    private void createDriverMarker(List<DriverModel> drivers) {
+        Log.d(TAG, "createDriverMarker: ");
         if (!drivers.isEmpty()) {
             for (Marker m : driverMarkers) {
                 m.remove();
             }
             driverMarkers.clear();
-
             for (DriverModel driver : drivers) {
                 LatLng curentDriverPos = new LatLng(driver.getGeoPoint().getLatitude(), driver.getGeoPoint().getLongitude());
                 driverMarkers.add(mMap.addMarker(new MarkerOptions()
@@ -284,88 +261,65 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     @OnClick(R.id.picker_pickUpButton)
     public void onPickUpClick() {
         Log.d(TAG, "onPickUpClick: pick up area");
-        if (pickUpMarker != null) pickUpMarker.remove();
+        setPickUpContainer.setVisibility(View.GONE);
         LatLng centerPos = mMap.getCameraPosition().target;
-        pickUpMarker = mMap.addMarker(new MarkerOptions()
-                .position(centerPos)
-                .title("Pick Up")
-                .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_pickups)));
-        this.pickUpLatLang = centerPos;
+        createMarkerDirection(PICKUP, centerPos);
         fillAddress(pickUpText, centerPos, 1);
-        requestRoute();
-    }
-
-    public void createPickUpMarker(LatLng pickUpLatLang) {
-        Log.d(TAG, "createPickUpMarker: ");
-        if (pickUpMarker != null) pickUpMarker.remove();
-        createMarkerDirection("Pick Up", pickUpLatLang);
-//        pickUpMarker = mMap.addMarker(new MarkerOptions()
-//                .position(pickUpLatLang)
-//                .title("Pick Up")
-//                .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_pickups)));
-//        this.pickUpLatLang = pickUpLatLang;
-
-    }
-
-    private void createMarkerDirection(String param, LatLng position) {
-        if (param.equals("Pick Up")) {
-            pickUpMarker = mMap.addMarker(new MarkerOptions()
-                    .position(position)
-                    .title(param)
-                    .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_pickups)));
-            this.pickUpLatLang = position;
-        } else {
-            destinationMarker = mMap.addMarker(new MarkerOptions()
-                    .position(position)
-                    .title("Destination")
-                    .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_destination)));
-            this.destinationLatLang = position;
-            setDestinationContainer.setVisibility(View.GONE);
-        }
-
-        requestRoute();
     }
 
     @OnClick(R.id.picker_destinationButton)
     public void onDestinationClick() {
         Log.d(TAG, "onDestinationClick: pick destination");
-        if (destinationMarker != null) destinationMarker.remove();
         LatLng centerPos = mMap.getCameraPosition().target;
-        destinationMarker = mMap.addMarker(new MarkerOptions()
-                .position(centerPos)
-                .title("Destination")
-                .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_destination)));
-        destinationLatLang = centerPos;
+        createMarkerDirection(DESTINTAION, centerPos);
+        fillAddress(destinationText, centerPos, 2);
+    }
 
-        if (pickUpLatLang != null) {
-            if (pickUpMarker != null)
-                pickUpMarker.remove();
+    public void createMarkerDirection(String params, LatLng position) {
+        if (params.equals("Pick Up")) {
+            if (pickUpMarker != null) pickUpMarker.remove();
+            setDestinationContainer.setVisibility(View.GONE);
             pickUpMarker = mMap.addMarker(new MarkerOptions()
-                    .position(centerPos)
-                    .title("Pick Up")
-                    .position(pickUpLatLang)
+                    .position(position)
+                    .title(params)
                     .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_pickups)));
+            this.pickUpLatLang = position;
+        } else {
+            if (destinationMarker != null) destinationMarker.remove();
+
+            if (pickUpMarker == null) {
+                pickUpMarker = mMap.addMarker(new MarkerOptions()
+                        .position(pickUpLatLang)
+                        .title(params)
+                        .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_pickups)));
+            }
+
+            setDestinationContainer.setVisibility(View.GONE);
+            destinationMarker = mMap.addMarker(new MarkerOptions()
+                    .position(position)
+                    .title(params)
+                    .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_destination)));
+            this.destinationLatLang = position;
+            setDestinationContainer.setVisibility(View.GONE);
         }
-        fillAddress(destinationText, destinationLatLang, 2);
         requestRoute();
-        setDestinationContainer.setVisibility(View.GONE);
     }
 
     private void moveCameraupdate(LatLng latLng) {
+        Log.d(TAG, "moveCameraupdate:");
         CameraUpdate updateFactory = CameraUpdateFactory.newLatLngZoom(latLng, 15f);
         mMap.animateCamera(updateFactory);
-
     }
 
     private void requestRoute() {
         Log.d(TAG, "requestRoute: request router");
         if (pickUpLatLang != null && destinationLatLang != null) {
             calculateDirection(pickUpLatLang, destinationLatLang);
-            moveCameraupdate(destinationLatLang);
         }
     }
 
     private void fillAddress(TextView textView, LatLng latLng, int param) {
+        Log.d(TAG, "fillAddress: ");
         String addres = viewModel.getAdress(latLng);
         textView.setText(addres);
         if (param == 1) {
@@ -378,7 +332,6 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     private void calculateDirection(LatLng pickUpLatLang, LatLng destinationLatLang) {
         if (pickUpLatLang != null && destinationLatLang != null) {
             Log.d(TAG, "calculateDirection: calculate directions");
-
             DirectionsApiRequest direction = new DirectionsApiRequest(mGeoAPiContext);
             direction.alternatives(true)
                     .mode(TravelMode.DRIVING)
@@ -402,33 +355,34 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
 
     private void updateLineDestination(DirectionsResult result) {
         if (result != null) {
-            List<LatLng> newDecodedPath = new ArrayList<>();
-            for (com.google.maps.model.LatLng latLng : result.routes[0].overviewPolyline.decodePath()) {
-                newDecodedPath.add(new LatLng(latLng.lat, latLng.lng));
-            }
-            new Handler(getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-                    if (directionLine != null) directionLine.remove();
-                    directionLine = mMap.addPolyline((new PolylineOptions())
-                            .addAll(newDecodedPath)
-                            .color(darkGreen)
-                            .width(17));
+            Log.d(TAG, "updateLineDestination: ");
+            new Handler(getMainLooper()).post(() -> {
 
-                    LatLng southwest = new LatLng(result.routes[0].bounds.southwest.lat, result.routes[0].bounds.southwest.lng);
-                    LatLng northeast = new LatLng(result.routes[0].bounds.northeast.lat, result.routes[0].bounds.northeast.lng);
-
-                    LatLngBounds bounds = new LatLngBounds(southwest, northeast);
-                    CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bounds, 200, 200, 0);
-                    mMap.animateCamera(update);
-                    updateDistance(result.routes[0].legs[0].distance);
-                    timeDistance = result.routes[0].legs[0].duration.toString();
+                List<LatLng> newDecodedPath = new ArrayList<>();
+                for (com.google.maps.model.LatLng latLng : result.routes[0].overviewPolyline.decodePath()) {
+                    newDecodedPath.add(new LatLng(latLng.lat, latLng.lng));
                 }
+
+                if (directionLine != null) directionLine.remove();
+                directionLine = mMap.addPolyline((new PolylineOptions())
+                        .addAll(newDecodedPath)
+                        .color(darkGreen)
+                        .width(17));
+
+                LatLng southwest = new LatLng(result.routes[0].bounds.southwest.lat, result.routes[0].bounds.southwest.lng);
+                LatLng northeast = new LatLng(result.routes[0].bounds.northeast.lat, result.routes[0].bounds.northeast.lng);
+
+                LatLngBounds bounds = new LatLngBounds(southwest, northeast);
+                CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bounds, 600, 600, 100);
+                mMap.animateCamera(update);
+                updateDistance(result.routes[0].legs[0].distance);
+                timeDistance = result.routes[0].legs[0].duration.toString();
             });
         }
     }
 
     private void updateDistance(Distance distance) {
+        Log.d(TAG, "updateDistance: ");
         tripPlantText.setVisibility(View.VISIBLE);
         butonNext.setVisibility(View.VISIBLE);
 
@@ -436,7 +390,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         float km = ((float) distance.inMeters) / Constant.RANGE_VALUE;
 
         long biaya = 3000;
-        long biayaMinimum = 10000;
+        long biayaMinimum = 8000;
 
         double biayaTotal = (double) (biaya * km);
 
@@ -479,15 +433,17 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
 
     @OnClick(R.id.btn_next)
     public void checkOutProcces() {
+        Log.d(TAG, "checkOutProcces: click");
         checkOutModel.setTimeDistance(String.valueOf(timeDistance));
         viewModel.setCheckOut(checkOutModel);
-        CheckOutButtomSheetDialog dialog = new CheckOutButtomSheetDialog();
+        CheckOutButtomSheet dialog = new CheckOutButtomSheet();
         dialog.show(getSupportFragmentManager(), dialog.getTag());
     }
 
 
     @Override
     protected void onResume() {
+        Log.d(TAG, "onResume: ");
         super.onResume();
         if (!mPermissionService) {
             requestPermissions();

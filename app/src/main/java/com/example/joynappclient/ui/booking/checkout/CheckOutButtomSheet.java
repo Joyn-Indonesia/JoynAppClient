@@ -22,7 +22,7 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CheckOutButtomSheetDialog extends BottomSheetDialogFragment {
+public class CheckOutButtomSheet extends BottomSheetDialogFragment {
     private static final String TAG = "CheckOutButtomSheetDial";
 
     @BindView(R.id.tv_pickUp_text)
@@ -33,7 +33,7 @@ public class CheckOutButtomSheetDialog extends BottomSheetDialogFragment {
     TextView detailTransaction;
 
     private BottomSheetBehavior bottomSheetBehavior;
-    private BookingViewModel viewModel;
+
     BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
         @Override
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -59,25 +59,23 @@ public class CheckOutButtomSheetDialog extends BottomSheetDialogFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ViewModelFactory factory = ViewModelFactory.getInstance(Objects.requireNonNull(getActivity()).getApplication());
-        viewModel = new ViewModelProvider(getActivity(), factory).get(BookingViewModel.class);
-        viewModel.getCheckOut().observe(getActivity(), checkOutModel -> {
-
-            Log.d(TAG, "onActivityCreated: " + checkOutModel.getCost());
-
-            pickUpAddress.setText(checkOutModel.getPickupAdress());
-            destinationAddress.setText(checkOutModel.getDestintaionAddress());
+        BookingViewModel viewModel = new ViewModelProvider(getActivity(), factory).get(BookingViewModel.class);
+        viewModel.getCheckOut().observe(getActivity(), model -> {
+            pickUpAddress.setText(model.getPickupAdress());
+            destinationAddress.setText(model.getDestintaionAddress());
+            detailTransaction.setText(String.format(getString(R.string.text_ride_detail),
+                    model.getDistance(),
+                    model.getTimeDistance(), model.getCost()));
         });
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-
         BottomSheetDialog bottomSheet = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
         View view = View.inflate(getContext(), R.layout.layout_bottom_sheet_check_out, null);
 
         ButterKnife.bind(this, view);
-
 
         bottomSheet.setContentView(view);
         bottomSheetBehavior = BottomSheetBehavior.from((View) (view.getParent()));

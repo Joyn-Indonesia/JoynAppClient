@@ -1,4 +1,4 @@
-package com.example.joynappclient.ui.booking.pickup;
+package com.example.joynappclient.ui.booking.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;

@@ -1,4 +1,4 @@
-package com.example.joynappclient.ui.booking.pickup;
+package com.example.joynappclient.ui.booking.address;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.ui.booking.BookingViewModel;
+import com.example.joynappclient.ui.booking.adapter.PlacesAutoCompleteAdapter;
 import com.example.joynappclient.ui.booking.utils.StatusResponse;
 import com.example.joynappclient.viewmodel.ViewModelFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -36,8 +37,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddressPickUpBottomSheet extends BottomSheetDialogFragment implements PlacesAutoCompleteAdapter.ClickListener {
-    private static final String TAG = "AddressPickUpBottomSheet";
+public class PickUpAddressBottomSheet extends BottomSheetDialogFragment implements PlacesAutoCompleteAdapter.ClickListener {
+    private static final String TAG = "PickUpAddressBottomShee";
 
     private BookingViewModel viewModel;
 
@@ -61,7 +62,7 @@ public class AddressPickUpBottomSheet extends BottomSheetDialogFragment implemen
             Log.d(TAG, "BottomSheetCallback " + "slideOffset: " + slideOffset);
         }
     };
-    private LatLngBounds latLngBounds;
+
     private TextWatcher filterTextWatcher = new TextWatcher() {
         public void afterTextChanged(Editable s) {
             if (!s.toString().equals("")) {
