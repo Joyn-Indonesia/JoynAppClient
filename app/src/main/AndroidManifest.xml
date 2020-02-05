@@ -44,10 +44,8 @@
         <activity android:name=".ui.booking.BookingActivity" />
         <activity android:name=".ui.authentication.otp.OtpActivity" />
         <activity android:name=".ui.main_menu.MainMenuActivity" />
-        <activity android:name=".ui.booking.checkout.CheckoutActivity" />
         <activity android:name=".ui.booking.paymen.PaymenRideActivity" />
         <activity android:name=".ui.booking.paymen.PaymenCarActivity" />
-        <activity android:name=".ui.booking.pickup.PickupActivity" />
         <activity android:name=".ui.booking.BindingActivity" />
         <activity android:name=".ui.main_menu.order.history.HistoryActivity" />
         <activity android:name=".ui.splashscreen.SplashScreen">

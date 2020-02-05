@@ -7,8 +7,6 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.ui.booking.pickup.PickupActivity;
-import com.example.joynappclient.utils.MoveActivity;
 
 public class BindingActivity extends AppCompatActivity {
 
@@ -21,7 +19,7 @@ public class BindingActivity extends AppCompatActivity {
         acc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveActivity.MoveAct(BindingActivity.this, PickupActivity.class);
+                // MoveActivity.MoveAct(BindingActivity.this, PickupActivity.class);
             }
         });
     }

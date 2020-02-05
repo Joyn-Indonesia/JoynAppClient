@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/_32sdp"
+    android:background="@color/colorBackground"
     android:orientation="vertical">
 
     <ImageView
@@ -31,116 +33,146 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.23000002"
-        tools:ignore="MissingConstraints">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="@dimen/_230sdp"
-            android:layout_height="wrap_content"
-            android:hint="@string/search_for_street_or_place"
-            tools:layout_editor_absoluteY="6dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/namedes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        tools:ignore="MissingConstraints" />
-
     <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
-        android:layout_marginBottom="@dimen/_100ssp"
         android:orientation="vertical"
+        android:padding="@dimen/_8sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.14"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/favorite_addres"
-            android:textColor="@color/toscaTop"
-            android:textSize="@dimen/medium_small_text"
-            android:textStyle="bold" />
+            android:background="@color/colorWhite"
+            app:boxCornerRadiusBottomEnd="@dimen/_16sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_16sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_16sdp"
+            app:boxCornerRadiusTopStart="@dimen/_16sdp"
+            app:boxStrokeColor="@color/greenYoung"
+            app:boxStrokeWidth="1dp">
 
-        <TextView
-            android:id="@+id/tv_favaddres"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_search_places"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/search_for_street_or_place"
+                tools:layout_editor_absoluteY="6dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_select_from_map"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="- Jl. Slamet SurabayaEmbong Kaliasin, Kec. Genteng, \nKota SBY, Jawa Timur 60271" />
+            android:padding="@dimen/_8sdp"
+            android:text="@string/select_from_map" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/places_recycler_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="- Jl. Mawar Kaliasin, Kec. Genteng,Kota SBY,  \n Jawa Timur 60271" />
-
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            tools:listitem="@layout/list_item_place_map_autocomplete" />
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="@dimen/_23ssp"
-        android:layout_height="@dimen/_23ssp"
-        android:src="@drawable/historyorder"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7"
-        app:layout_constraintVertical_bias="0.13999999"
-        tools:ignore="MissingConstraints" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/_20sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.04000002"
-        tools:ignore="MissingConstraints">
+    <!--    <ImageView-->
+    <!--        android:id="@+id/imageView7"-->
+    <!--        android:layout_width="@dimen/_20sdp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="30dp"-->
+    <!--        android:src="@drawable/namedes"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        tools:ignore="MissingConstraints"-->
+    <!--        tools:layout_editor_absoluteY="129dp" />-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Address History :"
-            android:textColor="@color/toscaTop"
-            android:textSize="@dimen/medium_small_text"
-            android:textStyle="bold" />
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/linearLayout3"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.14"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/imageView7"-->
+    <!--        tools:ignore="MissingConstraints"-->
+    <!--        tools:layout_editor_absoluteY="141dp">-->
 
-        <TextView
-            android:id="@+id/tv_hisaddres"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="- Jl. Slamet SurabayaEmbong Kaliasin, Kec. Genteng, \nKota SBY, Jawa Timur 60271" />
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="@string/favorite_addres"-->
+    <!--            android:textColor="@color/toscaTop"-->
+    <!--            android:textSize="@dimen/medium_small_text"-->
+    <!--            android:textStyle="bold" />-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="- Jl. Mawar Kaliasin, Kec. Genteng,Kota SBY,  \n Jawa Timur 60271" />
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv_favaddres"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="- Jl. Slamet SurabayaEmbong Kaliasin, Kec. Genteng, \nKota SBY, Jawa Timur 60271" />-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="- Jl. Mawar Kaliasin, Kec. Genteng,Kota SBY,  \n Jawa Timur 60271" />-->
 
 
-    </LinearLayout>
+    <!--    </LinearLayout>-->
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/imageView8"-->
+    <!--        android:layout_width="@dimen/_23ssp"-->
+    <!--        android:layout_height="@dimen/_23ssp"-->
+    <!--        android:src="@drawable/historyorder"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.0"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/imageView7"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/imageView7"-->
+    <!--        app:layout_constraintVertical_bias="0.13999999"-->
+    <!--        tools:ignore="MissingConstraints" />-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/linearLayout2"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:paddingBottom="@dimen/_20sdp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.01"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/imageView8"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"-->
+    <!--        app:layout_constraintVertical_bias="0.04000002"-->
+    <!--        tools:ignore="MissingConstraints">-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Address History :"-->
+    <!--            android:textColor="@color/toscaTop"-->
+    <!--            android:textSize="@dimen/medium_small_text"-->
+    <!--            android:textStyle="bold" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv_hisaddres"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="- Jl. Slamet SurabayaEmbong Kaliasin, Kec. Genteng, \nKota SBY, Jawa Timur 60271" />-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="- Jl. Mawar Kaliasin, Kec. Genteng,Kota SBY,  \n Jawa Timur 60271" />-->
+
+
+    <!--    </LinearLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

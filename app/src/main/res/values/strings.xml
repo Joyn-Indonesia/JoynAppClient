@@ -94,6 +94,7 @@
     <string name="text_ride_detail">J-Ride   %1$s Kilometer   +%2$s Minutes   Rp. %3$s,-</string>
     <string name="logout">logout</string>
     <string name="edit">edit</string>
+    <string name="select_from_map">select from map</string>
 
     <!--  Permission  -->
 

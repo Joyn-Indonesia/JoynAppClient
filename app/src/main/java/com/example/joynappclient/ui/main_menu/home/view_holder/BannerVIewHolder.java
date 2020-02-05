@@ -26,7 +26,10 @@ public class BannerVIewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindItem(List<HomeContentDataModel> model) {
-        titleBanner.setText(model.get(0).getTitle());
-        contentBanner.setText(model.get(0).getContent());
+        if (!model.isEmpty()) {
+            titleBanner.setText(model.get(0).getTitle());
+            contentBanner.setText(model.get(0).getContent());
+        }
+
     }
 }

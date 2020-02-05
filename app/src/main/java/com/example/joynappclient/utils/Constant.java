@@ -18,6 +18,6 @@ public class Constant extends AppCompatActivity {
     public static final String UNIT_OF_DISTANCE = "Km"; //if you use km or miles
     public static final Float RANGE_VALUE = 1000f; //if using km (1000f) or Miles using 1609f
     // Currency settings
-    public static final String MONEY = "$";
+    public static final String MONEY = "Rp";
 
 }

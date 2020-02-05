@@ -198,6 +198,7 @@ public class OtpActivity extends AppCompatActivity {
                 if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                     // The verification code entered was invalid
                     Log.e(TAG, "Invalid code: ");
+                    MoveActivity.showToast(context, "Invalid Code");
                     isTrue = false;
                 }
             }
