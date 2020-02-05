@@ -91,7 +91,7 @@
     <string name="j_car_features">J-Car Features</string>
     <string name="text_addressNotAvailable">Address does not exist.</string>
     <string name="your_trip_plan">Your Trip Plan</string>
-    <string name="text_ride_detail">J-Ride \n %1$s \n %2$s \n %3$s,-</string>
+    <string name="text_ride_detail">J-Ride \n %1$s \n %2$s \n %3$s-</string>
     <string name="logout">logout</string>
     <string name="edit">edit</string>
     <string name="select_from_map">select from map</string>

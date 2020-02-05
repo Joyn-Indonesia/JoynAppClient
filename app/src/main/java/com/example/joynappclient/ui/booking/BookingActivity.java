@@ -1,5 +1,6 @@
 package com.example.joynappclient.ui.booking;
 
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -86,6 +87,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     private DestinationAddressBottomSheet destintaionAddressBottomSheet;
 
     //vars
+    private Context context;
     private GoogleMap mMap;
     private GeoApiContext mGeoAPiContext = null;
     private FusedLocationProviderClient mFusedLocation;
@@ -99,6 +101,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     private Polyline directionLine;
     private String timeDistance;
     private double harga;
+
     //viewModel
     private BookingViewModel viewModel;
     private CheckOutModel checkOutModel;
@@ -108,7 +111,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
         ButterKnife.bind(this);
-
+        context = this;
         initViewModel();
 
         //maps
@@ -389,8 +392,8 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         checkOutModel.setDistance(distance.toString());
         float km = ((float) distance.inMeters) / Constant.RANGE_VALUE;
 
-        long biaya = 3000;
-        long biayaMinimum = 8000;
+        long biaya = 3;
+        long biayaMinimum = 8;
 
         double biayaTotal = (double) (biaya * km);
 
@@ -409,9 +412,9 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
 //        }
 
         String formattedTotal = NumberFormat.getNumberInstance(Locale.US).format(biayaTotal);
-        String noCent = String.format(Locale.US, Constant.MONEY + " %s.00", formattedTotal);
+        String noCent = String.format(Locale.US, Constant.MONEY + " %s.000", formattedTotal);
 //        priceText.setText(noCent);
-        checkOutModel.setCost(noCent);
+        checkOutModel.setCost(formattedTotal);
 
        /* String priceCent = String.format(Locale.US, General.MONEY +" %.2f", biayaTotal);
        priceText.setText(noCent);
@@ -421,7 +424,6 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         } else {
             priceText.setText(noCent);
         } */
-
 
 //        if (saldoMpay < (harga * designedFitur.getBiayaAkhir())) {
 //            mPayButton.setEnabled(false);
@@ -436,7 +438,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         Log.d(TAG, "checkOutProcces: click");
         checkOutModel.setTimeDistance(String.valueOf(timeDistance));
         viewModel.setCheckOut(checkOutModel);
-        CheckOutButtomSheet dialog = new CheckOutButtomSheet();
+        CheckOutButtomSheet dialog = new CheckOutButtomSheet(context);
         dialog.show(getSupportFragmentManager(), dialog.getTag());
     }
 

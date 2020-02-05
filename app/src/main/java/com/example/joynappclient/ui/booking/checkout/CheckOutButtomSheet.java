@@ -1,6 +1,7 @@
 package com.example.joynappclient.ui.booking.checkout;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,11 @@ public class CheckOutButtomSheet extends BottomSheetDialogFragment {
     TextView detailTransaction;
 
     private BottomSheetBehavior bottomSheetBehavior;
+    private Context context;
+
+    public CheckOutButtomSheet(Context context) {
+        this.context = context;
+    }
 
     BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
         @Override
@@ -63,9 +69,10 @@ public class CheckOutButtomSheet extends BottomSheetDialogFragment {
         viewModel.getCheckOut().observe(getActivity(), model -> {
             pickUpAddress.setText(model.getPickupAdress());
             destinationAddress.setText(model.getDestintaionAddress());
-            detailTransaction.setText(String.format(getString(R.string.text_ride_detail),
+            detailTransaction.setText(String.format((context.getString(R.string.text_ride_detail)),
                     model.getDistance(),
-                    model.getTimeDistance(), model.getCost()));
+                    model.getTimeDistance(),
+                    model.getCost()));
         });
     }
 
