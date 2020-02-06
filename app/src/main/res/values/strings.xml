@@ -96,6 +96,10 @@
     <string name="edit">edit</string>
     <string name="select_from_map">select from map</string>
     <string name="use_discount_voucher">Use Discount Voucher</string>
+    <string name="save">save</string>
+    <string name="add_pickup_notes">Add PickUp Notes</string>
+    <string name="where_are_you_going">Where Are You Going ?</string>
+    <string name="j_ride_big">J-RIDE</string>
 
     <!--  Permission  -->
 

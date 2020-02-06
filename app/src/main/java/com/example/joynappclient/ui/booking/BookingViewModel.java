@@ -22,21 +22,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DefaultObserver;
-import io.reactivex.schedulers.Schedulers;
-
 public class BookingViewModel extends AndroidViewModel {
     private static final String TAG = "BookingViewModel";
 
     private MutableLiveData<CheckOutModel> checkOut = new MutableLiveData<>();
     private JoynRepository repository;
     private String addressLocation;
-    private String cityName;
     private Context context;
+    private CheckOutModel checkOutModel;
 
-    private MutableLiveData<Place> placeSearchDestination = new MutableLiveData<>();
     private MutableLiveData<HandleResponse<Place>> responsePickUp = new MutableLiveData<>();
     private MutableLiveData<HandleResponse<Place>> responseDestination = new MutableLiveData<>();
 
@@ -81,9 +75,25 @@ public class BookingViewModel extends AndroidViewModel {
         return checkOut;
     }
 
-    public void setCheckOut(CheckOutModel checkOut) {
-        this.checkOut.postValue(checkOut);
+    public void setNote(String note) {
+        checkOutModel = new CheckOutModel();
+        checkOutModel.setNote(note);
+        checkOut.postValue(checkOutModel);
     }
+
+    public void setCheckOutModel(CheckOutModel checkOut) {
+
+        if (checkOutModel == null) {
+            checkOutModel = new CheckOutModel();
+        }
+        checkOutModel.setPickupAdress(checkOut.getDestintaionAddress());
+        checkOutModel.setDestintaionAddress(checkOut.getDestintaionAddress());
+        checkOutModel.setDistance(checkOut.getDistance());
+        checkOutModel.setTimeDistance(checkOut.getTimeDistance());
+        checkOutModel.setCost(checkOut.getCost());
+        this.checkOut.postValue(checkOutModel);
+    }
+
 
     public String getAdress(LatLng latLng) {
 
@@ -98,43 +108,6 @@ public class BookingViewModel extends AndroidViewModel {
             e.printStackTrace();
         }
         return addressLocation;
-    }
-
-    public String getCity(String city) {
-        Observable.just(city)
-                .subscribeOn(Schedulers.io())
-                .map(s -> {
-                    Log.d(TAG, "getCity: " + s);
-                    String address = null;
-                    Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-                    try {
-                        final List<Address> adresses = geocoder.getFromLocationName(s, 1);
-                        address = adresses.get(0).getAddressLine(0);
-                        Log.d(TAG, "getCity: " + adresses.get(0).getAddressLine(0));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return address;
-                }).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<String>() {
-                    @Override
-                    public void onNext(String s) {
-                        Log.d(TAG, "onNext: " + s);
-                        cityName = s;
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d(TAG, "onError: ");
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.d(TAG, "onComplete: ");
-                    }
-                });
-
-        return cityName;
     }
 
 }

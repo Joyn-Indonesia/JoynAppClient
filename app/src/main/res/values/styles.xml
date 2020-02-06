@@ -20,6 +20,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="StyleTextViewDefault.Bold.padding">
+        <item name="android:padding">@dimen/_2sdp</item>
+    </style>
+
     <style name="StyleTextViewDefault.Black">
         <item name="android:textColor">@color/colorBlack</item>
     </style>

@@ -7,6 +7,7 @@ public class CheckOutModel {
     private String distance;
     private String timeDistance;
     private String cost;
+    private String note;
 
     public String getPickupAdress() {
         return pickupAdress;
@@ -22,6 +23,14 @@ public class CheckOutModel {
 
     public void setDestintaionAddress(String destintaionAddress) {
         this.destintaionAddress = destintaionAddress;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public String getDistance() {

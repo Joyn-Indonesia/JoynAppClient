@@ -22,7 +22,6 @@
             android:textSize="@dimen/extra_big_text"
             android:visibility="gone" />
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,6 +32,7 @@
                 android:layout_width="@dimen/_32sdp"
                 android:layout_height="@dimen/_32sdp"
                 android:layout_gravity="center"
+                android:contentDescription="@string/content_image"
                 android:padding="@dimen/_4sdp"
                 android:src="@drawable/ic_pin_pickups"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@+id/imageView16"
+                app:layout_constraintEnd_toStartOf="@+id/btn_search_pickup"
                 app:layout_constraintStart_toEndOf="@+id/imageView15"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -58,14 +58,23 @@
                     style="@style/StyleTextViewDefault"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="2"
-                    android:maxLines="2"
+                    android:textColor="@color/black80"
                     tool:text="@string/text_addressNotAvailable" />
+
+                <TextView
+                    android:id="@+id/btn_add_note_pickup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_4sdp"
+                    android:paddingStart="0dp"
+                    android:text="@string/add_note"
+                    android:textColor="@color/halfBlack"
+                    android:textSize="@dimen/medium_small_text" />
 
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView16"
+                android:id="@+id/btn_search_pickup"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_32sdp"
                 android:layout_gravity="center"
@@ -87,6 +96,7 @@
                 android:layout_width="@dimen/_32sdp"
                 android:layout_height="@dimen/_32sdp"
                 android:layout_gravity="center"
+                android:contentDescription="@string/content_image"
                 android:padding="@dimen/_4sdp"
                 android:src="@drawable/ic_pin_destination"
                 app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +107,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@+id/imageView18"
+                app:layout_constraintEnd_toStartOf="@+id/btn_search_desti"
                 app:layout_constraintStart_toEndOf="@+id/imageView17"
                 app:layout_constraintTop_toTopOf="@+id/imageView17">
 
@@ -112,14 +122,12 @@
                     style="@style/StyleTextViewDefault"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="2"
-                    android:maxLines="2"
                     tool:text="@string/text_addressNotAvailable" />
 
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView18"
+                android:id="@+id/btn_search_desti"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_32sdp"
                 android:layout_gravity="center"

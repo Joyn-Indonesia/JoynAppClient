@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
@@ -18,6 +19,7 @@ import com.example.joynappclient.ui.booking.address.DestinationAddressBottomShee
 import com.example.joynappclient.ui.booking.address.PickUpAddressBottomSheet;
 import com.example.joynappclient.ui.booking.checkout.CheckOutButtomSheet;
 import com.example.joynappclient.ui.booking.checkout.CheckOutModel;
+import com.example.joynappclient.ui.booking.dialog.AddNote;
 import com.example.joynappclient.utils.BaseActivity;
 import com.example.joynappclient.utils.Constant;
 import com.example.joynappclient.utils.VectorDescriptor;
@@ -75,6 +77,8 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     //textview
     @BindView(R.id.booking_pickUpText)
     TextView pickUpText;
+    @BindView(R.id.btn_add_note_pickup)
+    TextView noteCostumer;
     @BindView(R.id.booking_destintationText)
     TextView destinationText;
     @BindView(R.id.tv_tripPlan)
@@ -132,7 +136,6 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     }
 
     private void initViewModel() {
-
         ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
         viewModel = new ViewModelProvider(this, factory).get(BookingViewModel.class);
 
@@ -157,6 +160,15 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
             }
         });
 
+        //note
+        viewModel.getCheckOut().observe(this, model -> {
+            if (model.getNote() != null) {
+                noteCostumer.setText(model.getNote());
+            } else {
+                noteCostumer.setText(getString(R.string.add_note));
+            }
+        });
+
         //destintaion
         viewModel.getResponseDestination().observe(this, status -> {
             switch (status.status) {
@@ -178,19 +190,28 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         });
     }
 
-    @OnClick(R.id.container_pickup)
+    @OnClick(R.id.btn_search_pickup)
     public void setSetPickUpContainer() {
         Log.d(TAG, "setSetPickUpContainer: ");
         pickUpAddressBottomSheet = new PickUpAddressBottomSheet();
         pickUpAddressBottomSheet.show(getSupportFragmentManager(), pickUpAddressBottomSheet.getTag());
     }
 
-    @OnClick(R.id.container_destination)
+    @OnClick(R.id.btn_search_desti)
     public void setSetDestinationContainer() {
         Log.d(TAG, "setSetDestinationContainer: ");
         destintaionAddressBottomSheet = new DestinationAddressBottomSheet();
         destintaionAddressBottomSheet.show(getSupportFragmentManager(), destintaionAddressBottomSheet.getTag());
     }
+
+    @OnClick(R.id.btn_add_note_pickup)
+    public void showAddNote() {
+        FragmentManager fm = getSupportFragmentManager();
+        AddNote dialog = AddNote.getInstance(AddNote.PICKUP);
+        dialog.show(fm, dialog.getTag());
+
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -291,10 +312,12 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
             if (destinationMarker != null) destinationMarker.remove();
 
             if (pickUpMarker == null) {
-                pickUpMarker = mMap.addMarker(new MarkerOptions()
-                        .position(pickUpLatLang)
-                        .title(params)
-                        .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_pickups)));
+                if (pickUpLatLang != null) {
+                    pickUpMarker = mMap.addMarker(new MarkerOptions()
+                            .position(pickUpLatLang)
+                            .title(params)
+                            .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_pickups)));
+                }
             }
 
             setDestinationContainer.setVisibility(View.GONE);
@@ -334,11 +357,12 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
 
     private void calculateDirection(LatLng pickUpLatLang, LatLng destinationLatLang) {
         if (pickUpLatLang != null && destinationLatLang != null) {
+            Log.d(TAG, "calculateDirection: " + pickUpLatLang + ", " + destinationLatLang);
             Log.d(TAG, "calculateDirection: calculate directions");
             DirectionsApiRequest direction = new DirectionsApiRequest(mGeoAPiContext);
-            direction.alternatives(true)
-                    .mode(TravelMode.DRIVING)
-                    .language("id")
+
+            direction.alternatives(false)
+                    .mode(TravelMode.DRIVING).language("id")
                     .origin(new com.google.maps.model.LatLng(pickUpLatLang.latitude, pickUpLatLang.longitude))
                     .destination(new com.google.maps.model.LatLng(destinationLatLang.latitude, destinationLatLang.longitude))
                     .setCallback(new PendingResult.Callback<DirectionsResult>() {
@@ -392,7 +416,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         checkOutModel.setDistance(distance.toString());
         float km = ((float) distance.inMeters) / Constant.RANGE_VALUE;
 
-        long biaya = 3;
+        long biaya = 2;
         long biayaMinimum = 8;
 
         double biayaTotal = (double) (biaya * km);
@@ -412,9 +436,9 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
 //        }
 
         String formattedTotal = NumberFormat.getNumberInstance(Locale.US).format(biayaTotal);
-        String noCent = String.format(Locale.US, Constant.MONEY + " %s.000", formattedTotal);
+        String noCent = String.format(Locale.US, Constant.MONEY + " %s.000,-", formattedTotal);
 //        priceText.setText(noCent);
-        checkOutModel.setCost(formattedTotal);
+        checkOutModel.setCost(noCent);
 
        /* String priceCent = String.format(Locale.US, General.MONEY +" %.2f", biayaTotal);
        priceText.setText(noCent);
@@ -436,8 +460,8 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     @OnClick(R.id.btn_next)
     public void checkOutProcces() {
         Log.d(TAG, "checkOutProcces: click");
-        checkOutModel.setTimeDistance(String.valueOf(timeDistance));
-        viewModel.setCheckOut(checkOutModel);
+        checkOutModel.setTimeDistance(timeDistance);
+        viewModel.setCheckOutModel(checkOutModel);
         CheckOutButtomSheet dialog = new CheckOutButtomSheet(context);
         dialog.show(getSupportFragmentManager(), dialog.getTag());
     }

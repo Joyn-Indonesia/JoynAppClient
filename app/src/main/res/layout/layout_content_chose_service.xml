@@ -3,140 +3,84 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tool="http://schemas.android.com/tools"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
-        android:background="#ffcdd2"
+        android:backgroundTint="@color/toscaBottom"
         app:cardCornerRadius="@dimen/_10sdp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:orientation="horizontal"
-            android:padding="@dimen/_10sdp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="@dimen/_110sdp"
-                android:layout_height="@dimen/_130sdp"
+                android:id="@+id/imageView7"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_140sdp"
+                android:contentDescription="@string/content_image"
+                android:padding="@dimen/_8sdp"
                 android:scaleType="fitXY"
-                android:src="@drawable/j_ride" />
+                android:src="@drawable/j_ride"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="end"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/tv_detail_transaction"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_ride_detail"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/default_text" />
+                    style="@style/StyleTextViewDefault.Bold"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:text="@string/j_ride_big"
+                    android:textColor="@color/colorBlack" />
 
-                <Button
+                <TextView
+                    android:id="@+id/tv_ride_km"
+                    style="@style/StyleTextViewDefault.Bold"
+                    android:textColor="@color/colorBlack"
+                    tool:text="@string/j_ride" />
+
+                <TextView
+                    android:id="@+id/tv_ride_minutes"
+                    style="@style/StyleTextViewDefault.Bold"
+                    android:textColor="@color/colorBlack"
+                    tool:text="@string/j_ride" />
+
+                <TextView
+                    android:id="@+id/tv_ride_price"
+                    style="@style/StyleTextViewDefault.Bold"
+                    android:textColor="@color/colorBlack"
+                    tool:text="@string/j_ride" />
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_select"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:text="@string/select" />
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:backgroundTint="@color/greenDarkerMain"
+                    android:padding="@dimen/_4sdp"
+                    android:text="@string/select"
+                    android:textColor="@color/material_light_white"
+                    android:textSize="@dimen/default_text"
+                    app:cornerRadius="@dimen/_8sdp" />
             </LinearLayout>
-        </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:orientation="horizontal">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp"
-            android:background="@color/toscaLevel3"
-            app:cardCornerRadius="@dimen/_10sdp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/toscaLevel3"
-                android:orientation="vertical"
-                android:padding="@dimen/_10sdp">
-
-                <ImageView
-                    android:id="@+id/iv_jcar"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/j_car" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rp. 40.000,-" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp"
-            android:background="@color/toscaLevel3"
-            app:cardCornerRadius="@dimen/_10sdp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/toscaLevel3"
-                android:orientation="vertical"
-                android:padding="@dimen/_10sdp">
-
-                <ImageView
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/j_send" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rp. 23.000,-" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp"
-            android:background="@color/toscaLevel3"
-            app:cardCornerRadius="@dimen/_10sdp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/toscaLevel3"
-                android:orientation="vertical"
-                android:padding="@dimen/_10sdp">
-
-                <ImageView
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/j_box" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rp. 49.000,-" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
 </LinearLayout>

@@ -28,18 +28,18 @@ public class CheckOutButtomSheet extends BottomSheetDialogFragment {
 
     @BindView(R.id.tv_pickUp_text)
     TextView pickUpAddress;
+    @BindView(R.id.tv_note)
+    TextView noteCustomer;
     @BindView(R.id.tv_destintaion_text)
     TextView destinationAddress;
-    @BindView(R.id.tv_detail_transaction)
-    TextView detailTransaction;
+    @BindView(R.id.tv_ride_km)
+    TextView rideKm;
+    @BindView(R.id.tv_ride_minutes)
+    TextView rideMinute;
+    @BindView(R.id.tv_ride_price)
+    TextView ridePrice;
 
     private BottomSheetBehavior bottomSheetBehavior;
-    private Context context;
-
-    public CheckOutButtomSheet(Context context) {
-        this.context = context;
-    }
-
     BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
         @Override
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -60,6 +60,11 @@ public class CheckOutButtomSheet extends BottomSheetDialogFragment {
             Log.d(TAG, "BottomSheetCallback " + "slideOffset: " + slideOffset);
         }
     };
+    private Context context;
+
+    public CheckOutButtomSheet(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -68,11 +73,16 @@ public class CheckOutButtomSheet extends BottomSheetDialogFragment {
         BookingViewModel viewModel = new ViewModelProvider(getActivity(), factory).get(BookingViewModel.class);
         viewModel.getCheckOut().observe(getActivity(), model -> {
             pickUpAddress.setText(model.getPickupAdress());
+
+            String note = "";
+            if (model.getNote() != null) {
+                note = model.getNote();
+            }
+            noteCustomer.setText("Note : " + note);
             destinationAddress.setText(model.getDestintaionAddress());
-            detailTransaction.setText(String.format((context.getString(R.string.text_ride_detail)),
-                    model.getDistance(),
-                    model.getTimeDistance(),
-                    model.getCost()));
+            rideKm.setText(model.getDistance());
+            rideMinute.setText("+ " + model.getTimeDistance());
+            ridePrice.setText(model.getCost());
         });
     }
 

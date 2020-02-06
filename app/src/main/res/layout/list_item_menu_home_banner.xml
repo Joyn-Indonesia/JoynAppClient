@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tool="http://schemas.android.com/tools"
     android:layout_marginBottom="@dimen/_8sdp">
 
     <LinearLayout
@@ -31,7 +32,7 @@
             android:id="@+id/tv_title_banner"
             style="@style/StyleTextViewDefault.Bold"
             android:layout_marginTop="16dp"
-            android:text="@string/mcdonald_s_ready"
+            tool:text="@string/mcdonald_s_ready"
             android:textColor="@color/colorBlack"
             app:layout_constraintStart_toStartOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -40,7 +41,7 @@
             android:id="@+id/tv_content_banner"
             style="@style/StyleTextViewDefault.ContentBanner"
             android:layout_marginTop="8dp"
-            android:text="@string/happy_meal"
+            tool:text="@string/happy_meal"
             app:layout_constraintEnd_toEndOf="@+id/imageView2"
             app:layout_constraintStart_toStartOf="@+id/textView7"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />

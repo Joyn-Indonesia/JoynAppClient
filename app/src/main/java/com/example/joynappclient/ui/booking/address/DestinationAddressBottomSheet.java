@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -48,9 +50,7 @@ public class DestinationAddressBottomSheet extends BottomSheetDialogFragment imp
     BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
         @Override
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
-            if (newState == BottomSheetBehavior.STATE_DRAGGING) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
+
             if (BottomSheetBehavior.STATE_HIDDEN == newState) {
                 dismiss();
             }
@@ -93,9 +93,14 @@ public class DestinationAddressBottomSheet extends BottomSheetDialogFragment imp
         return view;
     }
 
+    @BindView(R.id.tv_title_destination)
+    TextView destintaionTitle;
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        destintaionTitle.setText(getContext().getString(R.string.where_are_you_going));
 
         ViewModelFactory factory = ViewModelFactory.getInstance(getActivity().getApplication());
         viewModel = new ViewModelProvider(getActivity(), factory).get(BookingViewModel.class);

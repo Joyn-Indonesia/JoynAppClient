@@ -2,6 +2,7 @@ package com.example.joynappclient.ui.booking.address;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,23 +35,27 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class PickUpAddressBottomSheet extends BottomSheetDialogFragment implements PlacesAutoCompleteAdapter.ClickListener {
     private static final String TAG = "PickUpAddressBottomShee";
 
+    @BindView(R.id.extraSpace)
+    View extraSpace;
     private BookingViewModel viewModel;
-
     private PlacesAutoCompleteAdapter mAutoCompleteAdapter;
     private RecyclerView recyclerView;
     private BottomSheetBehavior bottomSheetBehavior;
     BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
         @Override
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
-            if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+
+            if (4 == newState) {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
+
             if (BottomSheetBehavior.STATE_HIDDEN == newState) {
                 dismiss();
             }
@@ -60,9 +65,9 @@ public class PickUpAddressBottomSheet extends BottomSheetDialogFragment implemen
         @Override
         public void onSlide(@NonNull View bottomSheet, float slideOffset) {
             Log.d(TAG, "BottomSheetCallback " + "slideOffset: " + slideOffset);
+
         }
     };
-
     private TextWatcher filterTextWatcher = new TextWatcher() {
         public void afterTextChanged(Editable s) {
             if (!s.toString().equals("")) {
@@ -90,6 +95,7 @@ public class PickUpAddressBottomSheet extends BottomSheetDialogFragment implemen
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_bottom_sheet_booking, container, false);
         ButterKnife.bind(this, view);
+        extraSpace.setMinimumHeight((Resources.getSystem().getDisplayMetrics().heightPixels));
         return view;
     }
 
@@ -118,6 +124,7 @@ public class PickUpAddressBottomSheet extends BottomSheetDialogFragment implemen
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         mAutoCompleteAdapter.setClickListener(this);
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(mAutoCompleteAdapter);
         mAutoCompleteAdapter.notifyDataSetChanged();
     }
@@ -139,8 +146,8 @@ public class PickUpAddressBottomSheet extends BottomSheetDialogFragment implemen
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         dialog.setOnShowListener(dialogInterface -> {
-            BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
-            setupFullHeight(bottomSheetDialog);
+            //BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
+            // setupFullHeight(bottomSheetDialog);
         });
         return dialog;
 
