@@ -18,8 +18,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-import java.util.Objects;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -69,7 +67,7 @@ public class CheckOutButtomSheet extends BottomSheetDialogFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ViewModelFactory factory = ViewModelFactory.getInstance(Objects.requireNonNull(getActivity()).getApplication());
+        ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
         BookingViewModel viewModel = new ViewModelProvider(getActivity(), factory).get(BookingViewModel.class);
         viewModel.getCheckOut().observe(getActivity(), model -> {
             pickUpAddress.setText(model.getPickupAdress());

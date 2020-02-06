@@ -1,17 +1,20 @@
 package com.example.joynappclient.di;
 
-import android.app.Application;
+import android.content.Context;
 
 import com.example.joynappclient.data.JoynRepository;
-import com.example.joynappclient.data.source.remote.firebase.FirebaseRepository;
-import com.example.joynappclient.data.source.remote.gmaps.GmapRepository;
+import com.example.joynappclient.data.source.local.LocalDataSource;
+import com.example.joynappclient.data.source.local.room.JoynDataBase;
+import com.example.joynappclient.data.source.remote.firebase.FirebaseDataSource;
+import com.example.joynappclient.data.source.remote.gmaps.GmapDataSource;
 
 public class DataInjection {
 
-    public static JoynRepository provideRepository(Application application) {
-        Application application1 = application;
-        FirebaseRepository firebaseRepository = FirebaseRepository.getInstance();
-        GmapRepository gmapRepository = GmapRepository.getInstance();
-        return JoynRepository.getInstance(application, firebaseRepository, gmapRepository);
+    public static JoynRepository provideRepository(Context context) {
+        JoynDataBase joynDataBase = JoynDataBase.getInstance(context);
+        FirebaseDataSource firebaseDataSource = FirebaseDataSource.getInstance();
+        GmapDataSource gmapDataSource = GmapDataSource.getInstance();
+        LocalDataSource localDataSource = LocalDataSource.getInstance(joynDataBase.joynDao());
+        return JoynRepository.getInstance(context, firebaseDataSource, gmapDataSource, localDataSource);
     }
 }

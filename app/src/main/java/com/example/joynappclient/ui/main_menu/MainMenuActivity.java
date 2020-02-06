@@ -1,15 +1,17 @@
 package com.example.joynappclient.ui.main_menu;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.joynappclient.R;
 import com.example.joynappclient.application.JoynApp;
-import com.example.joynappclient.data.source.remote.model.UserModel;
 import com.example.joynappclient.ui.main_menu.account.AccountFragment;
 import com.example.joynappclient.ui.main_menu.adapter.VIewPagerAdapter;
 import com.example.joynappclient.ui.main_menu.chat.ChatFragment;
@@ -17,9 +19,7 @@ import com.example.joynappclient.ui.main_menu.home.HomeFragment;
 import com.example.joynappclient.ui.main_menu.inbox.InboxFragment;
 import com.example.joynappclient.ui.main_menu.order.OrderFragment;
 import com.example.joynappclient.utils.BaseActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.joynappclient.viewmodel.ViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class MainMenuActivity extends BaseActivity {
     ViewPager container;
 
     //vars
-
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +84,6 @@ public class MainMenuActivity extends BaseActivity {
 
         navView.show(MENU_HOME, true);
         navView.setCount(MENU_INBOX, "9");
-        setFragment(HomeFragment.getInstance());
-
     }
 
     private void initFragment() {
@@ -100,58 +98,42 @@ public class MainMenuActivity extends BaseActivity {
         container.setAdapter(adapter);
         container.setCurrentItem(0);
         container.setOffscreenPageLimit(5);
-
     }
 
-    private void setFragment(Fragment fragment) {
-//        String tag = fragment.getClass().getSimpleName();
-//        FragmentManager fm = getSupportFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.replace(R.id.containerMain, fragment, tag)
-//                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-//                .commit();
-//        if (fm.findFragmentByTag(tag) == null) {
-//            ft.add(R.id.containerMain, fragment, tag)
-//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-//                    .addToBackStack(tag)
-//                    .commit();
-//        } else {
-//            ft.show(Objects.requireNonNull(fm.findFragmentByTag(tag))).commit();
-//        }
-    }
+    private void getDetailUser() {
+        ViewModelFactory factory = ViewModelFactory.getInstance(this);
+        MainActivityViewModel viewModel = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
 
-    private void getUserDetail() {
-        FirebaseFirestore mDb = FirebaseFirestore.getInstance();
-        DocumentReference reffUser = mDb.collection(getString(R.string.collection_users)).document(FirebaseAuth.getInstance().getUid());
-
-        reffUser.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult() != null) {
-                Log.d(TAG, "onComplete: get user complete");
-
-                UserModel user = task.getResult().toObject(UserModel.class);
-                ((JoynApp) getApplicationContext()).setUser(user);
-            } else {
-                Log.d(TAG, "getUserDetail: failed");
-            }
+        viewModel.getUserLogin().observe(this, userLogin -> {
+            Log.d(TAG, "getDetailUser: " + userLogin.getRegId());
+            JoynApp.getInstance(MainMenuActivity.this).setLoginUser(userLogin);
         });
-
     }
+
 
     @Override
     public void onBackPressed() {
-
-        if (getSupportFragmentManager().getBackStackEntryCount() <= 1) {
+        if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-            finish();
-        } else {
-            getSupportFragmentManager().popBackStack();
+            return;
         }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, R.string.press_again_to_exit, Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getUserDetail();
+        getDetailUser();
         if (checkMapServices()) {
             if (!mPermissionService) {
                 requestPermissions();

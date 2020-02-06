@@ -13,17 +13,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class FirebaseRepository {
-    private static final String TAG = "FirebaseRepository";
+public class FirebaseDataSource {
+    private static final String TAG = "FirebaseDataSource";
 
-    private static volatile FirebaseRepository INSTANCE = null;
+    private static volatile FirebaseDataSource INSTANCE = null;
     private FirebaseFirestore mDb = FirebaseFirestore.getInstance();
     private UserModel userModel;
     private Handler handler = new Handler();
 
-    public static FirebaseRepository getInstance() {
+    public static FirebaseDataSource getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new FirebaseRepository();
+            INSTANCE = new FirebaseDataSource();
         }
         return INSTANCE;
     }

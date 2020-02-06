@@ -3,8 +3,10 @@ package com.example.joynappclient.data.source.remote.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class UserModel implements Parcelable {
+import androidx.annotation.NonNull;
+import androidx.room.PrimaryKey;
 
+public class UserModel implements Parcelable {
 
     public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {
         @Override
@@ -20,9 +22,21 @@ public class UserModel implements Parcelable {
     private String name;
     private String eMail;
     private String phoneNumber;
+    @PrimaryKey
+    @NonNull
     private String userId;
 
     public UserModel() {
+    }
+
+    private String regId;
+
+    public UserModel(String name, String eMail, String phoneNumber, String userId, String regId) {
+        this.name = name;
+        this.eMail = eMail;
+        this.phoneNumber = phoneNumber;
+        this.userId = userId;
+        this.regId = regId;
     }
 
     protected UserModel(Parcel in) {
@@ -30,14 +44,21 @@ public class UserModel implements Parcelable {
         eMail = in.readString();
         phoneNumber = in.readString();
         userId = in.readString();
+        regId = in.readString();
     }
 
-    public String getUserId() {
-        return userId;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(eMail);
+        dest.writeString(phoneNumber);
+        dest.writeString(userId);
+        dest.writeString(regId);
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public String getName() {
@@ -64,16 +85,19 @@ public class UserModel implements Parcelable {
         this.phoneNumber = phoneNumber;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getUserId() {
+        return userId;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(eMail);
-        dest.writeString(phoneNumber);
-        dest.writeString(userId);
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getRegId() {
+        return regId;
+    }
+
+    public void setRegId(String regId) {
+        this.regId = regId;
     }
 }

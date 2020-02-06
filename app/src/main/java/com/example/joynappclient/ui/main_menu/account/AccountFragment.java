@@ -53,7 +53,7 @@ public class AccountFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // UserModel user = ((JoynApp) getActivity().getApplicationContext()).getUser();
+        // UserModel user = ((JoynApp) getActivity().getApplicationContext()).getLoginUser();
 
         profilName.setText("saya");
         phoneProfilNumber.setText("0813145151");

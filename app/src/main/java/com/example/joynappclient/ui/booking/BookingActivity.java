@@ -136,7 +136,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     }
 
     private void initViewModel() {
-        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
+        ViewModelFactory factory = ViewModelFactory.getInstance(getApplicationContext());
         viewModel = new ViewModelProvider(this, factory).get(BookingViewModel.class);
 
         //pick up
@@ -236,7 +236,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     }
 
     private void updateMyLocation(LatLng location) {
-        Log.d(TAG, "updateMyLocation: update location");
+        Log.d(TAG, "updateMyLocation: updateUserLogin location");
         mMap.setMyLocationEnabled(true);
         if (location != null) {
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(location, 15f);

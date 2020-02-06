@@ -12,15 +12,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DefaultObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class GmapRepository {
+public class GmapDataSource {
 
-    private static volatile GmapRepository INSTANCE;
+    private static volatile GmapDataSource INSTANCE;
     private ResponseGmaps gmaps;
 
-    public static GmapRepository getInstance() {
+    public static GmapDataSource getInstance() {
         if (INSTANCE == null) {
-            synchronized (GmapRepository.class) {
-                INSTANCE = new GmapRepository();
+            synchronized (GmapDataSource.class) {
+                INSTANCE = new GmapDataSource();
             }
         }
         return INSTANCE;

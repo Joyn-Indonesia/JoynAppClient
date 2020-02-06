@@ -16,8 +16,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class SplashScreen extends AppCompatActivity {
     private static final String TAG = "SplashScreen";
 
-    //firebase
-    private FirebaseAuth.AuthStateListener mListener;
 
     //vars
     private boolean stateSignedIn = false;
@@ -27,9 +25,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        new Handler().postDelayed(() -> {
-            setupFirebaseAuth();
-        }, 3000);
+        new Handler().postDelayed(this::setupFirebaseAuth, 3000);
     }
 
     private void setupFirebaseAuth() {
@@ -43,22 +39,8 @@ public class SplashScreen extends AppCompatActivity {
         } else {
             Log.d(TAG, "onAuthStateChanged:signed_out");
             moveToRegister();
+            finish();
         }
-
-//        mListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                FirebaseUser user = firebaseAuth.getCurrentUser();
-//                if (user != null) {
-//                    Log.d(TAG, "onAuthStateChanged: signed in" + user.getUid());
-//                    moveToHome();
-//                    finish();
-//                } else {
-//                    Log.d(TAG, "onAuthStateChanged:signed_out");
-//                    moveToRegister();
-//                }
-//            }
-//        };
     }
 
     private void moveToHome() {

@@ -57,7 +57,7 @@ public class AddNote extends DialogFragment {
 
         ButterKnife.bind(this, view);
 
-        ViewModelFactory factory = ViewModelFactory.getInstance(getActivity().getApplication());
+        ViewModelFactory factory = ViewModelFactory.getInstance(getContext());
         BookingViewModel viewModel = new ViewModelProvider(getActivity(), factory).get(BookingViewModel.class);
 
         viewModel.getCheckOut().observe(getActivity(), new Observer<CheckOutModel>() {

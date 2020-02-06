@@ -1,6 +1,6 @@
 package com.example.joynappclient.viewmodel;
 
-import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -11,25 +11,26 @@ import com.example.joynappclient.di.DataInjection;
 import com.example.joynappclient.ui.authentication.otp.OtpVIewModel;
 import com.example.joynappclient.ui.authentication.signin.SignInVIewModel;
 import com.example.joynappclient.ui.authentication.signup.SignUpViewModel;
+import com.example.joynappclient.ui.authentication.welcome_to_app.WelcomeViewModel;
 import com.example.joynappclient.ui.booking.BookingViewModel;
+import com.example.joynappclient.ui.main_menu.MainActivityViewModel;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     private static volatile ViewModelFactory INSTANCE;
     private final JoynRepository joynRepository;
-    private Application application;
+    private Context context;
 
-    public ViewModelFactory(Application application, JoynRepository joynRepository) {
+    public ViewModelFactory(Context context, JoynRepository joynRepository) {
         this.joynRepository = joynRepository;
-        this.application = application;
+        this.context = context;
     }
 
-    public static ViewModelFactory getInstance(Application application) {
+    public static ViewModelFactory getInstance(Context context) {
         if (INSTANCE == null) {
             synchronized (ViewModelFactory.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new ViewModelFactory(application, DataInjection.provideRepository(application));
-
+                    INSTANCE = new ViewModelFactory(context, DataInjection.provideRepository(context));
                 }
             }
         }
@@ -49,9 +50,15 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         } else if (modelClass.isAssignableFrom(OtpVIewModel.class)) {
             //noinspection unchecked
             return (T) new OtpVIewModel(joynRepository);
+        } else if (modelClass.isAssignableFrom(WelcomeViewModel.class)) {
+            //noinspection unchecked
+            return (T) new WelcomeViewModel(joynRepository);
+        } else if (modelClass.isAssignableFrom(MainActivityViewModel.class)) {
+            //noinspection unchecked
+            return (T) new MainActivityViewModel(joynRepository);
         } else if (modelClass.isAssignableFrom(BookingViewModel.class)) {
             //noinspection unchecked
-            return (T) new BookingViewModel(application, joynRepository);
+            return (T) new BookingViewModel(context, joynRepository);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel Class " + modelClass.getName());

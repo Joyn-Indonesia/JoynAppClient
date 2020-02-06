@@ -1,15 +1,14 @@
 package com.example.joynappclient.ui.booking;
 
-import android.app.Application;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.joynappclient.data.JoynRepository;
 import com.example.joynappclient.ui.booking.checkout.CheckOutModel;
@@ -22,7 +21,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class BookingViewModel extends AndroidViewModel {
+public class BookingViewModel extends ViewModel {
     private static final String TAG = "BookingViewModel";
 
     private MutableLiveData<CheckOutModel> checkOut = new MutableLiveData<>();
@@ -35,9 +34,9 @@ public class BookingViewModel extends AndroidViewModel {
     private MutableLiveData<HandleResponse<Place>> responseDestination = new MutableLiveData<>();
 
 
-    public BookingViewModel(@NonNull Application application, JoynRepository repository) {
-        super(application);
-        this.context = application.getApplicationContext();
+    public BookingViewModel(@NonNull Context context, JoynRepository repository) {
+
+        this.context = context;
         this.repository = repository;
     }
 

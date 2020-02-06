@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
+import com.example.joynappclient.application.JoynApp;
 import com.example.joynappclient.data.source.remote.model.UserModel;
 import com.example.joynappclient.ui.authentication.otp.OtpActivity;
 import com.example.joynappclient.ui.authentication.signin.SignInActivity;
@@ -110,6 +111,7 @@ public class SignUpActivity extends BaseActivity implements Validator.Validation
         user.setName(name.getText().toString());
         user.seteMail(email.getText().toString());
         user.setPhoneNumber(phoneNumber);
+        user.setRegId(JoynApp.getInstance(context).getToken());
         Intent i = new Intent(context, OtpActivity.class);
         i.putExtra(getString(R.string.intent_phone), user);
         startActivity(i);

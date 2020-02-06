@@ -1,32 +1,42 @@
 package com.example.joynappclient.data;
 
-import android.app.Application;
+import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.joynappclient.data.source.local.LocalDataSource;
+import com.example.joynappclient.data.source.local.entity.UserLogin;
 import com.example.joynappclient.data.source.remote.ApiResponse;
-import com.example.joynappclient.data.source.remote.firebase.FirebaseRepository;
-import com.example.joynappclient.data.source.remote.gmaps.GmapRepository;
+import com.example.joynappclient.data.source.remote.firebase.FirebaseDataSource;
+import com.example.joynappclient.data.source.remote.gmaps.GmapDataSource;
 import com.example.joynappclient.data.source.remote.gmaps.model.ResponseGmaps;
 
+import io.reactivex.Completable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 public class JoynRepository implements JoynDataSource {
+    private static final String TAG = "JoynRepository";
     private static volatile JoynRepository INSTANCE = null;
 
-    private FirebaseRepository firebaseRepository;
-    private GmapRepository gmapRepository;
-    private Application application;
+    private FirebaseDataSource firebaseDataSource;
+    private GmapDataSource gmapDataSource;
+    private LocalDataSource localDataSource;
+    private Context context;
 
-    public JoynRepository(Application application, FirebaseRepository firebaseRepository, GmapRepository gmapRepository) {
-        this.application = application;
-        this.firebaseRepository = firebaseRepository;
-        this.gmapRepository = gmapRepository;
+    public JoynRepository(Context context, FirebaseDataSource firebaseDataSource, GmapDataSource gmapDataSource, LocalDataSource localDataSource) {
+        this.firebaseDataSource = firebaseDataSource;
+        this.gmapDataSource = gmapDataSource;
+        this.localDataSource = localDataSource;
+        this.context = context;
     }
 
-    public static JoynRepository getInstance(Application application, FirebaseRepository firebaseRepository, GmapRepository gmapRepository) {
+    public static JoynRepository getInstance(Context context, FirebaseDataSource firebaseDataSource, GmapDataSource gmapDataSource, LocalDataSource localDataSource) {
         if (INSTANCE == null) {
             synchronized (JoynRepository.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new JoynRepository(application, firebaseRepository, gmapRepository);
+                    INSTANCE = new JoynRepository(context, firebaseDataSource, gmapDataSource, localDataSource);
                 }
             }
         }
@@ -35,11 +45,36 @@ public class JoynRepository implements JoynDataSource {
 
     @Override
     public LiveData<ApiResponse> checkPhoneNumber(String number, String reference) {
-        return firebaseRepository.checkPhoneNumber(number, reference);
+        return firebaseDataSource.checkPhoneNumber(number, reference);
     }
 
     @Override
     public LiveData<ApiResponse<ResponseGmaps>> getAddress(String latLng, String apiKey) {
-        return gmapRepository.getAdress(latLng, apiKey);
+        return gmapDataSource.getAdress(latLng, apiKey);
+    }
+
+    @Override
+    public LiveData<UserLogin> getUserLogin() {
+        return localDataSource.getUserLogin();
+    }
+
+    @Override
+    public void saveUserLogin(UserLogin userLogin) {
+        Log.d(TAG, "saveUserLogin: save ");
+        Completable.fromAction(() -> localDataSource.insertUserLogin(userLogin)).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe();
+    }
+
+    @Override
+    public void updateUserLogin(UserLogin userLogin) {
+        Completable.fromAction(() -> localDataSource.updateUserLogin(userLogin)).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe();
+    }
+
+    @Override
+    public void deleteUserLogin() {
+        Log.d(TAG, "deleteUserLogin: delete");
+        Completable.fromAction(() -> localDataSource.deleteUserLogin()).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe();
     }
 }

@@ -8,7 +8,7 @@
     <!-- Auth -->
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
-    <string name="e_mail">E-mail</string>
+    <string name="email">E-mail</string>
     <string name="register">Register</string>
     <string name="your_name">Your Name</string>
     <string name="change_language">Change Language</string>
@@ -100,6 +100,7 @@
     <string name="add_pickup_notes">Add PickUp Notes</string>
     <string name="where_are_you_going">Where Are You Going ?</string>
     <string name="j_ride_big">J-RIDE</string>
+    <string name="press_again_to_exit">Press again to exit</string>
 
     <!--  Permission  -->
 
