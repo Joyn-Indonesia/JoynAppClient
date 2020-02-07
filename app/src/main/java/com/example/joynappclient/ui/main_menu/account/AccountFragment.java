@@ -9,10 +9,12 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.ui.authentication.signin.SignInActivity;
 import com.example.joynappclient.utils.MoveActivity;
+import com.example.joynappclient.viewmodel.ViewModelFactory;
 import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
@@ -23,13 +25,17 @@ import butterknife.OnClick;
  * A simple {@link Fragment} subclass.
  */
 public class AccountFragment extends Fragment {
-
+    private static final String TAG = "AccountFragment";
 
     //widgets
+    @BindView(R.id.tv_title_toolbar)
+    TextView titleToolbar;
     @BindView(R.id.tv_profil_name)
-    TextView profilName;
+    TextView profilUser;
+    @BindView(R.id.tv_email)
+    TextView emailUser;
     @BindView(R.id.tv_number_profil)
-    TextView phoneProfilNumber;
+    TextView phoneUser;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -52,12 +58,8 @@ public class AccountFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        // UserModel user = ((JoynApp) getActivity().getApplicationContext()).getLoginUser();
-
-        profilName.setText("saya");
-        phoneProfilNumber.setText("0813145151");
-
+        titleToolbar.setText("Account");
+        getDetailUser();
     }
 
     @OnClick(R.id.btn_logout)
@@ -65,5 +67,16 @@ public class AccountFragment extends Fragment {
         FirebaseAuth.getInstance().signOut();
         MoveActivity.MoveAct(getContext(), SignInActivity.class);
         getActivity().finish();
+    }
+
+    private void getDetailUser() {
+        ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
+        AccountFragmentViewModel viewModel = new ViewModelProvider(getActivity(), factory).get(AccountFragmentViewModel.class);
+
+        viewModel.getUserLogin().observe(getActivity(), user -> {
+            profilUser.setText(user.getName());
+            emailUser.setText(user.getEmail());
+            phoneUser.setText(user.getPhoneNumber());
+        });
     }
 }

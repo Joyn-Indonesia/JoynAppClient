@@ -13,7 +13,8 @@ import com.example.joynappclient.ui.authentication.signin.SignInVIewModel;
 import com.example.joynappclient.ui.authentication.signup.SignUpViewModel;
 import com.example.joynappclient.ui.authentication.welcome_to_app.WelcomeViewModel;
 import com.example.joynappclient.ui.booking.BookingViewModel;
-import com.example.joynappclient.ui.main_menu.MainActivityViewModel;
+import com.example.joynappclient.ui.main_menu.MainMenuViewModel;
+import com.example.joynappclient.ui.main_menu.account.AccountFragmentViewModel;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
@@ -53,12 +54,15 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         } else if (modelClass.isAssignableFrom(WelcomeViewModel.class)) {
             //noinspection unchecked
             return (T) new WelcomeViewModel(joynRepository);
-        } else if (modelClass.isAssignableFrom(MainActivityViewModel.class)) {
+        } else if (modelClass.isAssignableFrom(MainMenuViewModel.class)) {
             //noinspection unchecked
-            return (T) new MainActivityViewModel(joynRepository);
+            return (T) new MainMenuViewModel(joynRepository);
         } else if (modelClass.isAssignableFrom(BookingViewModel.class)) {
             //noinspection unchecked
             return (T) new BookingViewModel(context, joynRepository);
+        } else if (modelClass.isAssignableFrom(AccountFragmentViewModel.class)) {
+            //noinspection unchecked
+            return (T) new AccountFragmentViewModel(joynRepository);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel Class " + modelClass.getName());

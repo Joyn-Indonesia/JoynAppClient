@@ -2,6 +2,7 @@ package com.example.joynappclient.ui.main_menu;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -53,6 +54,7 @@ public class MainMenuActivity extends BaseActivity {
 
         ButterKnife.bind(this);
 
+
         navView.add(new MeowBottomNavigation.Model(MENU_HOME, R.drawable.icon_home));
         navView.add(new MeowBottomNavigation.Model(MENU_ORDER, R.drawable.icon_order));
         navView.add(new MeowBottomNavigation.Model(MENU_CHAT, R.drawable.icon_chat));
@@ -102,10 +104,11 @@ public class MainMenuActivity extends BaseActivity {
 
     private void getDetailUser() {
         ViewModelFactory factory = ViewModelFactory.getInstance(this);
-        MainActivityViewModel viewModel = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
+        MainMenuViewModel viewModel = new ViewModelProvider(this, factory).get(MainMenuViewModel.class);
 
         viewModel.getUserLogin().observe(this, userLogin -> {
-            JoynApp.getInstance(MainMenuActivity.this).setLoginUser(userLogin);
+            Log.d(TAG, "getDetailUser: " + userLogin.getName());
+            JoynApp.getInstance(this).setLoginUser(userLogin);
         });
     }
 
