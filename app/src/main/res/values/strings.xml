@@ -71,7 +71,7 @@
     <string name="select">Select</string>
     <string name="favorite_addres">Favorite Addresses :</string>
     <string name="pickup_location">Pickup Location</string>
-    <string name="destination">Destination</string>
+    <string name="destinationLatLg">Destination</string>
 
     <!--  FOOD  -->
     <string name="food">Food</string>

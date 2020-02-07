@@ -6,6 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Constant extends AppCompatActivity {
 
+    //KEY
+    public static final String FCM_KEY = "AIzaSyCgJuIHUC4mutg5ahFsZW5VjUhCHwH5PQY";
+
+    //permision
     public static final int REQUEST_PERMISSIONS = 1001;
     public static final int REQUEST_ENABLE_GPS = 1002;
     public static final int PERMISSIONS_REQUEST_ENABLE_GPS = 1003;

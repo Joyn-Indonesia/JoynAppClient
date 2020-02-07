@@ -2,7 +2,6 @@ package com.example.joynappclient.ui.main_menu;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -45,6 +44,7 @@ public class MainMenuActivity extends BaseActivity {
 
     //vars
     boolean doubleBackToExitPressedOnce = false;
+    boolean showloading = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,11 +105,9 @@ public class MainMenuActivity extends BaseActivity {
         MainActivityViewModel viewModel = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
 
         viewModel.getUserLogin().observe(this, userLogin -> {
-            Log.d(TAG, "getDetailUser: " + userLogin.getRegId());
             JoynApp.getInstance(MainMenuActivity.this).setLoginUser(userLogin);
         });
     }
-
 
     @Override
     public void onBackPressed() {

@@ -109,6 +109,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
+    //eventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
     implementation 'com.balysv:material-ripple:1.0.2'
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     implementation 'com.dmitrymalkovich.android:material-design-dimens:1.4'

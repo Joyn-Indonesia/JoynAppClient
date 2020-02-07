@@ -65,7 +65,7 @@
                     tool:text="@string/j_ride" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_select"
+                    android:id="@+id/btn_select_service"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_12sdp"

@@ -55,10 +55,9 @@
 
                 <TextView
                     android:id="@+id/booking_pickUpText"
-                    style="@style/StyleTextViewDefault"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/StyleTextViewDefault.Bold"
                     android:textColor="@color/black80"
+                    android:maxLines="1"
                     tool:text="@string/text_addressNotAvailable" />
 
                 <TextView
@@ -113,15 +112,15 @@
 
                 <TextView
                     style="@style/StyleTextViewDefault.Bold"
-                    android:text="@string/destination"
+                    android:text="@string/destinationLatLg"
                     android:textColor="@color/greenDarkerMain"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/booking_destintationText"
-                    style="@style/StyleTextViewDefault"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/StyleTextViewDefault.Bold"
+                    android:maxLines="1"
+                    android:textColor="@color/black80"
                     tool:text="@string/text_addressNotAvailable" />
 
             </LinearLayout>

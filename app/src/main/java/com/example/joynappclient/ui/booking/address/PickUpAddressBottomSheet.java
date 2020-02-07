@@ -108,7 +108,7 @@ public class PickUpAddressBottomSheet extends BottomSheetDialogFragment implemen
 
         bottomSheetBehavior = BottomSheetBehavior.from((View) (view.getParent()));
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        bottomSheetBehavior.setBottomSheetCallback(callback);
+        bottomSheetBehavior.addBottomSheetCallback(callback);
 
         Places.initialize(getActivity().getApplicationContext(), getString(R.string.google_maps_key));
         PlacesClient placesClient = Places.createClient(getContext());

@@ -9,15 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
+import com.example.joynappclient.application.JoynApp;
 import com.example.joynappclient.data.source.remote.model.DriverModel;
 import com.example.joynappclient.ui.booking.address.DestinationAddressBottomSheet;
 import com.example.joynappclient.ui.booking.address.PickUpAddressBottomSheet;
-import com.example.joynappclient.ui.booking.checkout.CheckOutButtomSheet;
+import com.example.joynappclient.ui.booking.checkout.CheckOut;
 import com.example.joynappclient.ui.booking.checkout.CheckOutModel;
 import com.example.joynappclient.ui.booking.dialog.AddNote;
 import com.example.joynappclient.utils.BaseActivity;
@@ -48,6 +50,10 @@ import com.google.maps.PendingResult;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.Distance;
 import com.google.maps.model.TravelMode;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -218,6 +224,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         Log.d(TAG, "onMapReady: ");
         LatLng surabya = new LatLng(-7.2755979, 112.572597);
         mMap = googleMap;
+        mMap.getUiSettings().setRotateGesturesEnabled(false);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(surabya, 10));
         getLastKnowLocation();
     }
@@ -400,7 +407,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
                 LatLng northeast = new LatLng(result.routes[0].bounds.northeast.lat, result.routes[0].bounds.northeast.lng);
 
                 LatLngBounds bounds = new LatLngBounds(southwest, northeast);
-                CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bounds, 600, 600, 100);
+                CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bounds, 600, 400, 100);
                 mMap.animateCamera(update);
                 updateDistance(result.routes[0].legs[0].distance);
                 timeDistance = result.routes[0].legs[0].duration.toString();
@@ -461,11 +468,15 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     public void checkOutProcces() {
         Log.d(TAG, "checkOutProcces: click");
         checkOutModel.setTimeDistance(timeDistance);
+        checkOutModel.setPickupLatLg(pickUpLatLang);
+        checkOutModel.setDestinationLatLg(destinationLatLang);
+
+        checkOutModel.setUserBooking(JoynApp.getInstance(this).getLoginUser());
+        checkOutModel.setDrivers(driverAvaible);
         viewModel.setCheckOutModel(checkOutModel);
-        CheckOutButtomSheet dialog = new CheckOutButtomSheet(context);
+        CheckOut dialog = new CheckOut(context);
         dialog.show(getSupportFragmentManager(), dialog.getTag());
     }
-
 
     @Override
     protected void onResume() {
@@ -476,6 +487,22 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void message(String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
 }
 
 

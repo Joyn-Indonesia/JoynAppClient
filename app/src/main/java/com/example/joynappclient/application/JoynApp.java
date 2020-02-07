@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.ContextWrapper;
 
 import com.example.joynappclient.data.source.local.entity.UserLogin;
-import com.example.joynappclient.utils.Constant;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.pixplicity.easyprefs.library.Prefs;
 
@@ -26,7 +25,6 @@ public class JoynApp extends Application {
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(result ->
                 token = result.getToken());
-        Prefs.putString(Constant.REG_ID, token);
     }
 
 
@@ -49,6 +47,7 @@ public class JoynApp extends Application {
     }
 
     public void setLoginUser(UserLogin userLogin) {
+        userLogin = new UserLogin();
         this.userLogin = userLogin;
     }
 }
