@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.ui.booking.BookingViewModel;
-import com.example.joynappclient.ui.booking.checkout.CheckOutModel;
+import com.example.joynappclient.ui.booking.checkout.model.CheckOutModel;
 import com.example.joynappclient.viewmodel.ViewModelFactory;
 
 import butterknife.BindView;

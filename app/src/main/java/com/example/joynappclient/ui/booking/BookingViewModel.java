@@ -11,7 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.joynappclient.data.JoynRepository;
-import com.example.joynappclient.ui.booking.checkout.CheckOutModel;
+import com.example.joynappclient.ui.booking.checkout.model.CheckOutModel;
 import com.example.joynappclient.ui.booking.utils.HandleResponse;
 import com.example.joynappclient.ui.booking.utils.StatusResponse;
 import com.google.android.gms.maps.model.LatLng;
@@ -90,6 +90,12 @@ public class BookingViewModel extends ViewModel {
         checkOutModel.setDistance(checkOut.getDistance());
         checkOutModel.setTimeDistance(checkOut.getTimeDistance());
         checkOutModel.setCost(checkOut.getCost());
+        checkOutModel.setPickupLatLg(checkOut.getPickupLatLg());
+        checkOutModel.setDestinationLatLg(checkOut.getDestinationLatLg());
+        checkOutModel.setPolyline(checkOut.getPolyline());
+        checkOutModel.setDrivers(checkOut.getDrivers());
+        checkOutModel.setLatLngBounds(checkOut.getLatLngBounds());
+        checkOutModel.setEncodedPolyline(checkOut.getEncodedPolyline());
         this.checkOut.postValue(checkOutModel);
     }
 

@@ -46,7 +46,6 @@ public class DestinationAddressBottomSheet extends BottomSheetDialogFragment imp
 
     private PlacesAutoCompleteAdapter mAutoCompleteAdapter;
     private RecyclerView recyclerView;
-    private BottomSheetBehavior bottomSheetBehavior;
     BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
         @Override
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -88,7 +87,7 @@ public class DestinationAddressBottomSheet extends BottomSheetDialogFragment imp
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.layout_bottom_sheet_booking, container, false);
+        view = inflater.inflate(R.layout.layout_bottom_search_adress, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -105,7 +104,7 @@ public class DestinationAddressBottomSheet extends BottomSheetDialogFragment imp
         ViewModelFactory factory = ViewModelFactory.getInstance(getActivity().getApplication());
         viewModel = new ViewModelProvider(getActivity(), factory).get(BookingViewModel.class);
 
-        bottomSheetBehavior = BottomSheetBehavior.from((View) (view.getParent()));
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) (view.getParent()));
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         bottomSheetBehavior.setBottomSheetCallback(callback);
 

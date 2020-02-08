@@ -93,7 +93,7 @@ public class PickUpAddressBottomSheet extends BottomSheetDialogFragment implemen
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.layout_bottom_sheet_booking, container, false);
+        view = inflater.inflate(R.layout.layout_bottom_search_adress, container, false);
         ButterKnife.bind(this, view);
         extraSpace.setMinimumHeight((Resources.getSystem().getDisplayMetrics().heightPixels));
         return view;

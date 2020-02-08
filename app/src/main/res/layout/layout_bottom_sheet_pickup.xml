@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_driver"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_140sdp"
+    android:background="@color/colorWhite"
+    android:paddingTop="@dimen/_16sdp"
+    android:paddingBottom="@dimen/_16sdp"
+    app:behavior_peekHeight="@dimen/_140sdp"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/man"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.038"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_plat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="P 1234 joyn"
+        android:textColor="@color/black80"
+        android:textSize="@dimen/medium_text"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toEndOf="@+id/iv_profile"
+        app:layout_constraintTop_toTopOf="@+id/iv_profile"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_vehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vario Tech 125"
+        android:textColor="@color/black80"
+        android:textSize="@dimen/medium_small_text"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_plat"
+        app:layout_constraintTop_toBottomOf="@+id/tv_plat"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_nama_driver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alvian iqbal"
+        android:textSize="@dimen/medium_small_text"
+        app:layout_constraintStart_toStartOf="@+id/tv_vehicle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_vehicle"
+        tools:ignore="MissingConstraints" />
+
+    <RatingBar
+        android:id="@+id/rb_driver"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rating="3.5"
+        android:scaleX="1"
+        android:scaleY="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_vehicle"
+        app:layout_constraintTop_toTopOf="@+id/tv_vehicle"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@android:color/white"
+        android:drawableLeft="@drawable/ic_whatsapp"
+        android:gravity="center"
+        android:text="Call"
+        android:textColor="@android:color/black"
+        app:iconSize="@dimen/_20sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nama_driver"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_chat"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@android:color/white"
+        android:drawableLeft="@drawable/ic_chat"
+        android:gravity="center"
+        android:text="Chat"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_call"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_call"
+        app:layout_constraintTop_toTopOf="@+id/btn_call"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

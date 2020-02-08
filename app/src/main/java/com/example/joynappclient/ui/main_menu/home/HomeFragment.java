@@ -75,7 +75,9 @@ public class HomeFragment extends Fragment {
         containerHomeBanner.setItemAnimator(new DefaultItemAnimator());
         HomeBannerAdapter adapter = new HomeBannerAdapter();
         adapter.setBanner(context, DummyItem.getTipeBanner());
-        //  containerHomeBanner.setAdapter(adapter);
+        containerHomeBanner.setAdapter(adapter);
+
+
     }
 
     private void initButton() {
@@ -93,6 +95,7 @@ public class HomeFragment extends Fragment {
         adapter.setItem(context, title);
         rvButton.setHasFixedSize(true);
         rvButton.setAdapter(adapter);
+
 
     }
 

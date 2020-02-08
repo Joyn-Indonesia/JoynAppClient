@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,68 +10,74 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
-        android:layout_width="@dimen/_275sdp"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/toscaLevel3"
-        app:cardCornerRadius="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        android:backgroundTint="@color/toscaBottom"
+        app:cardCornerRadius="@dimen/_16sdp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/j_car" />
+                android:id="@+id/image_content"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:padding="@dimen/_8sdp"
+                android:scaleType="fitXY"
+                android:src="@drawable/j_ride" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:text="J-Car 9km 20min \n (Rp. 28.000 - 5.000)X 2 \n Rp. 46.000" />
+                android:id="@+id/tv_distance_and_time"
+                style="@style/StyleTextViewDefault"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_toEndOf="@id/image_content"
+                android:padding="@dimen/_1sdp"
+                tools:text="@string/j_ride" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="@dimen/_15sdp"
-                android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_discount_cost"
+                style="@style/StyleTextViewDefault"
+                android:layout_below="@id/tv_distance_and_time"
+                android:layout_toEndOf="@id/image_content"
+                android:padding="@dimen/_1sdp"
+                android:textColor="@color/greenYoung"
+                tools:text="@string/rp_25_000" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bidding Mode"
-                    android:textColor="@color/greenLight"
-
-                    />
-
-                <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
+            <TextView
+                android:id="@+id/tv_total_cost"
+                style="@style/StyleTextViewDefault.Bold"
+                android:layout_below="@id/tv_discount_cost"
+                android:layout_toEndOf="@id/image_content"
+                android:padding="@dimen/_1sdp"
+                android:textColor="@color/greenDarkerMain"
+                tools:text="@string/rp_25_000" />
 
 
-            </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <include
-        layout="@layout/layout_select_paymen_layout"
-        android:layout_width="wrap_content"
+        android:id="@+id/include4"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-        app:layout_constraintVertical_bias="0.060000002" />
+        layout="@layout/layout_select_paymen_layout"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="@dimen/_8sdp" />
+
+    <View
+        android:id="@+id/extraSpace"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -36,9 +36,9 @@ dependencies {
 
     //firebase
     implementation 'com.google.firebase:firebase-auth:19.2.0'
-    implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
-    implementation 'com.google.firebase:firebase-firestore:21.3.1'
+    implementation 'com.google.firebase:firebase-firestore:21.4.0'
 
     //maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
@@ -111,6 +111,9 @@ dependencies {
 
     //eventBus
     implementation 'org.greenrobot:eventbus:3.1.1'
+
+    //circleImageView
+    implementation 'de.hdodenhof:circleimageview:3.0.2'
 
     implementation 'com.balysv:material-ripple:1.0.2'
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'

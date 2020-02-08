@@ -47,7 +47,7 @@ public class JoynApp extends Application {
     }
 
     public void setLoginUser(UserLogin userLogin) {
-        userLogin = new UserLogin();
         this.userLogin = userLogin;
+
     }
 }

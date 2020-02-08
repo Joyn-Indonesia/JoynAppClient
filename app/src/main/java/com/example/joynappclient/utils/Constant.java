@@ -26,4 +26,7 @@ public class Constant extends AppCompatActivity {
     //preffConstant
     public static final String REG_ID = "reg_id";
 
+    //INTENT
+    public static final String INTENT_PARAM = "param";
+
 }

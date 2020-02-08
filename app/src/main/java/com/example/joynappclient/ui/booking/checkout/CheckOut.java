@@ -14,23 +14,16 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.source.remote.firebase.FCMservice;
-import com.example.joynappclient.data.source.remote.firebase.model.FCMMessage;
 import com.example.joynappclient.ui.booking.BookingViewModel;
+import com.example.joynappclient.ui.booking.checkout.model.CheckOutModel;
+import com.example.joynappclient.ui.booking.paymen.PaymentBottomSheet;
 import com.example.joynappclient.viewmodel.ViewModelFactory;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CheckOut extends BottomSheetDialogFragment {
     private static final String TAG = "CheckOutButtomSheetDial";
@@ -118,39 +111,9 @@ public class CheckOut extends BottomSheetDialogFragment {
 
     @OnClick(R.id.btn_select_service)
     public void sendBooking() {
-
-        RequestModel model = new RequestModel();
-        model.setUserName("pesanan");
-        model.setPickupAddress(checkOutModel.getPickupAdress());
-        model.setDestinationAddress(checkOutModel.getDestintaionAddress());
-        model.setPickupLatLg(checkOutModel.getPickupLatLg());
-        model.setDestinationLatLg(checkOutModel.getDestinationLatLg());
-
-        Gson gson = new Gson();
-
-        FCMMessage message = new FCMMessage();
-        message.setTo("d_md1j5ezSg:APA91bHcV2tgU94HR-M1kdJHm67eB7Nz9aqaInBb71iNPFcdUjSL-IHJbjZJx5Yn_p_PTNoIc78Gr9Ur_EAbisGf5G1YuWKdoWkXckhtXFDCaazyl5YSmEFvWEh2Ef7T7ygLlWgKG39V");
-        message.setData(model);
-
-        MediaType JSON
-                = MediaType.parse("application/json; charset=utf-8");
-
-        String json = gson.toJson(message);
-
-        RequestBody body = RequestBody.create(JSON, json);
-
-        Call<ResponseBody> booking = FCMservice.getInstance().sendRequest(body);
-        booking.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d(TAG, "onResponse: ");
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d(TAG, "onFailure: " + t);
-            }
-        });
+        PaymentBottomSheet dialog = new PaymentBottomSheet();
+        dialog.show(getActivity().getSupportFragmentManager(), dialog.getTag());
+        dismiss();
     }
 
 }

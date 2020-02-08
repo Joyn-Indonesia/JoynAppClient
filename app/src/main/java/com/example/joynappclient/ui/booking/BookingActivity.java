@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,7 +19,7 @@ import com.example.joynappclient.data.source.remote.model.DriverModel;
 import com.example.joynappclient.ui.booking.address.DestinationAddressBottomSheet;
 import com.example.joynappclient.ui.booking.address.PickUpAddressBottomSheet;
 import com.example.joynappclient.ui.booking.checkout.CheckOut;
-import com.example.joynappclient.ui.booking.checkout.CheckOutModel;
+import com.example.joynappclient.ui.booking.checkout.model.CheckOutModel;
 import com.example.joynappclient.ui.booking.dialog.AddNote;
 import com.example.joynappclient.utils.BaseActivity;
 import com.example.joynappclient.utils.Constant;
@@ -50,10 +49,6 @@ import com.google.maps.PendingResult;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.Distance;
 import com.google.maps.model.TravelMode;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -123,7 +118,6 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         ButterKnife.bind(this);
         context = this;
         initViewModel();
-
         //maps
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_container);
         mapFragment.getMapAsync(this);
@@ -376,7 +370,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
                         @Override
                         public void onResult(DirectionsResult result) {
                             updateLineDestination(result);
-                            Log.d(TAG, "onResult: result");
+                            checkOutModel.setPolyline(result.routes[0].overviewPolyline);
                         }
 
                         @Override
@@ -409,6 +403,10 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
                 LatLngBounds bounds = new LatLngBounds(southwest, northeast);
                 CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bounds, 600, 400, 100);
                 mMap.animateCamera(update);
+
+                checkOutModel.setEncodedPolyline(result.routes[0].overviewPolyline);
+                checkOutModel.setLatLngBounds(bounds);
+
                 updateDistance(result.routes[0].legs[0].distance);
                 timeDistance = result.routes[0].legs[0].duration.toString();
             });
@@ -467,10 +465,10 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     @OnClick(R.id.btn_next)
     public void checkOutProcces() {
         Log.d(TAG, "checkOutProcces: click");
+
         checkOutModel.setTimeDistance(timeDistance);
         checkOutModel.setPickupLatLg(pickUpLatLang);
         checkOutModel.setDestinationLatLg(destinationLatLang);
-
         checkOutModel.setUserBooking(JoynApp.getInstance(this).getLoginUser());
         checkOutModel.setDrivers(driverAvaible);
         viewModel.setCheckOutModel(checkOutModel);
@@ -485,23 +483,6 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         if (!mPermissionService) {
             requestPermissions();
         }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void message(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
     }
 }
 

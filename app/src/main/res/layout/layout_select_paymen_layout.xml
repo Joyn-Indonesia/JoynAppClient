@@ -8,13 +8,14 @@
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="@dimen/_280sdp"
-        android:layout_height="@dimen/_320sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/toscaLevel3"
-        app:cardCornerRadius="@dimen/_10sdp">
+        app:cardCornerRadius="@dimen/_16sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:padding="@dimen/_8sdp"
             android:layout_height="match_parent">
 
             <TextView
@@ -148,7 +149,7 @@
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Direct cash payment to driver"
+                android:text="Direct cash payment to driverPosition"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView10"
