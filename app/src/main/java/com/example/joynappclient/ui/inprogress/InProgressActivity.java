@@ -125,7 +125,7 @@ public class InProgressActivity extends BaseActivity implements OnMapReadyCallba
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(model.getLatitude(), model.getLongitude()))
                 .title("Driver")
-                .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_ride_position)));
+                .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_ride)));
 
         bottomsheet.setVisibility(View.VISIBLE);
         TextView namadriver = findViewById(R.id.tv_nama_driver);

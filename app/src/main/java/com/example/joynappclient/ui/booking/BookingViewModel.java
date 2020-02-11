@@ -85,7 +85,7 @@ public class BookingViewModel extends ViewModel {
         if (checkOutModel == null) {
             checkOutModel = new CheckOutModel();
         }
-        checkOutModel.setPickupAdress(checkOut.getDestintaionAddress());
+        checkOutModel.setPickupAdress(checkOut.getPickupAdress());
         checkOutModel.setDestintaionAddress(checkOut.getDestintaionAddress());
         checkOutModel.setDistance(checkOut.getDistance());
         checkOutModel.setTimeDistance(checkOut.getTimeDistance());

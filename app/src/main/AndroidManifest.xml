@@ -16,9 +16,9 @@
         android:name=".application.JoynApp"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@drawable/logo_app"
+        android:icon="@drawable/ic_logo_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_logo_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.inprogress.InProgressActivity"></activity>
