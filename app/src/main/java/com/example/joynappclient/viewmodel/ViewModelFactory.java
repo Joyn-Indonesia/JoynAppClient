@@ -59,7 +59,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new MainMenuViewModel(joynRepository);
         } else if (modelClass.isAssignableFrom(BookingViewModel.class)) {
             //noinspection unchecked
-            return (T) new BookingViewModel(context, joynRepository);
+            return (T) new BookingViewModel(context);
         } else if (modelClass.isAssignableFrom(AccountFragmentViewModel.class)) {
             //noinspection unchecked
             return (T) new AccountFragmentViewModel(joynRepository);

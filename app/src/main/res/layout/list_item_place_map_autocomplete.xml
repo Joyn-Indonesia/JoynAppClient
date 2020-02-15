@@ -5,18 +5,19 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/_4sdp"
     android:layout_marginBottom="@dimen/_4sdp"
+    android:background="@drawable/edittext_bottom_line"
+    android:paddingBottom="@dimen/_4sdp"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/place_area"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_16sdp"
-        android:textStyle="bold" />
+        style="@style/StyleTextViewDefault.Bold"
+        android:textSize="@dimen/medium_text" />
 
     <TextView
         android:id="@+id/place_address"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        style="@style/StyleTextViewDefault" />
 
 </LinearLayout>

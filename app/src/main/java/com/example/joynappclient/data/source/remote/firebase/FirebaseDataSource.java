@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.joynappclient.data.source.remote.ApiResponse;
-import com.example.joynappclient.data.source.remote.model.UserModel;
+import com.example.joynappclient.data.source.remote.model.ResponseUserLogin;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -18,7 +18,7 @@ public class FirebaseDataSource {
 
     private static volatile FirebaseDataSource INSTANCE = null;
     private FirebaseFirestore mDb = FirebaseFirestore.getInstance();
-    private UserModel userModel;
+    private ResponseUserLogin responseUserLogin;
     private Handler handler = new Handler();
 
     public static FirebaseDataSource getInstance() {

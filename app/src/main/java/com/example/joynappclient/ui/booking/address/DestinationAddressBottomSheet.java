@@ -1,17 +1,14 @@
 package com.example.joynappclient.ui.booking.address;
 
-import android.app.Activity;
-import android.app.Dialog;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,7 +29,6 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import butterknife.BindView;
@@ -42,13 +38,24 @@ import butterknife.OnClick;
 public class DestinationAddressBottomSheet extends BottomSheetDialogFragment implements PlacesAutoCompleteAdapter.ClickListener {
     private static final String TAG = "PickUpAddressBottomShee";
 
-    private BookingViewModel viewModel;
+    @BindView(R.id.extraSpace)
+    View extraSpace;
 
+    private BookingViewModel viewModel;
     private PlacesAutoCompleteAdapter mAutoCompleteAdapter;
     private RecyclerView recyclerView;
+    private BottomSheetBehavior bottomSheetBehavior;
+
+
     BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
         @Override
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
+
+            if (4 == newState) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+
+
 
             if (BottomSheetBehavior.STATE_HIDDEN == newState) {
                 dismiss();
@@ -89,6 +96,7 @@ public class DestinationAddressBottomSheet extends BottomSheetDialogFragment imp
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_bottom_search_adress, container, false);
         ButterKnife.bind(this, view);
+        extraSpace.setMinimumHeight((Resources.getSystem().getDisplayMetrics().heightPixels));
         return view;
     }
 
@@ -104,9 +112,10 @@ public class DestinationAddressBottomSheet extends BottomSheetDialogFragment imp
         ViewModelFactory factory = ViewModelFactory.getInstance(getActivity().getApplication());
         viewModel = new ViewModelProvider(getActivity(), factory).get(BookingViewModel.class);
 
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) (view.getParent()));
+        bottomSheetBehavior = BottomSheetBehavior.from((View) (view.getParent()));
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        bottomSheetBehavior.setBottomSheetCallback(callback);
+        bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
+        bottomSheetBehavior.addBottomSheetCallback(callback);
 
         Places.initialize(getActivity().getApplicationContext(), getString(R.string.google_maps_key));
         PlacesClient placesClient = Places.createClient(getContext());
@@ -135,41 +144,7 @@ public class DestinationAddressBottomSheet extends BottomSheetDialogFragment imp
     @Override
     public void click(Place place) {
         viewModel.setResponsePlacesDestintaion(StatusResponse.SEARCH, place);
-//        viewModel.setPlaceSearchPickup(place);
         dismiss();
-    }
-
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        dialog.setOnShowListener(dialogInterface -> {
-            BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
-            setupFullHeight(bottomSheetDialog);
-        });
-        return dialog;
-
-    }
-
-    private void setupFullHeight(BottomSheetDialog bottomSheetDialog) {
-        FrameLayout bottomSheet = bottomSheetDialog.findViewById(R.id.design_bottom_sheet);
-        BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
-        ViewGroup.LayoutParams layoutParams = bottomSheet.getLayoutParams();
-
-        int windowHeight = getWindowHeight();
-        if (layoutParams != null) {
-            layoutParams.height = windowHeight;
-        }
-        bottomSheet.setLayoutParams(layoutParams);
-        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-    }
-
-    private int getWindowHeight() {
-        // Calculate window height for fullscreen use
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        return displayMetrics.heightPixels;
-        // return 1400;
     }
 
 }

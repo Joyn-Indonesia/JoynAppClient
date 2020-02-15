@@ -11,12 +11,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
+import com.example.joynappclient.data.model.json.book.RequestRideCarRequestJson;
 import com.example.joynappclient.ui.booking.BookingViewModel;
 import com.example.joynappclient.ui.booking.checkout.model.CheckOutModel;
 import com.example.joynappclient.ui.booking.paymen.PaymentBottomSheet;
+import com.example.joynappclient.utils.StringFormat;
 import com.example.joynappclient.viewmodel.ViewModelFactory;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -65,7 +68,7 @@ public class CheckOut extends BottomSheetDialogFragment {
     };
     private Context context;
     private View view;
-    private CheckOutModel checkOutModel;
+    private RequestRideCarRequestJson requestModel;
 
     public CheckOut(Context context) {
         this.context = context;
@@ -93,20 +96,24 @@ public class CheckOut extends BottomSheetDialogFragment {
 
         ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
         BookingViewModel viewModel = new ViewModelProvider(getActivity(), factory).get(BookingViewModel.class);
-        viewModel.getCheckOut().observe(getActivity(), model -> {
-
-            checkOutModel = model;
-            pickUpAddress.setText(model.getPickupAdress());
-            String note = "";
-            if (model.getNote() != null) {
-                note = model.getNote();
+        viewModel.getRequestRideCar().observe(this, new Observer<RequestRideCarRequestJson>() {
+            @Override
+            public void onChanged(RequestRideCarRequestJson model) {
+                requestModel = model;
+                pickUpAddress.setText(model.getAlamatAsal());
+                String note = "";
+                if (model.getCatatan() != null) {
+                    note = model.getCatatan();
+                }
+                noteCustomer.setText("Note : " + note);
+                destinationAddress.setText(model.getAlamatTujuan());
+                rideKm.setText(StringFormat.distanceFormat(model.getJarak()));
+                rideMinute.setText("\u00B1 " + model.getWaktuPerjalanan());
+                ridePrice.setText(StringFormat.costFormat(model.getHarga()));
             }
-            noteCustomer.setText("Note : " + note);
-            destinationAddress.setText(model.getDestintaionAddress());
-            rideKm.setText(model.getDistance());
-            rideMinute.setText("+ " + model.getTimeDistance());
-            ridePrice.setText(model.getCost());
         });
+
+
     }
 
     @OnClick(R.id.btn_select_service)

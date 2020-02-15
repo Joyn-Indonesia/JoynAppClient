@@ -14,8 +14,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
+import com.example.joynappclient.data.model.json.book.RequestRideCarRequestJson;
 import com.example.joynappclient.ui.booking.BookingViewModel;
-import com.example.joynappclient.ui.booking.checkout.model.CheckOutModel;
 import com.example.joynappclient.viewmodel.ViewModelFactory;
 
 import butterknife.BindView;
@@ -27,6 +27,8 @@ public class AddNote extends DialogFragment {
     public static final String PICKUP = "picup";
     @BindView(R.id.input_note)
     EditText inputNote;
+
+    private RequestRideCarRequestJson param;
 
     public AddNote() {
     }
@@ -56,25 +58,28 @@ public class AddNote extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
+        param = new RequestRideCarRequestJson();
 
         ViewModelFactory factory = ViewModelFactory.getInstance(getContext());
         BookingViewModel viewModel = new ViewModelProvider(getActivity(), factory).get(BookingViewModel.class);
 
-        viewModel.getCheckOut().observe(getActivity(), new Observer<CheckOutModel>() {
+        viewModel.getRequestRideCar().observe(getActivity(), new Observer<RequestRideCarRequestJson>() {
             @Override
-            public void onChanged(CheckOutModel model) {
-                inputNote.setText(model.getNote());
+            public void onChanged(RequestRideCarRequestJson model) {
+                inputNote.setText(model.getCatatan());
             }
         });
 
         view.findViewById(R.id.btn_save_note).setOnClickListener(v -> {
             if (!TextUtils.isEmpty(inputNote.getText().toString())) {
                 viewModel.setNote(inputNote.getText().toString());
+            }else {
+                viewModel.setNote(null);
             }
             dismiss();
         });
 
-
+    }
     }
 
-}
+

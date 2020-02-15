@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.source.remote.model.UserModel;
+import com.example.joynappclient.data.source.remote.model.ResponseUserLogin;
 import com.example.joynappclient.ui.authentication.otp.OtpActivity;
 import com.example.joynappclient.utils.BaseActivity;
 import com.example.joynappclient.utils.MoveActivity;
@@ -105,7 +105,7 @@ public class SignInActivity extends BaseActivity implements Validator.Validation
                 case EMPTY:
                     hideProgressDialog();
                     MoveActivity.showToast(context, apiResponse.message);
-                    Log.d(TAG, "checkNumber: ");
+                    Log.d(TAG, "checkNumber: empty ");
                     break;
 
                 case ERROR:
@@ -119,8 +119,8 @@ public class SignInActivity extends BaseActivity implements Validator.Validation
 
     private void moveToOtp(String phoneNumber) {
         Log.d(TAG, "moveToOtp: " + phoneNumber);
-        UserModel user = new UserModel();
-        user.setPhoneNumber(phoneNumber);
+        ResponseUserLogin user = new ResponseUserLogin();
+        user.setNoTelepon(phoneNumber);
         Intent i = new Intent(this, OtpActivity.class);
         i.putExtra(params, "login");
         i.putExtra(getString(R.string.intent_phone), user);

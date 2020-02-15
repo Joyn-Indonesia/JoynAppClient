@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.application.JoynApp;
-import com.example.joynappclient.data.source.remote.model.UserModel;
+import com.example.joynappclient.data.source.remote.model.ResponseUserLogin;
 import com.example.joynappclient.ui.authentication.otp.OtpActivity;
 import com.example.joynappclient.ui.authentication.signin.SignInActivity;
 import com.example.joynappclient.utils.BaseActivity;
@@ -107,10 +107,10 @@ public class SignUpActivity extends BaseActivity implements Validator.Validation
 
     private void registerUser(String phoneNumber) {
         Log.d(TAG, "registerUser: register run");
-        UserModel user = new UserModel();
-        user.setName(name.getText().toString());
-        user.seteMail(email.getText().toString());
-        user.setPhoneNumber(phoneNumber);
+        ResponseUserLogin user = new ResponseUserLogin();
+        user.setNamaDepan(name.getText().toString());
+        user.setEmail(email.getText().toString());
+        user.setNoTelepon(phoneNumber);
         user.setRegId(JoynApp.getInstance(context).getToken());
         Intent i = new Intent(context, OtpActivity.class);
         i.putExtra(getString(R.string.intent_phone), user);

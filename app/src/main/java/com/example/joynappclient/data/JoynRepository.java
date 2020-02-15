@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.example.joynappclient.data.source.local.LocalDataSource;
-import com.example.joynappclient.data.source.local.entity.UserLogin;
+import com.example.joynappclient.data.source.local.entity.LocalUserLogin;
 import com.example.joynappclient.data.source.remote.ApiResponse;
 import com.example.joynappclient.data.source.remote.firebase.FirebaseDataSource;
 import com.example.joynappclient.data.source.remote.gmaps.GmapDataSource;
@@ -54,20 +54,20 @@ public class JoynRepository implements JoynDataSource {
     }
 
     @Override
-    public LiveData<UserLogin> getUserLogin() {
+    public LiveData<LocalUserLogin> getUserLogin() {
         return localDataSource.getUserLogin();
     }
 
     @Override
-    public void saveUserLogin(UserLogin userLogin) {
+    public void saveUserLogin(LocalUserLogin localUserLogin) {
         Log.d(TAG, "saveUserLogin: save ");
-        Completable.fromAction(() -> localDataSource.insertUserLogin(userLogin)).subscribeOn(Schedulers.io())
+        Completable.fromAction(() -> localDataSource.insertUserLogin(localUserLogin)).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe();
     }
 
     @Override
-    public void updateUserLogin(UserLogin userLogin) {
-        Completable.fromAction(() -> localDataSource.updateUserLogin(userLogin)).subscribeOn(Schedulers.io())
+    public void updateUserLogin(LocalUserLogin localUserLogin) {
+        Completable.fromAction(() -> localDataSource.updateUserLogin(localUserLogin)).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe();
     }
 

@@ -4,14 +4,14 @@ import android.app.Application;
 import android.content.Context;
 import android.content.ContextWrapper;
 
-import com.example.joynappclient.data.source.local.entity.UserLogin;
+import com.example.joynappclient.data.source.local.entity.LocalUserLogin;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.pixplicity.easyprefs.library.Prefs;
 
 public class JoynApp extends Application {
 
 
-    private UserLogin userLogin;
+    private LocalUserLogin localUserLogin;
     private String token;
 
     public static JoynApp getInstance(Context context) {
@@ -42,12 +42,12 @@ public class JoynApp extends Application {
         return token;
     }
 
-    public UserLogin getLoginUser() {
-        return userLogin;
+    public LocalUserLogin getLoginUser() {
+        return localUserLogin;
     }
 
-    public void setLoginUser(UserLogin userLogin) {
-        this.userLogin = userLogin;
+    public void setLoginUser(LocalUserLogin localUserLogin) {
+        this.localUserLogin = localUserLogin;
 
     }
 }

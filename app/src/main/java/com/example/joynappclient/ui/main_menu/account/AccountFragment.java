@@ -74,9 +74,9 @@ public class AccountFragment extends Fragment {
         AccountFragmentViewModel viewModel = new ViewModelProvider(getActivity(), factory).get(AccountFragmentViewModel.class);
 
         viewModel.getUserLogin().observe(getActivity(), user -> {
-            profilUser.setText(user.getName());
+            profilUser.setText(user.getNamaDepan());
             emailUser.setText(user.getEmail());
-            phoneUser.setText(user.getPhoneNumber());
+            phoneUser.setText(user.getNoTelepon());
         });
     }
 }

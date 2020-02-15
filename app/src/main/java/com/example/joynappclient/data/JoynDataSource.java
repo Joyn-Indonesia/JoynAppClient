@@ -2,7 +2,7 @@ package com.example.joynappclient.data;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.joynappclient.data.source.local.entity.UserLogin;
+import com.example.joynappclient.data.source.local.entity.LocalUserLogin;
 import com.example.joynappclient.data.source.remote.ApiResponse;
 import com.example.joynappclient.data.source.remote.gmaps.model.ResponseGmaps;
 
@@ -12,11 +12,11 @@ public interface JoynDataSource {
 
     LiveData<ApiResponse<ResponseGmaps>> getAddress(String latLng, String apiKey);
 
-    LiveData<UserLogin> getUserLogin();
+    LiveData<LocalUserLogin> getUserLogin();
 
-    void saveUserLogin(UserLogin userLogin);
+    void saveUserLogin(LocalUserLogin localUserLogin);
 
-    void updateUserLogin(UserLogin userLogin);
+    void updateUserLogin(LocalUserLogin localUserLogin);
 
     void deleteUserLogin();
 

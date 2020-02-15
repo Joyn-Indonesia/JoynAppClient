@@ -8,19 +8,19 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.joynappclient.data.source.local.entity.UserLogin;
+import com.example.joynappclient.data.source.local.entity.LocalUserLogin;
 
 @Dao
 public interface JoynDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertLoginUser(UserLogin user);
+    void insertLoginUser(LocalUserLogin user);
 
     @Query("select * from tb_user_login")
-    LiveData<UserLogin> getUserLogin();
+    LiveData<LocalUserLogin> getUserLogin();
 
     @Update
-    void updateUserLogin(UserLogin user);
+    void updateUserLogin(LocalUserLogin user);
 
     @Query("Delete from tb_user_login")
     void deleteUserLogin();

@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.application.JoynApp;
-import com.example.joynappclient.data.source.local.entity.UserLogin;
-import com.example.joynappclient.data.source.remote.model.UserModel;
+import com.example.joynappclient.data.source.local.entity.LocalUserLogin;
+import com.example.joynappclient.data.source.remote.model.ResponseUserLogin;
 import com.example.joynappclient.ui.main_menu.MainMenuActivity;
 import com.example.joynappclient.viewmodel.ViewModelFactory;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,24 +53,24 @@ public class WelcomeToAppActivity extends AppCompatActivity {
                 Log.d(TAG, "onComplete: get user complete");
 
                 String token = JoynApp.getInstance(this).getToken();
-                UserModel user = task.getResult().toObject(UserModel.class);
+                ResponseUserLogin responseUserLogin = task.getResult().toObject(ResponseUserLogin.class);
 
-                UserLogin userLogin = new UserLogin();
-                userLogin.setName(user.getName());
-                userLogin.setPhoneNumber(user.getPhoneNumber());
-                userLogin.setEmail(user.geteMail());
-                userLogin.setUserId(user.getUserId());
-                userLogin.setRegId(user.getRegId());
+                LocalUserLogin localUserLogin = new LocalUserLogin();
+                localUserLogin.setNamaDepan(responseUserLogin.getNamaDepan());
+                localUserLogin.setNoTelepon(responseUserLogin.getNoTelepon());
+                localUserLogin.setEmail(responseUserLogin.getEmail());
+                localUserLogin.setId(responseUserLogin.getId());
+                localUserLogin.setRegId(responseUserLogin.getRegId());
 
-                if (user.getRegId() == null || !user.getRegId().equals(token)) {
+                if (responseUserLogin.getRegId() == null || !responseUserLogin.getRegId().equals(token)) {
                     Log.d(TAG, "getUserDetail: token not macth");
-                    user.setRegId(token);
+                    responseUserLogin.setRegId(token);
                     mDb.collection(getString(R.string.collection_users)).document(FirebaseAuth.getInstance().getUid())
-                            .set(user);
-                    userLogin.setRegId(user.getRegId());
+                            .set(responseUserLogin);
+                    localUserLogin.setRegId(responseUserLogin.getRegId());
                 }
-                viewModel.saveUserLogin(userLogin);
-                JoynApp.getInstance(this).setLoginUser(userLogin);
+                viewModel.saveUserLogin(localUserLogin);
+                JoynApp.getInstance(this).setLoginUser(localUserLogin);
             } else {
                 Log.d(TAG, "getUserDetail: failed");
             }

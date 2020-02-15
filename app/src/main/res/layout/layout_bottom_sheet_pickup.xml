@@ -10,7 +10,7 @@
     android:paddingBottom="@dimen/_16sdp"
     app:behavior_peekHeight="@dimen/_140sdp"
     app:cardCornerRadius="@dimen/_10sdp"
-    app:layout_behavior="@string/bottom_sheet_behavior">
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_profile"

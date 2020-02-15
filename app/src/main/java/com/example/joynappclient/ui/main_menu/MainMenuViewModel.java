@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.joynappclient.data.JoynRepository;
-import com.example.joynappclient.data.source.local.entity.UserLogin;
+import com.example.joynappclient.data.source.local.entity.LocalUserLogin;
 
 public class MainMenuViewModel extends ViewModel {
 
@@ -14,7 +14,7 @@ public class MainMenuViewModel extends ViewModel {
         this.repository = repository;
     }
 
-    LiveData<UserLogin> getUserLogin() {
+    LiveData<LocalUserLogin> getUserLogin() {
         return repository.getUserLogin();
     }
 }

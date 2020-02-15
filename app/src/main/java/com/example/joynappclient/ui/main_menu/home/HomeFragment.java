@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.ui.booking.BookingActivity;
+import com.example.joynappclient.ui.inprogress.InProgressActivity;
 import com.example.joynappclient.ui.j_food.food.JFoodActivity;
 import com.example.joynappclient.ui.main_menu.home.adapter.ButtonAdapter;
 import com.example.joynappclient.ui.main_menu.home.adapter.HomeBannerAdapter;
@@ -116,7 +117,7 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.menu_JRide)
     void moveRide() {
-        MoveActivity.MoveAct(context, BookingActivity.class);
+        MoveActivity.MoveAct(context, InProgressActivity.class);
     }
 
     @OnClick(R.id.menu_JSend)

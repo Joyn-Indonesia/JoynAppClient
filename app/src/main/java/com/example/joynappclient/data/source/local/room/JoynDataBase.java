@@ -6,9 +6,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.joynappclient.data.source.local.entity.UserLogin;
+import com.example.joynappclient.data.source.local.entity.LocalUserLogin;
 
-@Database(entities = {UserLogin.class},
+@Database(entities = {LocalUserLogin.class},
         version = 1,
         exportSchema = false)
 public abstract class JoynDataBase extends RoomDatabase {

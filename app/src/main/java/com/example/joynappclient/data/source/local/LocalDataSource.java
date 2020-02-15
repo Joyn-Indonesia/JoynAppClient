@@ -4,7 +4,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.joynappclient.data.source.local.entity.UserLogin;
+import com.example.joynappclient.data.source.local.entity.LocalUserLogin;
 import com.example.joynappclient.data.source.local.room.JoynDao;
 
 public class LocalDataSource {
@@ -24,17 +24,17 @@ public class LocalDataSource {
         return INSTANCE;
     }
 
-    public void insertUserLogin(UserLogin userLogin) {
+    public void insertUserLogin(LocalUserLogin localUserLogin) {
         Log.d(TAG, "insertUserLogin:saving");
-        joynDao.insertLoginUser(userLogin);
+        joynDao.insertLoginUser(localUserLogin);
     }
 
-    public LiveData<UserLogin> getUserLogin() {
+    public LiveData<LocalUserLogin> getUserLogin() {
         return joynDao.getUserLogin();
     }
 
-    public void updateUserLogin(UserLogin userLogin) {
-        joynDao.updateUserLogin(userLogin);
+    public void updateUserLogin(LocalUserLogin localUserLogin) {
+        joynDao.updateUserLogin(localUserLogin);
     }
 
     public void deleteUserLogin() {

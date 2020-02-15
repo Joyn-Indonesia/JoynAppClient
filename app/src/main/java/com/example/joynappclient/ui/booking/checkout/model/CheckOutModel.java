@@ -3,7 +3,7 @@ package com.example.joynappclient.ui.booking.checkout.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.joynappclient.data.source.local.entity.UserLogin;
+import com.example.joynappclient.data.source.local.entity.LocalUserLogin;
 import com.example.joynappclient.data.source.remote.model.DriverModel;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -21,7 +21,7 @@ public class CheckOutModel implements Parcelable {
     private String note;
     private LatLng pickupLatLg;
     private LatLng destinationLatLg;
-    private UserLogin userBooking;
+    private LocalUserLogin userBooking;
     public static final Creator<CheckOutModel> CREATOR = new Creator<CheckOutModel>() {
         @Override
         public CheckOutModel createFromParcel(Parcel in) {
@@ -160,11 +160,11 @@ public class CheckOutModel implements Parcelable {
         this.destinationLatLg = destinationLatLg;
     }
 
-    public UserLogin getUserBooking() {
+    public LocalUserLogin getUserBooking() {
         return userBooking;
     }
 
-    public void setUserBooking(UserLogin userBooking) {
+    public void setUserBooking(LocalUserLogin userBooking) {
         this.userBooking = userBooking;
     }
 

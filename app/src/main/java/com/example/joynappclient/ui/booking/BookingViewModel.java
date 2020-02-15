@@ -10,8 +10,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.joynappclient.data.JoynRepository;
-import com.example.joynappclient.ui.booking.checkout.model.CheckOutModel;
+import com.example.joynappclient.data.model.json.book.RequestRideCarRequestJson;
+import com.example.joynappclient.data.source.remote.model.DriverModel;
 import com.example.joynappclient.ui.booking.utils.HandleResponse;
 import com.example.joynappclient.ui.booking.utils.StatusResponse;
 import com.google.android.gms.maps.model.LatLng;
@@ -24,20 +24,19 @@ import java.util.Locale;
 public class BookingViewModel extends ViewModel {
     private static final String TAG = "BookingViewModel";
 
-    private MutableLiveData<CheckOutModel> checkOut = new MutableLiveData<>();
-    private JoynRepository repository;
+
     private String addressLocation;
     private Context context;
-    private CheckOutModel checkOutModel;
-
+    private String note;
     private MutableLiveData<HandleResponse<Place>> responsePickUp = new MutableLiveData<>();
     private MutableLiveData<HandleResponse<Place>> responseDestination = new MutableLiveData<>();
+    private MutableLiveData<RequestRideCarRequestJson> requestRideCar = new MutableLiveData<>();
+    private MutableLiveData<List<DriverModel>> driver = new MutableLiveData<>();
 
 
-    public BookingViewModel(@NonNull Context context, JoynRepository repository) {
-
+    public BookingViewModel(@NonNull Context context) {
         this.context = context;
-        this.repository = repository;
+
     }
 
 
@@ -69,36 +68,30 @@ public class BookingViewModel extends ViewModel {
         getAdress(latLng);
     }
 
+    public LiveData<RequestRideCarRequestJson> getRequestRideCar() {
+        return requestRideCar;
+    }
 
-    public LiveData<CheckOutModel> getCheckOut() {
-        return checkOut;
+    public void setRequestRideCar(RequestRideCarRequestJson requestRideCar) {
+        requestRideCar.setCatatan(this.note);
+        this.requestRideCar.postValue(requestRideCar);
     }
 
     public void setNote(String note) {
-        checkOutModel = new CheckOutModel();
-        checkOutModel.setNote(note);
-        checkOut.postValue(checkOutModel);
+        this.note = note;
+        RequestRideCarRequestJson param = new RequestRideCarRequestJson();
+        param.setCatatan(note);
+        requestRideCar.postValue(param);
     }
 
-    public void setCheckOutModel(CheckOutModel checkOut) {
 
-        if (checkOutModel == null) {
-            checkOutModel = new CheckOutModel();
-        }
-        checkOutModel.setPickupAdress(checkOut.getPickupAdress());
-        checkOutModel.setDestintaionAddress(checkOut.getDestintaionAddress());
-        checkOutModel.setDistance(checkOut.getDistance());
-        checkOutModel.setTimeDistance(checkOut.getTimeDistance());
-        checkOutModel.setCost(checkOut.getCost());
-        checkOutModel.setPickupLatLg(checkOut.getPickupLatLg());
-        checkOutModel.setDestinationLatLg(checkOut.getDestinationLatLg());
-        checkOutModel.setPolyline(checkOut.getPolyline());
-        checkOutModel.setDrivers(checkOut.getDrivers());
-        checkOutModel.setLatLngBounds(checkOut.getLatLngBounds());
-        checkOutModel.setEncodedPolyline(checkOut.getEncodedPolyline());
-        this.checkOut.postValue(checkOutModel);
+    public void setDriverAvaible(List<DriverModel> driver) {
+        this.driver.postValue(driver);
     }
 
+    public LiveData<List<DriverModel>> getDriver() {
+        return driver;
+    }
 
     public String getAdress(LatLng latLng) {
 

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.data.source.remote.model.UserModel;
+import com.example.joynappclient.data.source.remote.model.ResponseUserLogin;
 import com.example.joynappclient.ui.authentication.welcome_to_app.WelcomeToAppActivity;
 import com.example.joynappclient.utils.MoveActivity;
 import com.example.joynappclient.viewmodel.ViewModelFactory;
@@ -52,7 +52,7 @@ public class OtpActivity extends AppCompatActivity {
     private FirebaseFirestore mDb;
     private PhoneAuthProvider.ForceResendingToken mResendingToken;
     private String mVerificationId;
-    private UserModel user;
+    private ResponseUserLogin user;
     private boolean registerNewUser = true;
     private String phoneNumber;
     private OtpVIewModel vIewModel;
@@ -84,8 +84,8 @@ public class OtpActivity extends AppCompatActivity {
         Log.d(TAG, "getData: get data from intent");
         if (getIntent() != null) {
             user = getIntent().getParcelableExtra(getString(R.string.intent_phone));
-            phoneNumber = user.getPhoneNumber();
-            if (user.getName() == null) {
+            phoneNumber = user.getNoTelepon();
+            if (user.getNamaDepan() == null) {
                 registerNewUser = false;
             }
             numberText.setText(phoneNumber);
@@ -186,7 +186,7 @@ public class OtpActivity extends AppCompatActivity {
                 Log.d(TAG, "onComplete: success");
                 if (registerNewUser) {
                     isTrue = true;
-                    user.setUserId(mAuth.getUid());
+                    user.setId(mAuth.getUid());
                     insertNewUser();
                     Log.d(TAG, "sendOtpCode: new user");
                 } else {
@@ -211,7 +211,7 @@ public class OtpActivity extends AppCompatActivity {
                 Log.d(TAG, "onComplete: success");
                 if (registerNewUser) {
                     isTrue = true;
-                    user.setUserId(mAuth.getUid());
+                    user.setId(mAuth.getUid());
                     insertNewUser();
                     Log.d(TAG, "sendOtpCode: new user");
                 } else {
@@ -242,7 +242,7 @@ public class OtpActivity extends AppCompatActivity {
     private void insertNewUser() {
         DocumentReference newUserRef = mDb
                 .collection(getString(R.string.collection_users))
-                .document(user.getUserId());
+                .document(user.getId());
 
         newUserRef.set(user).addOnSuccessListener(this, aVoid -> {
             Log.d(TAG, "DocumentSnapshot successfully written!");

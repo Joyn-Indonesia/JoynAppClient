@@ -106,9 +106,9 @@ public class MainMenuActivity extends BaseActivity {
         ViewModelFactory factory = ViewModelFactory.getInstance(this);
         MainMenuViewModel viewModel = new ViewModelProvider(this, factory).get(MainMenuViewModel.class);
 
-        viewModel.getUserLogin().observe(this, userLogin -> {
-            Log.d(TAG, "getDetailUser: " + userLogin.getName());
-            JoynApp.getInstance(this).setLoginUser(userLogin);
+        viewModel.getUserLogin().observe(this, localUserLogin -> {
+            Log.d(TAG, "getDetailUser: " + localUserLogin.getNamaDepan());
+            JoynApp.getInstance(this).setLoginUser(localUserLogin);
         });
     }
 

@@ -11,18 +11,17 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
-import com.example.joynappclient.application.JoynApp;
-import com.example.joynappclient.data.source.local.entity.UserLogin;
+import com.example.joynappclient.data.model.json.book.RequestRideCarRequestJson;
 import com.example.joynappclient.data.source.remote.firebase.FCMservice;
 import com.example.joynappclient.data.source.remote.firebase.model.FCMMessage;
 import com.example.joynappclient.ui.booking.BookingViewModel;
-import com.example.joynappclient.ui.booking.checkout.model.CheckOutModel;
-import com.example.joynappclient.ui.booking.checkout.model.DriverRequestModel;
 import com.example.joynappclient.ui.inprogress.InProgressActivity;
 import com.example.joynappclient.utils.MoveActivity;
+import com.example.joynappclient.utils.StringFormat;
 import com.example.joynappclient.viewmodel.ViewModelFactory;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -53,7 +52,7 @@ public class PaymentBottomSheet extends BottomSheetDialogFragment {
     @BindView(R.id.extraSpace)
     View extraSpace;
     private View v;
-    private CheckOutModel checkOutModel;
+    private RequestRideCarRequestJson requestJson;
     private BottomSheetBehavior bottomSheetBehavior;
 
     @Nullable
@@ -71,38 +70,26 @@ public class PaymentBottomSheet extends BottomSheetDialogFragment {
         initBottomSheet();
         ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
         BookingViewModel viewModel = new ViewModelProvider(getActivity(), factory).get(BookingViewModel.class);
-        viewModel.getCheckOut().observe(getActivity(), m -> {
-            this.checkOutModel = m;
-            String distaceTime = "J-Ride " + m.getDistance() + " \u00B1 " + m.getTimeDistance();
-            distanceTime.setText(distaceTime);
-            discountCost.setText(" Discount : Rp. 0,-");
-            totalCost.setText(m.getCost());
+        viewModel.getRequestRideCar().observe(getActivity(), new Observer<RequestRideCarRequestJson>() {
+            @Override
+            public void onChanged(RequestRideCarRequestJson m) {
+                requestJson = m;
+                String info = "J-Ride " + m.getJarak() + " \u00B1 " + m.getWaktuPerjalanan();
+                distanceTime.setText(info);
+                discountCost.setText(" Discount : Rp. 0,-");
+                totalCost.setText(StringFormat.costFormat(m.getHarga()));
+            }
         });
 
         btnNextBooking.setOnClickListener(v -> {
-            UserLogin user = JoynApp.getInstance(getActivity().getApplicationContext()).getLoginUser();
-            DriverRequestModel model = new DriverRequestModel();
-            model.setUserName(user.getName());
-            model.setRegIdPelanggan(user.getRegId());
-            model.setPickupAddress(checkOutModel.getPickupAdress());
-            model.setDestinationAddress(checkOutModel.getDestintaionAddress());
-            model.setStartLatitude(checkOutModel.getPickupLatLg().latitude);
-            model.setStartLongitude(checkOutModel.getPickupLatLg().longitude);
-            model.setEndLatitude(checkOutModel.getDestinationLatLg().latitude);
-            model.setEndLongitude(checkOutModel.getDestinationLatLg().longitude);
-            model.setCost(checkOutModel.getCost());
-            model.setDistance(checkOutModel.getDistance());
 
             Gson gson = new Gson();
             FCMMessage message = new FCMMessage();
-            message.setTo("csIK9mRrIZQ:APA91bFm5HQ5TTNh7itdb_wVZh724PGxGpR_jLXOJu7wbdjfKkdBXJ07TrHJ5IjvkukdWHtMkhJsYPz0FSv0fbYHhmV58oecYbzzhO-fa6CGYTYaFOJzSW89rjc9XHIo-pLDJyh1KL4A");
-            message.setData(model);
+            message.setTo("fmCCYHw_rkc:APA91bGPs5Wesj1tOvkI5bbdEb8jSeU3n9XoZVGJqNR9JTlpSw-cJBpRyBOtcqkukW_DpRklDqtWh_K_VsP0PU7qZPA4LbrhFkMhU4hsS9MY2WjVbcygqZlMkF8afPzEG4c5gg6O0WBG");
+            message.setData(requestJson);
 
-            MediaType JSON
-                    = MediaType.parse("application/json; charset=utf-8");
-
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
             String json = gson.toJson(message);
-
             RequestBody body = RequestBody.create(json, JSON);
 
             Call<ResponseBody> booking = FCMservice.getInstance().sendRequest(body);
@@ -130,8 +117,12 @@ public class PaymentBottomSheet extends BottomSheetDialogFragment {
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (BottomSheetBehavior.STATE_HALF_EXPANDED == newState) {
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+//                if (BottomSheetBehavior.STATE_HALF_EXPANDED == newState) {
+//                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+//                }
+
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
 
                 if (BottomSheetBehavior.STATE_HIDDEN == newState) {
@@ -148,7 +139,7 @@ public class PaymentBottomSheet extends BottomSheetDialogFragment {
 
     private void moveInProgress() {
         MoveActivity.MoveAct(getActivity(), InProgressActivity.class);
-        EventBus.getDefault().postSticky(checkOutModel);
+        EventBus.getDefault().postSticky(requestJson);
         getActivity().finish();
     }
 }

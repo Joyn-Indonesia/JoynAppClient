@@ -5,14 +5,14 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.joynappclient.data.JoynRepository;
 import com.example.joynappclient.data.source.remote.ApiResponse;
-import com.example.joynappclient.data.source.remote.model.UserModel;
+import com.example.joynappclient.data.source.remote.model.ResponseUserLogin;
 
 public class SignUpViewModel extends ViewModel {
     private JoynRepository repository;
 
     private String phoneNumber;
     private String reference;
-    private UserModel userModel;
+    private ResponseUserLogin responseUserLogin;
 
     public SignUpViewModel(JoynRepository repository) {
         this.repository = repository;
@@ -23,8 +23,8 @@ public class SignUpViewModel extends ViewModel {
         this.reference = reference;
     }
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
+    public void setResponseUserLogin(ResponseUserLogin responseUserLogin) {
+        this.responseUserLogin = responseUserLogin;
     }
 
     public LiveData<ApiResponse> checkPhoneNumber() {

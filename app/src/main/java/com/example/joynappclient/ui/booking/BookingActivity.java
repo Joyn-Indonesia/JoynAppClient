@@ -11,10 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.joynappclient.R;
 import com.example.joynappclient.application.JoynApp;
+import com.example.joynappclient.data.model.json.book.RequestRideCarRequestJson;
 import com.example.joynappclient.data.source.remote.model.DriverModel;
 import com.example.joynappclient.ui.booking.address.DestinationAddressBottomSheet;
 import com.example.joynappclient.ui.booking.address.PickUpAddressBottomSheet;
@@ -32,7 +34,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -106,6 +107,10 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
     private Polyline directionLine;
     private String timeDistance;
     private double harga;
+    long biaya = 2;
+    long biayaMinimum = 8;
+    private double jarak;
+    private RequestRideCarRequestJson param;
 
     //viewModel
     private BookingViewModel viewModel;
@@ -118,6 +123,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         ButterKnife.bind(this);
         context = this;
         initViewModel();
+        param = new RequestRideCarRequestJson();
         //maps
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_container);
         mapFragment.getMapAsync(this);
@@ -161,11 +167,15 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         });
 
         //note
-        viewModel.getCheckOut().observe(this, model -> {
-            if (model.getNote() != null) {
-                noteCostumer.setText(model.getNote());
-            } else {
-                noteCostumer.setText(getString(R.string.add_note));
+        viewModel.getRequestRideCar().observe(this, new Observer<RequestRideCarRequestJson>() {
+            @Override
+            public void onChanged(RequestRideCarRequestJson model) {
+                if (model.getCatatan() != null) {
+                    noteCostumer.setText(model.getCatatan());
+                } else {
+                    noteCostumer.setText(getString(R.string.add_note));
+                }
+
             }
         });
 
@@ -209,9 +219,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
         FragmentManager fm = getSupportFragmentManager();
         AddNote dialog = AddNote.getInstance(AddNote.PICKUP);
         dialog.show(fm, dialog.getTag());
-
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -231,6 +239,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
                 pickUpLatLang = new LatLng(location.getLatitude(), location.getLongitude());
                 viewModel.setPickup(pickUpLatLang);
                 updateMyLocation(pickUpLatLang);
+                createMarkerDirection(PICKUP, pickUpLatLang);
                 fillAddress(pickUpText, pickUpLatLang, 1);
             }
         });
@@ -278,7 +287,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
                 LatLng curentDriverPos = new LatLng(driver.getGeoPoint().getLatitude(), driver.getGeoPoint().getLongitude());
                 driverMarkers.add(mMap.addMarker(new MarkerOptions()
                         .position(curentDriverPos)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_ride_position))));
+                        .icon(VectorDescriptor.bitmapDescriptorFromVector(this, R.drawable.ic_pin_ride))));
             }
         }
     }
@@ -370,7 +379,6 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
                         @Override
                         public void onResult(DirectionsResult result) {
                             updateLineDestination(result);
-                            checkOutModel.setPolyline(result.routes[0].overviewPolyline);
                         }
 
                         @Override
@@ -420,9 +428,7 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
 
         checkOutModel.setDistance(distance.toString());
         float km = ((float) distance.inMeters) / Constant.RANGE_VALUE;
-
-        long biaya = 2;
-        long biayaMinimum = 8;
+        this.jarak = km;
 
         double biayaTotal = (double) (biaya * km);
 
@@ -434,44 +440,29 @@ public class BookingActivity extends BaseActivity implements OnMapReadyCallback 
             this.harga = biayaMinimum;
             biayaTotal = biayaMinimum;
         }
-
-//        if (mPayButton.isChecked()) {
-//            Log.e("MPAY", "total :" + biayaTotal + " kali " + designedFitur.getBiayaAkhir());
-//            biayaTotal *= designedFitur.getBiayaAkhir();
-//        }
-
         String formattedTotal = NumberFormat.getNumberInstance(Locale.US).format(biayaTotal);
-        String noCent = String.format(Locale.US, Constant.MONEY + " %s.000,-", formattedTotal);
-//        priceText.setText(noCent);
-        checkOutModel.setCost(noCent);
-
-       /* String priceCent = String.format(Locale.US, General.MONEY +" %.2f", biayaTotal);
-       priceText.setText(noCent);
-
-        if (General.Cent) {
-            priceText.setText(priceCent);
-        } else {
-            priceText.setText(noCent);
-        } */
-
-//        if (saldoMpay < (harga * designedFitur.getBiayaAkhir())) {
-//            mPayButton.setEnabled(false);
-//            cashButton.toggle();
-//        } else {
-//            mPayButton.setEnabled(true);
-//        }
+        String totalCost = String.format(Locale.US, Constant.MONEY + " %s.000,-", formattedTotal);
+        checkOutModel.setCost(totalCost);
     }
 
     @OnClick(R.id.btn_next)
     public void checkOutProcces() {
         Log.d(TAG, "checkOutProcces: click");
+        param.setIdPelanggan(JoynApp.getInstance(this).getLoginUser().getId());
+        param.setOrderFitur("1");
+        param.setStartLatitude(pickUpLatLang.latitude);
+        param.setStartLongitude(pickUpLatLang.longitude);
+        param.setEndLatitude(destinationLatLang.latitude);
+        param.setEndLongitude(destinationLatLang.longitude);
+        param.setJarak(this.jarak);
+        param.setHarga(this.harga);
+        param.setWaktuPerjalanan(timeDistance);
+        param.setAlamatAsal(pickUpText.getText().toString());
+        param.setAlamatTujuan(destinationText.getText().toString());
+        viewModel.setRequestRideCar(param);
 
-        checkOutModel.setTimeDistance(timeDistance);
-        checkOutModel.setPickupLatLg(pickUpLatLang);
-        checkOutModel.setDestinationLatLg(destinationLatLang);
-        checkOutModel.setUserBooking(JoynApp.getInstance(this).getLoginUser());
-        checkOutModel.setDrivers(driverAvaible);
-        viewModel.setCheckOutModel(checkOutModel);
+        viewModel.setDriverAvaible(driverAvaible);
+
         CheckOut dialog = new CheckOut(context);
         dialog.show(getSupportFragmentManager(), dialog.getTag());
     }
